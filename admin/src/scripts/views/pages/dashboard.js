@@ -11,7 +11,7 @@ const Dashboard = {
           <span>x Kuliner</span>  
       </div>
       <div class="card">
-          <img src="penginapan.jpeg" alt="Hotel Icon">
+          <img src="../../images/penginapan.jpeg" alt="Hotel Icon">
           <span>x Penginapan</span>
       </div>
   </div>

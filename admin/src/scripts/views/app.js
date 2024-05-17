@@ -21,10 +21,8 @@ class App {
     console.log(page)
     this._content.innerHTML = await page.render()
     await page.afterRender()
-    const skipLinkElem = document.querySelector('.skip-link')
-    skipLinkElem.addEventListener('click', (event) => {
+    this._content.addEventListener('click', (event) => {
       event.preventDefault()
-      document.querySelector('#maincontent').focus()
     })
   }
 }

@@ -1,0 +1,69 @@
+/* Add this CSS to your existing stylesheet or in a separate stylesheet */
+.button-wrapper {
+    margin-top: 10px;
+}
+
+.button-wrapper button {
+    padding: 10px 20px;
+    background-color: #007bff; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-bar {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.search-bar span {
+    margin-right: 10px;
+}
+
+.search-bar input[type="text"] {
+    width: 200px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+td img {
+    max-width: 100px; /* Adjust the max width of the image */
+    height: auto;
+}
+
+td button {
+    padding: 5px 10px;
+    background-color: #28a745; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+td button:last-child {
+    margin-right: 0;
+}
