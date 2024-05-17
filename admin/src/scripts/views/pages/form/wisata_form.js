@@ -3,11 +3,11 @@ const Wisata_form = {
         return `
             <form id="wisataForm">
                 <div>
-                    <label for="name">Name:</label>
+                    <label for="name">Nama Tempat Wisata:</label>
                     <input type="text" id="name" name="name">
                 </div>
                 <div>
-                    <label for="location">Location:</label>
+                    <label for="location">Lokasi:</label>
                     <input type="text" id="location" name="location">
                 </div>
                 <div>

@@ -17,6 +17,8 @@ const Dashboard = {
   </div>
       `
     },
+    async afterRender() {
+    }
   }
   
   export default Dashboard

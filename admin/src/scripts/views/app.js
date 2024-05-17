@@ -21,9 +21,6 @@ class App {
     console.log(page)
     this._content.innerHTML = await page.render()
     await page.afterRender()
-    this._content.addEventListener('click', (event) => {
-      event.preventDefault()
-    })
   }
 }
 export default App
