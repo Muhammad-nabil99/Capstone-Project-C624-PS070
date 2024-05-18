@@ -1,4 +1,3 @@
-// import DrawerInitiator from '../utils/drawer-inisiator'
 import UrlParser from '../routes/url-parse'
 import routes from '../routes/route'
 

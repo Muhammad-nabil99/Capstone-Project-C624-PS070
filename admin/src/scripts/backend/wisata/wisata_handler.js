@@ -1,23 +1,19 @@
 const { db, storage } = require('../firebase');
 const { v4: uuidv4 } = require('uuid');
+const { ref, uploadBytes, getDownloadURL } = require('firebase/storage');
+const { doc, setDoc } = require('firebase/firestore');
 
 async function addWisata(name, location, openTime, price, detail, mapLocation, image) {
-  // Generate a unique ID (UUIDv4)
   const id = uuidv4();
-
-  // Save image to Firebase Storage
-  const storageRef = storage.ref();
-  const imageRef = storageRef.child(`images/${id}`);
+  const storageRef = ref(storage, `images/${id}`);
 
   try {
-    // Upload the image
-    await imageRef.put(image);
-
-    // Get the image URL
-    const imageUrl = await imageRef.getDownloadURL();
+    // Upload the image to Firebase Storage
+    await uploadBytes(storageRef, image);
+    const imageUrl = await getDownloadURL(storageRef); // Get the image URL
 
     // Save data to Firestore with the generated ID
-    await db.collection('wisata').doc(id).set({
+    await setDoc(doc(db, 'wisata', id), {
       id,
       name,
       location,
@@ -25,10 +21,10 @@ async function addWisata(name, location, openTime, price, detail, mapLocation, i
       price,
       detail,
       mapLocation,
-      imageUrl, // Save the image URL in Firestore
+      imageUrl,
     });
 
-    return id; // Return the generated ID
+    return id;
   } catch (error) {
     console.error('Error:', error);
     throw new Error('Failed to add Wisata');

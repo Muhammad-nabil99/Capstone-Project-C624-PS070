@@ -1,7 +1,6 @@
-import { addWisata } from "../../../backend/wisata/wisata_handler";
+import { addWisata } from '../../../backend/wisata/wisata_handler.js'
 import mapSetup from "../../../utils/maps.js"
 import geocodeHelper from '../../../utils/geocode.js';
-const { db, storage } = require('../firebase');
 
 const { initializeMap, addMarkerToMap } = mapSetup;
 const { geocodePlace } = geocodeHelper;
@@ -9,7 +8,6 @@ const { geocodePlace } = geocodeHelper;
 const mapboxglAccessToken = 'pk.eyJ1IjoiZjE3MjZ5YjE0MCIsImEiOiJjbHdhMXYyOGcwYW40Mmlxazg2aTBqYWl6In0.7vkdPDBmhzZq38n2jFNEjA';
 mapboxgl.accessToken = mapboxglAccessToken;
 
-const mapContainer = 'map';
 let map;
 let marker;
 
@@ -90,8 +88,6 @@ const Wisata_form = {
 
     wisataForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-
-      // Get form values
       const name = document.getElementById('name').value;
       const location = document.getElementById('location').value;
       const openTime = document.getElementById('openTime').value;
@@ -99,12 +95,11 @@ const Wisata_form = {
       const detail = document.getElementById('detail').value;
       const mapLocation = document.getElementById('mapLocation').value;
       const image = document.getElementById('image').files[0];
-
       try {
-        // Call the function to add Wisata
+
         const id = await addWisata(name, location, openTime, price, detail, mapLocation, image);
         console.log('Wisata added with ID:', id);
-        // Reset form
+
         wisataForm.reset();
       } catch (error) {
         console.error('Error adding Wisata:', error);

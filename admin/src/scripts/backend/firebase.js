@@ -1,11 +1,7 @@
-// Import Firebase App module
 const { initializeApp } = require('firebase/app');
-
-// Import Firestore and Storage modules
 const { getFirestore } = require('firebase/firestore');
 const { getStorage } = require('firebase/storage');
 
-// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyD1LxRgRqwbq9Ia82eTtb0156lpuk06mRw",
   authDomain: "capstone-project-c624-ps070.firebaseapp.com",
@@ -16,14 +12,8 @@ const firebaseConfig = {
   measurementId: "G-3KQ1MLQJVS"
 };
 
-// Initialize Firebase app
 const app = initializeApp(firebaseConfig);
-
-// Initialize Firestore
 const db = getFirestore(app);
-
-// Initialize Storage
 const storage = getStorage(app);
 
-// Export Firestore and Storage instances
 module.exports = { db, storage };
