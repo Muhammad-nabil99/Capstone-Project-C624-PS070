@@ -1,0 +1,153 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  background-color: #EBEBEB;
+}
+header{
+  width: 100%;
+}
+/* navigation */
+header div.sidebar{
+  text-transform: capitalize;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #F8F8FF;
+  padding: 2rem;
+}
+header div.sidebar .logo img{
+  width: 44px;
+  height: 44px;
+}
+header div.sidebar nav.drawer ul{
+  gap: 8px;
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+header div.sidebar ul li a{
+  display: inline-block;
+  font-weight: bold;
+  min-width: 44px;
+  min-height: 44px;
+  text-align: center;
+  line-height: 44px;
+  text-decoration: none;
+  color: black;
+}
+header div.sidebar ul li a:hover{
+  color: red;
+}
+/* hero */
+header .hero{
+  width: 100%;
+  height: 500px;
+  background-size: cover;
+  background-image: url(../public/images/heros/hero-image_3.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: capitalize;
+  font-size: 1.8rem;
+}
+header .tagline_hero{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 999;
+  color: white;
+}
+/* main */
+main#maincontent{
+  display: flex;
+  padding-block-start: 3rem;
+  flex-direction: column;
+}
+main#maincontent .options{
+  display: flex;
+  justify-content:space-around;
+  width: 100%;
+}
+/* options */
+main#maincontent .options .container-option-items{
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+  gap: 2rem;
+  padding: 2rem;
+  width: 100%;
+}
+main#maincontent .options .container-option-items button{
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+}
+main#maincontent .options .container-option-items .item_option{
+  display: flex;
+  flex-direction: column;
+  text-transform: capitalize;
+  gap: 1.2rem;
+  text-align: center;
+  font-weight: bold;
+}
+/* recomendation */
+div.recomendations h1{
+  padding-block: 6rem 3rem;
+  text-align: center;
+  font-size: 1.8rem;
+}
+div.recomendations .container-recomendation-items{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  padding: 1rem;
+  justify-content: center;
+  padding-block-end: 10rem;
+}
+div.recomendations .container-recomendation-items .item_recomendation{
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  text-align: center;
+}
+div.recomendations .container-recomendation-items img{
+  width: 450px;
+  height: 270px;
+  object-fit: cover;
+  object-position: center;
+  background-color: #F8F8FF;
+}
+div.recomendations .container-recomendation-items button{
+  display: inline-block;
+  border: 0;
+  margin:.3rem;
+  position: absolute;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 5px;
+  background-color: rgb(241, 241, 174);
+}
+
+/* footer */
+footer{
+  background-color: black;
+  display: flex;
+  padding: 2rem;
+}
+footer .footer-content{
+  margin: auto;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+}
+
