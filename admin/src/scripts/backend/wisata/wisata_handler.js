@@ -5,7 +5,7 @@ const { doc, setDoc } = require('firebase/firestore');
 
 async function addWisata(name, location, openTime, price, detail, mapLocation, image) {
   const id = uuidv4();
-  const storageRef = ref(storage, `images/${id}`);
+  const storageRef = ref(storage, `wisata/${id}`);
 
   try {
     // Upload the image to Firebase Storage
