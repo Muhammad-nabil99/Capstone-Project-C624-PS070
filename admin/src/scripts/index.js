@@ -1,5 +1,6 @@
   import '../styles/main.scss'
   import '../styles/wisata.scss'
+  import '../styles/mapbox.scss'
   import App from './views/app'
 
   const app = new App({

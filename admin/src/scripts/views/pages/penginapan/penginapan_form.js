@@ -40,15 +40,14 @@ const Wisata_form = {
               <input type="file" id="image" name="image" required>
           </div>
           <div>
-              <label for="placeName">Place Name:</label>
+              <label for="placeName">Nama Lokasi:</label>
               <input type="text" id="placeName" name="placeName">
               <button type="button" id="geocodeButton">Find Location</button>
           </div>
           <div>
-              <label for="mapLocation">Map Location:</label>
+              <label for="mapLocation">Koordinat Maps:</label>
               <input type="text" id="mapLocation" name="mapLocation" readonly>
-              <button type="button" id="chooseLocationButton">Choose Location</button>
-              <div id="map" style="height: 300px; width: 100%; display: none;"></div>
+              <div id="map" style="height: 300px; width: 100%;"></div>
           </div>
           <button type="submit">Submit</button>
       </form>
@@ -57,26 +56,21 @@ const Wisata_form = {
 
   async afterRender() {
     const mapContainer = document.getElementById('map');
-    const chooseLocationButton = document.getElementById('chooseLocationButton');
     const mapLocationInput = document.getElementById('mapLocation');
     const placeNameInput = document.getElementById('placeName');
     const geocodeButton = document.getElementById('geocodeButton');
     const wisataForm = document.getElementById('wisataForm');
 
-    chooseLocationButton.addEventListener('click', () => {
-      mapContainer.style.display = 'block';
+    // Initialize map on page load
+    const defaultCoordinates = [106.8456, -6.2088]; // Default to Jakarta coordinates
+    map = initializeMap(mapboxgl, mapContainer, defaultCoordinates);
 
-      if (!map) {
-        const defaultCoordinates = [106.8456, -6.2088];
-        map = initializeMap(mapboxgl, mapContainer, defaultCoordinates);
+    // Disable direct interaction with the marker
+    if (marker) {
+      marker.remove();
+    }
 
-        map.on('click', (e) => {
-          const coordinates = e.lngLat;
-          marker = addMarkerToMap(map, coordinates, mapLocationInput, marker);
-        });
-      }
-    });
-
+    // Add event listener for geocode button
     geocodeButton.addEventListener('click', () => {
       const placeName = placeNameInput.value;
       if (placeName) {
@@ -95,8 +89,8 @@ const Wisata_form = {
       const detail = document.getElementById('detail').value;
       const mapLocation = document.getElementById('mapLocation').value;
       const image = document.getElementById('image').files[0];
-      try {
 
+      try {
         const id = await addWisata(name, location, openTime, price, detail, mapLocation, image);
         console.log('Wisata added with ID:', id);
 
