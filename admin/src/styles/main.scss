@@ -1,11 +1,10 @@
-/* Add this CSS to your existing stylesheet */
-
 body, html {
   margin: 0;
   padding: 0;
   height: 100%;
+  font-family: Arial, sans-serif;
 }
-/* Add this CSS to your existing stylesheet */
+
 
 .appbar {
   background-color: #333; /* Appbar background color */
@@ -28,17 +27,20 @@ header {
   background: grey;
   padding: 10px;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .user-info span {
   font-weight: bold;
+  margin-right: 10px;
 }
 
 .user-info img {
   width: 30px; /* Adjust as needed */
   height: 30px; /* Adjust as needed */
   border-radius: 50%; /* For rounded corners */
-  margin-top: 10px;
 }
 
 .sidebar {
@@ -75,6 +77,7 @@ header {
 main {
   margin-left: 20%; /* Same as header width */
   padding: 20px;
+  flex: 1; /* Ensure main content grows and shrinks with the window */
 }
 
 footer {
@@ -87,6 +90,11 @@ footer {
   text-align: center;
 }
 
+.footer-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
 
 .cards {
   display: flex;

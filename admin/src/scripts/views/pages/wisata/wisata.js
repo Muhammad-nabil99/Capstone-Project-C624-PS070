@@ -1,6 +1,5 @@
-const { getDocs, collection } = require('firebase/firestore');
+const { getDocs, collection, deleteDoc, doc } = require('firebase/firestore');
 const { db } = require('../../../backend/firebase.js');
-const { deleteWisata } = require('../../../backend/wisata/wisata_handler.js');
 
 const Wisata = {
     async render() {
@@ -16,13 +15,13 @@ const Wisata = {
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Name</th>
+                        <th>Nama</th>
                         <th>Detail</th>
-                        <th>Location</th>
-                        <th>Open Time</th>
-                        <th>Price</th>
-                        <th>Image</th>
-                        <th>Action</th>
+                        <th>Lokasi</th>
+                        <th>Jam Buka</th>
+                        <th>Harga</th>
+                        <th>Gambar</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody id="wisataTableBody">
@@ -35,6 +34,7 @@ const Wisata = {
         goToAnotherPageButton.addEventListener('click', function() {
             window.location.href = '/#/wisata_form';
         });
+
         const wisataTableBody = document.getElementById('wisataTableBody');
         try {
             const querySnapshot = await getDocs(collection(db, 'wisata'));
@@ -44,8 +44,8 @@ const Wisata = {
                 const wisata = doc.data();
                 index++;
                 tableRows += `
-                    <tr data-id="${wisata.id}">
-                        <td>${index}</td>
+                    <tr>
+                        <td>${index}</td> <!-- Use index here -->
                         <td>${wisata.name}</td>
                         <td>${wisata.detail}</td>
                         <td>${wisata.location}</td>
@@ -53,37 +53,35 @@ const Wisata = {
                         <td>${wisata.price}</td>
                         <td><img src="${wisata.imageUrl}" alt="Image of ${wisata.name}" style="width: 50px; height: 50px;"></td>
                         <td>
-                            <button class="edit-button">Edit</button>
-                            <button class="delete-button">Delete</button>
+                            <button class="edit-button" data-id="${doc.id}">Edit</button>
+                            <button class="delete-button" data-id="${doc.id}">Delete</button>
                         </td>
                     </tr>
                 `;
             });
             wisataTableBody.innerHTML = tableRows;
 
-            const editButtons = document.querySelectorAll('.edit-button');
-            const deleteButtons = document.querySelectorAll('.delete-button');
-
-            editButtons.forEach(button => {
-                button.addEventListener('click', async (e) => {
-                    const wisataId = e.target.closest('tr').dataset.id;
+            document.querySelectorAll('.edit-button').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const wisataId = event.target.getAttribute('data-id');
                     window.location.href = `/#/wisata_form_edit/${wisataId}`;
                 });
             });
 
-            deleteButtons.forEach(button => {
-                button.addEventListener('click', async (e) => {
-                    const wisataId = e.target.closest('tr').dataset.id;
+            document.querySelectorAll('.delete-button').forEach(button => {
+                button.addEventListener('click', async (event) => {
+                    const wisataId = event.target.getAttribute('data-id');
                     try {
-                        await deleteWisata(wisataId);
-                        e.target.closest('tr').remove();
-                        console.log('Wisata deleted with ID:', wisataId);
+                        await deleteDoc(doc(db, 'wisata', wisataId));
+                        alert('Wisata deleted successfully');
+                        window.location.reload();
                     } catch (error) {
                         console.error('Error deleting Wisata:', error);
                         alert('Failed to delete Wisata. Please try again.');
                     }
                 });
             });
+
         } catch (error) {
             console.error('Error fetching wisata data:', error);
         }

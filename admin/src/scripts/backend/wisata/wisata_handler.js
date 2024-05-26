@@ -10,7 +10,6 @@ async function addWisata(name, location, openTime, price, detail, mapLocation, i
   try {
     await uploadBytes(storageRef, image);
     const imageUrl = await getDownloadURL(storageRef);
-
     await setDoc(doc(db, 'wisata', id), {
       id,
       name,

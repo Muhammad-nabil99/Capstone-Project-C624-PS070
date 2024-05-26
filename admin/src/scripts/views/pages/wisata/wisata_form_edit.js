@@ -35,7 +35,7 @@ const Wisata_form_edit = {
         </div>
         <div class="form-group">
           <label for="image">Image:</label>
-          <input type="file" id="image" name="image">
+          <input type="file" id="image" name="image" accept="image/png, image/jpeg, image/jpg">
         </div>
         <div class="form-group">
           <label for="placeName">Place Name:</label>
@@ -52,8 +52,7 @@ const Wisata_form_edit = {
   },
 
   async afterRender() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const wisataId = urlParams.get('id');
+    const wisataId = window.location.hash.split('/')[2];
     if (!wisataId) {
       console.error('No Wisata ID found in URL');
       return;
@@ -62,11 +61,13 @@ const Wisata_form_edit = {
     const mapContainer = document.getElementById('map');
     const mapLocationInput = document.getElementById('mapLocation');
     const wisataForm = document.getElementById('wisataForm');
+    const imagePreview = document.getElementById('imagePreview');
+    const imageInput = document.getElementById('image');
 
     const defaultCoordinates = [106.8456, -6.2088]; 
     map = initializeMap(mapboxgl, mapContainer, defaultCoordinates);
     marker = addMarkerToMap(map, defaultCoordinates, mapLocationInput, marker);
-    
+
     const geocoder = new MapboxGeocoder({
       accessToken: mapboxgl.accessToken,
       mapboxgl: mapboxgl,
@@ -97,6 +98,11 @@ const Wisata_form_edit = {
       document.getElementById('detail').value = wisata.detail;
       document.getElementById('mapLocation').value = wisata.mapLocation;
 
+      if (wisata.imageUrl) {
+        imagePreview.src = wisata.imageUrl;
+        imagePreview.style.display = 'block';
+      }
+
       const existingCoordinates = wisata.mapLocation.split(',').map(Number).reverse();
       map.flyTo({ center: existingCoordinates, zoom: 15 });
       if (marker) {
@@ -117,6 +123,11 @@ const Wisata_form_edit = {
       const detail = document.getElementById('detail').value;
       const mapLocation = document.getElementById('mapLocation').value;
       const image = document.getElementById('image').files[0];
+
+      if (image && !['image/png', 'image/jpeg', 'image/jpg'].includes(image.type)) {
+        alert('Only PNG, JPEG, and JPG images are allowed');
+        return;
+      }
 
       try {
         await updateWisata(wisataId, name, location, openTime, price, detail, mapLocation, image);

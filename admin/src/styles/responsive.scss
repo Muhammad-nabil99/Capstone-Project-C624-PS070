@@ -1,0 +1,88 @@
+@media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+    }
+    
+    .sidebar {
+      width: 100%;
+    }
+    
+    .main-content {
+      flex: 1;
+    }
+    
+    .appbar {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    header {
+      width: 25%;
+    }
+  
+    main {
+      margin-left: 25%;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    header {
+      width: 30%;
+    }
+  
+    main {
+      margin-left: 30%;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    header, .sidebar {
+      width: 100%;
+      float: none;
+      height: auto;
+    }
+    footer {
+      position: relative; 
+      bottom: auto;
+    }
+  
+    main {
+      margin-left: 0;
+      padding: 10px;
+    }
+  
+    .user-info {
+      flex-direction: column;
+    }
+  
+    .user-info img {
+      margin-top: 10px;
+    }
+  
+    .cards {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .card {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .user-info img {
+      width: 20px;
+      height: 20px;
+    }
+  
+    .card {
+      width: 100%;
+    }
+  
+    .sidebar ul li {
+      margin-bottom: 5px;
+    }
+  }
+  
