@@ -1,5 +1,6 @@
 const { getDocs, collection, deleteDoc, doc } = require('firebase/firestore');
 const { db } = require('../../../backend/firebase.js');
+const search_box = require('../../../utils/search.js');
 
 const Wisata = {
     async render() {
@@ -9,7 +10,7 @@ const Wisata = {
             </div>
             <div class="search-bar">
                 <span>Show:</span>
-                <input type="text" placeholder="Search...">
+                <input type="text" id="searchInput" placeholder="Search...">
             </div>
             <table>
                 <thead>
@@ -36,30 +37,22 @@ const Wisata = {
         });
 
         const wisataTableBody = document.getElementById('wisataTableBody');
+        const searchInput = document.getElementById('searchInput');
+
         try {
             const querySnapshot = await getDocs(collection(db, 'wisata'));
-            let tableRows = '';
-            let index = 0;
+            let wisataData = [];
             querySnapshot.forEach((doc) => {
-                const wisata = doc.data();
-                index++;
-                tableRows += `
-                    <tr>
-                        <td>${index}</td> <!-- Use index here -->
-                        <td>${wisata.name}</td>
-                        <td>${wisata.detail}</td>
-                        <td>${wisata.location}</td>
-                        <td>${wisata.openTime}</td>
-                        <td>${wisata.price}</td>
-                        <td><img src="${wisata.imageUrl}" alt="Image of ${wisata.name}" style="width: 50px; height: 50px;"></td>
-                        <td>
-                            <button class="edit-button" data-id="${doc.id}">Edit</button>
-                            <button class="delete-button" data-id="${doc.id}">Delete</button>
-                        </td>
-                    </tr>
-                `;
+                wisataData.push({ id: doc.id, ...doc.data() });
             });
-            wisataTableBody.innerHTML = tableRows;
+
+            search_box.renderTable(wisataData, wisataTableBody);
+
+            searchInput.addEventListener('input', () => {
+                const searchTerm = searchInput.value.toLowerCase();
+                const filteredData = search_box.filterWisataData(wisataData, searchTerm);
+                search_box.renderTable(filteredData, wisataTableBody);
+            });
 
             document.querySelectorAll('.edit-button').forEach(button => {
                 button.addEventListener('click', (event) => {

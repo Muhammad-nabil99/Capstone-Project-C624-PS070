@@ -12,7 +12,7 @@ let marker;
 const Wisata_form = {
   async render() {
     return `
-      <form id="wisataForm">
+      <form id="wisataForm" class="wisata-form">
         <div class="form-group">
           <label for="name">Nama Tempat Wisata:</label>
           <input type="text" id="name" name="name" required>
@@ -22,20 +22,24 @@ const Wisata_form = {
           <input type="text" id="location" name="location" required>
         </div>
         <div class="form-group">
-          <label for="openTime">Open Time:</label>
+          <label for="openTime">Jam Buka:</label>
           <input type="text" id="openTime" name="openTime" required>
         </div>
         <div class="form-group">
-          <label for="price">Price:</label>
+          <label for="price">Harga Tiket:</label>
           <input type="text" id="price" name="price" required>
         </div>
         <div class="form-group">
-          <label for="detail">Detail:</label>
-          <input type="text" id="detail" name="detail" required>
+          <label for="detail">Informasi Detail:</label>
+          <textarea id="detail" name="detail" rows="3" required></textarea>
         </div>
         <div class="form-group">
           <label for="image">Image:</label>
-          <input type="file" id="image" name="image" required>
+          <input type="file" id="image" name="image" accept="image/*" required>
+          <div id="imagePreviewContainer">
+            <img id="imagePreview" src="" alt="Image Preview" style="display: none;">
+            <button id="switchImageButton" type="button" style="display: none;">Switch Image</button>
+          </div>
         </div>
         <div class="form-group">
           <label for="placeName">Place Name:</label>
@@ -44,9 +48,10 @@ const Wisata_form = {
         <div class="form-group">
           <label for="mapLocation">Map Location:</label>
           <input type="text" id="mapLocation" name="mapLocation" readonly>
-          <div id="map"></div>
+          <div id="map" class="map-container"></div>
         </div>
         <button type="submit">Submit</button>
+        <div id="formFeedback" class="feedback"></div>
       </form>
     `;
   },
@@ -55,11 +60,14 @@ const Wisata_form = {
     const mapContainer = document.getElementById('map');
     const mapLocationInput = document.getElementById('mapLocation');
     const wisataForm = document.getElementById('wisataForm');
+    const imageInput = document.getElementById('image');
+    const imagePreview = document.getElementById('imagePreview');
+    const switchImageButton = document.getElementById('switchImageButton');
+    const formFeedback = document.getElementById('formFeedback');
 
     const defaultCoordinates = [106.8456, -6.2088];
     map = initializeMap(mapboxgl, mapContainer, defaultCoordinates);
     marker = addMarkerToMap(map, defaultCoordinates, mapLocationInput, marker);
-
 
     const geocoder = new MapboxGeocoder({
       accessToken: mapboxgl.accessToken,
@@ -82,24 +90,57 @@ const Wisata_form = {
       }
     });
 
+    imageInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          imagePreview.src = event.target.result;
+          imagePreview.style.display = 'block';
+          switchImageButton.style.display = 'block';
+          imageInput.style.display = 'none';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    switchImageButton.addEventListener('click', () => {
+      imagePreview.src = '';
+      imagePreview.style.display = 'none';
+      switchImageButton.style.display = 'none';
+      imageInput.style.display = 'block';
+      imageInput.value = '';
+    });
+
     wisataForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const name = document.getElementById('name').value;
-      const location = document.getElementById('location').value;
-      const openTime = document.getElementById('openTime').value;
-      const price = document.getElementById('price').value;
-      const detail = document.getElementById('detail').value;
-      const mapLocation = document.getElementById('mapLocation').value;
-      const image = document.getElementById('image').files[0];
+      formFeedback.textContent = '';  // Clear previous feedback
+
+      const formData = new FormData(wisataForm);
+      const image = formData.get('image');
 
       try {
-        const id = await addWisata(name, location, openTime, price, detail, mapLocation, image);
-        console.log('Wisata added with ID:', id);
+        const id = await addWisata(
+          formData.get('name'),
+          formData.get('location'),
+          formData.get('openTime'),
+          formData.get('price'),
+          formData.get('detail'),
+          formData.get('mapLocation'),
+          image
+        );
 
+        console.log('Wisata added with ID:', id);
+        formFeedback.textContent = 'Wisata added successfully!';
         wisataForm.reset();
+        imagePreview.src = '';
+        imagePreview.style.display = 'none';
+        switchImageButton.style.display = 'none';
+        imageInput.style.display = 'block';
+        marker.remove();  // Remove marker after submission
       } catch (error) {
         console.error('Error adding Wisata:', error);
-        alert('Failed to add Wisata. Please try again.');
+        formFeedback.textContent = 'Failed to add Wisata. Please try again.';
       }
     });
   }

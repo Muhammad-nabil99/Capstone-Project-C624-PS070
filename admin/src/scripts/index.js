@@ -1,7 +1,7 @@
   import '../styles/main.scss'
   import '../styles/wisata.scss'
   import '../styles/responsive.scss'
-  import '../styles/mapbox.scss'
+  import '../styles/form.scss'
   import App from './views/app'
 
   const app = new App({
