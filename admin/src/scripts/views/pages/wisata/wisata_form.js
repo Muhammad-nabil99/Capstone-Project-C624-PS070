@@ -1,5 +1,6 @@
 import { addWisata } from '../../../backend/wisata/wisata_handler.js';
 import mapSetup from '../../../utils/maps.js';
+import { showNotification } from '../../../utils/form_notification.js'; // Import notification handler
 
 const { initializeMap, addMarkerToMap } = mapSetup;
 
@@ -51,7 +52,7 @@ const Wisata_form = {
           <div id="map" class="map-container"></div>
         </div>
         <button type="submit">Submit</button>
-        <div id="formFeedback" class="feedback"></div>
+        <div id="notification" class="notification"></div>
       </form>
     `;
   },
@@ -63,8 +64,7 @@ const Wisata_form = {
     const imageInput = document.getElementById('image');
     const imagePreview = document.getElementById('imagePreview');
     const switchImageButton = document.getElementById('switchImageButton');
-    const formFeedback = document.getElementById('formFeedback');
-
+    
     const defaultCoordinates = [106.8456, -6.2088];
     map = initializeMap(mapboxgl, mapContainer, defaultCoordinates);
     marker = addMarkerToMap(map, defaultCoordinates, mapLocationInput, marker);
@@ -114,7 +114,6 @@ const Wisata_form = {
 
     wisataForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      formFeedback.textContent = '';  // Clear previous feedback
 
       const formData = new FormData(wisataForm);
       const image = formData.get('image');
@@ -131,7 +130,7 @@ const Wisata_form = {
         );
 
         console.log('Wisata added with ID:', id);
-        formFeedback.textContent = 'Wisata added successfully!';
+        showNotification('Wisata added successfully!');
         wisataForm.reset();
         imagePreview.src = '';
         imagePreview.style.display = 'none';
@@ -140,7 +139,7 @@ const Wisata_form = {
         marker.remove();  // Remove marker after submission
       } catch (error) {
         console.error('Error adding Wisata:', error);
-        formFeedback.textContent = 'Failed to add Wisata. Please try again.';
+        showNotification('Failed to add Wisata. Please try again.', true);
       }
     });
   }

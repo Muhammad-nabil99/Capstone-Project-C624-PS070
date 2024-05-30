@@ -57,3 +57,32 @@
 .custom-geocoder {
   margin-bottom: 10px;
 }
+/* Add these styles to your existing CSS file */
+
+.notification {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #4caf50; /* Green background */
+  color: white; /* White text */
+  text-align: center;
+  padding: 15px;
+  font-size: 17px;
+  z-index: 9999;
+}
+
+.notification.show {
+  display: block;
+  animation: slideDown 0.5s forwards;
+}
+
+@keyframes slideDown {
+  from {
+    top: -50px;
+  }
+  to {
+    top: 0;
+  }
+}
