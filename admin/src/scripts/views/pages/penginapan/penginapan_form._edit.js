@@ -13,9 +13,6 @@ let marker;
 const Penginapan_form_edit = {
   async render() {
     return `
-      <div class="button-wrapper">
-        <button id="goBack">Back to List</button>
-      </div>
       <form id="penginapanForm" class="penginapan-form">
         <div class="form-group">
           <label for="name">Nama Penginapan:</label>
@@ -39,7 +36,7 @@ const Penginapan_form_edit = {
         </div>
         <div class="form-group">
           <label for="image">Gambar:</label>
-          <input type="file" id="image" name="image" accept="image/*">
+          <input type="file" id="image" name="image" accept="image/*" required>
           <div id="imagePreviewContainer">
             <img id="imagePreview" src="" alt="Image Preview" style="display: none;">
             <button id="switchImageButton" type="button" style="display: none;">Ganti Gambar</button>
@@ -54,7 +51,7 @@ const Penginapan_form_edit = {
           <input type="text" id="mapLocation" name="mapLocation" readonly>
           <div id="map" class="map-container"></div>
         </div>
-        <button type="submit">Update</button>
+        <button type="submit">Submit</button>
         <div id="notification" class="notification"></div>
       </form>
     `;

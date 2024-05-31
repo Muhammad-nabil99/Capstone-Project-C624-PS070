@@ -1,145 +1,147 @@
-@media (max-width: 1024px) {
-  header {
-    width: 25%;
-  }
-
-  main {
-    margin-left: 25%;
-  }
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
 }
 
-@media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-  }
-
-  .sidebar {
-    width: 100%;
-  }
-
-  .main-content {
-    flex: 1;
-  }
-
-  .appbar {
-    width: 100%;
-  }
-
-  header {
-    width: 30%;
-  }
-
-  main {
-    margin-left: 30%;
-  }
+.appbar {
+  background-color: #333; /* Appbar background color */
+  color: #fff; /* Text color for appbar */
+  padding: 10px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 999; /* Ensure it appears above other elements */
 }
 
-@media (max-width: 600px) {
-  header,
-  .sidebar {
-    width: 100%;
-    float: none;
-    height: auto;
-  }
-
-  footer {
-    position: relative;
-    bottom: auto;
-  }
-
-  main {
-    margin-left: 0;
-    padding: 10px;
-  }
-
-  .user-info img {
-    margin-top: 10px;
-  }
-  .card {
-    width: 100%;
-    margin-bottom: 20px;
-  }
+header {
+  width: 20%; /* Adjust the width as needed */
+  float: left;
+  background-color: #f0f0f0; /* Header background color */
+  height: 100%; /* Extend to full height */
 }
 
-@media (max-width: 480px) {
-  .user-info img {
-    width: 20px;
-    height: 20px;
-  }
-
-  .card {
-    width: 100%;
-  }
-
-  .sidebar ul li {
-    margin-bottom: 5px;
-  }
+.user-info {
+  background: grey;
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+.user-info span {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.user-info img {
+  width: 30px; /* Adjust as needed */
+  height: 30px; /* Adjust as needed */
+  border-radius: 50%; /* For rounded corners */
+}
+
+.sidebar {
+  color: black; /* Text color for sidebar */
+  padding: 20px;
+}
+
+.sidebar .logo {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.sidebar .logo img {
+  width: 80px; /* Adjust as needed */
+  height: 80px; /* Adjust as needed */
+  margin-bottom: 10px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar ul li {
+  margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+  color: black;
+  text-decoration: none;
+}
+
+main {
+  margin-left: 20%; /* Same as header width */
+  padding: 20px;
+  height: calc(100vh - 160px); /* Adjust based on header and footer height */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#maincontent {
+  flex: 1;
+  overflow-y: auto; /* Enable vertical scrolling for the main content */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #333; /* Footer background color */
+  color: #fff; /* Text color for footer */
+  padding: 10px 0;
+  text-align: center;
+}
+
+.footer-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
 .cards {
   display: flex;
   justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
   padding: 20px;
-  flex-wrap: wrap; /* Allow items to wrap to the next line */
 }
 
 .card {
-  background-color: #5DADE2; /* Adjust color as needed */
+  width: 200px;
+  margin-bottom: 20px;
+  background-color: #5DADE2; 
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
-  width: 250px; /* Adjust width as needed */
-  height: 100px; /* Adjust height as needed */
+  width: 250px; 
+  height: 100px; 
   padding: 10px;
   text-align: left;
-  margin: 10px; /* Add margin for spacing between cards */
 }
 
 .card img {
-  margin-right: 10px; /* Space between image and text */
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  width: 40%; 
+  height: 100%; 
+  margin-right: 10px; 
 }
 
 .card span {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 16px;
+  color: #333;
   color: white;
   font-size: 1.2em;
   font-weight: bold;
-}
-
-/* Media queries for responsiveness */
-@media (max-width: 768px) {
-  .cards {
-    justify-content: center;
-  }
-
-  .card {
-    width: 200px; /* Adjust width for smaller screens */
-    height: 90px; /* Adjust height for smaller screens */
-  }
-
-  .card span {
-    font-size: 1em; /* Adjust text size for smaller screens */
-  }
-}
-
-@media (max-width: 480px) {
-  .cards {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .card {
-    width: 100%; /* Full width for very small screens */
-    height: auto; /* Adjust height for very small screens */
-    flex-direction: row; /* Keep image and text side by side */
-    text-align: left;
-  }
-
-  .card img {
-    margin: 0 10px 0 0; /* Margin to the right of image */
-  }
-
-  .card span {
-    font-size: 1em; /* Adjust text size for very small screens */
-  }
 }

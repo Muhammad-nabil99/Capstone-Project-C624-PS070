@@ -43,17 +43,22 @@ async function getKulinerById(id) {
   }
 }
 
-async function updateKuliner(id, name, location, openTime, detail, mapLocation, image) {
+async function updateKuliner(id, name, location, openTime, detail, mapLocation, newImage) {
   const docRef = doc(db, 'kuliner', id);
 
   try {
     const updates = { name, location, openTime, detail, mapLocation };
 
-    if (image) {
+    if (newImage) {
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const oldImageRef = ref(storage, `kuliner/${id}`);
+        await deleteObject(oldImageRef);
+      }
       const storageRef = ref(storage, `kuliner/${id}`);
-      await uploadBytes(storageRef, image);
-      const imageUrl = await getDownloadURL(storageRef);
-      updates.imageUrl = imageUrl;
+      await uploadBytes(storageRef, newImage);
+      const newImageUrl = await getDownloadURL(storageRef);
+      updates.imageUrl = newImageUrl;
     }
 
     await updateDoc(docRef, updates);
@@ -64,13 +69,14 @@ async function updateKuliner(id, name, location, openTime, detail, mapLocation, 
 }
 
 async function deleteKuliner(id) {
+  const docRef = doc(db, 'kuliner', id);
+  const storageRef = ref(storage, `kuliner/${id}`);
+  
   try {
-    const docRef = doc(db, 'kuliner', id);
-    const storageRef = ref(storage, `kuliner/${id}`);
     await deleteObject(storageRef);
     await deleteDoc(docRef);
   } catch (error) {
-    console.error('Error:', error);
+    console.error('Error deleting Kuliner:', error);
     throw new Error('Failed to delete Kuliner');
   }
 }

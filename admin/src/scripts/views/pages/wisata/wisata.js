@@ -1,6 +1,7 @@
 const { getDocs, collection, deleteDoc, doc } = require('firebase/firestore');
 const { db } = require('../../../backend/firebase.js');
-const search_box = require('../../../utils/search_box/search.js');
+const search_box = require('../../../utils/search_box/search_wisata.js');
+const { deleteWisata } = require('../../../backend/wisata/wisata_handler.js')
 
 const Wisata = {
     async render() {
@@ -65,7 +66,7 @@ const Wisata = {
                 button.addEventListener('click', async (event) => {
                     const wisataId = event.target.getAttribute('data-id');
                     try {
-                        await deleteDoc(doc(db, 'wisata', wisataId));
+                        await deleteWisata(wisataId);
                         alert('Wisata deleted successfully');
                         window.location.reload();
                     } catch (error) {

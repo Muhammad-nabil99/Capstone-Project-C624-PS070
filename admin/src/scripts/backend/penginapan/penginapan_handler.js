@@ -1,7 +1,7 @@
 const { db, storage } = require('../firebase');
 const { v4: uuidv4 } = require('uuid');
 const { ref, uploadBytes, getDownloadURL, deleteObject } = require('firebase/storage');
-const { doc, setDoc, getDoc, updateDoc } = require('firebase/firestore');
+const { doc, setDoc, getDoc, updateDoc, deleteDoc } = require('firebase/firestore');
 
 async function addPenginapan(name, location, fasilitas, price, detail, mapLocation, image) {
   const id = uuidv4();
@@ -44,17 +44,22 @@ async function getPenginapanById(id) {
   }
 }
 
-async function updatePenginapan(id, name, location, fasilitas, price, detail, mapLocation, image) {
+async function updatePenginapan(id, name, location, fasilitas, price, detail, mapLocation, newImage) {
   const docRef = doc(db, 'penginapan', id);
 
   try {
     const updates = { name, location, fasilitas, price, detail, mapLocation };
 
-    if (image) {
+    if (newImage) {
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const oldImageRef = ref(storage, `penginapan/${id}`);
+        await deleteObject(oldImageRef);
+      }
       const storageRef = ref(storage, `penginapan/${id}`);
-      await uploadBytes(storageRef, image);
-      const imageUrl = await getDownloadURL(storageRef);
-      updates.imageUrl = imageUrl;
+      await uploadBytes(storageRef, newImage);
+      const newImageUrl = await getDownloadURL(storageRef);
+      updates.imageUrl = newImageUrl;
     }
 
     await updateDoc(docRef, updates);
@@ -65,13 +70,14 @@ async function updatePenginapan(id, name, location, fasilitas, price, detail, ma
 }
 
 async function deletePenginapan(id) {
+  const docRef = doc(db, 'penginapan', id);
+  const storageRef = ref(storage, `penginapan/${id}`);
+  
   try {
-    const docRef = doc(db, 'penginapan', id);
-    const storageRef = ref(storage, `penginapan/${id}`);
     await deleteObject(storageRef);
     await deleteDoc(docRef);
   } catch (error) {
-    console.error('Error:', error);
+    console.error('Error deleting Penginapan:', error);
     throw new Error('Failed to delete Penginapan');
   }
 }

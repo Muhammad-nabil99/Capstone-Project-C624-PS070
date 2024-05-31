@@ -15,7 +15,7 @@ header div.sidebar{
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: #F8F8FF;
+  background-color: #61A3BA;
   padding: 2rem;
 }
 header div.sidebar .logo img{
@@ -36,19 +36,18 @@ header div.sidebar ul li a{
   text-align: center;
   line-height: 44px;
   text-decoration: none;
-  color: black;
+  color: white;
+}
+header div.sidebar ul li a.active{
+  color: #52D3D8;
 }
 header div.sidebar ul li a:hover{
-  color: red;
+  color: #b0f6f8;
 }
 /* hero */
 header .hero{
   width: 100%;
   height: 500px;
-  background-size: cover;
-  background-image: url(../public/images/heros/hero-image_3.jpg);
-  background-position: center;
-  background-repeat: no-repeat;
   position: relative;
   display: flex;
   justify-content: center;
@@ -114,13 +113,14 @@ div.recomendations .container-recomendation-items{
   padding-block-end: 10rem;
 }
 div.recomendations .container-recomendation-items .item_recomendation{
+  /* flex-basis: auto; */
   display: flex;
   position: relative;
   flex-direction: column;
   text-align: center;
 }
 div.recomendations .container-recomendation-items img{
-  width: 450px;
+  width: 350px;
   height: 270px;
   object-fit: cover;
   object-position: center;
@@ -134,12 +134,97 @@ div.recomendations .container-recomendation-items button{
   min-width: 44px;
   min-height: 44px;
   border-radius: 5px;
-  background-color: rgb(241, 241, 174);
+  background-color: #DDCE41;
+  cursor: pointer;
 }
-
+/* item */
+h1{
+  text-align: center;
+  padding-block-end: 8rem;
+}
+.penghinapanContainer{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:center;
+  gap: 2rem 1rem;
+  padding: 1rem;
+}
+.penghinapanContainer .detail-Container{
+  flex-basis: 20%;
+  background-color:rgb(219, 219, 219);
+  border-radius: 6px;
+}
+.penghinapanContainer .detail-Container .image-item{
+  width: 100%;
+  height: 180px;
+}
+.penghinapanContainer .detail-Container .image-item picture img{
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  object-position: center;
+}
+.penghinapanContainer .detail-Container .description-item{
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.penghinapanContainer .detail-Container .description-item .title-item{
+  text-align: center;
+  font-size: 1.3rem;
+}
+.penghinapanContainer .detail-Container .description-item .title-item a{
+  color: black;
+  text-transform: capitalize;
+  text-decoration: none;
+}
+/* detail */
+.detailContainer{
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+.detail-container{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.detailContainer .image-detail{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: auto;
+  max-width: 750px;
+  /* background-color:blue; */
+  text-align: center;
+  padding-block-end: 1rem;
+}
+.detailContainer .image-detail picture img{
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  object-position: center;
+  
+}
+.more-detail{
+  display: flex;
+}
+.location-detail{
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  width: 80%;
+  flex: 1;
+}
+.maps{
+  display: inline-block;
+  width: 30%;
+  flex: 0;
+}
 /* footer */
 footer{
-  background-color: black;
+  background-color: #0F1010;
   display: flex;
   padding: 2rem;
 }
@@ -150,4 +235,3 @@ footer .footer-content{
   font-weight: bold;
   color: white;
 }
-

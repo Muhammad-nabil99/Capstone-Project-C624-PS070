@@ -44,17 +44,23 @@ async function getWisataById(id) {
   }
 }
 
-async function updateWisata(id, name, location, openTime, price, detail, mapLocation, image) {
+async function updateWisata(id, name, location, openTime, price, detail, mapLocation, newImage) {
   const docRef = doc(db, 'wisata', id);
 
   try {
     const updates = { name, location, openTime, price, detail, mapLocation };
 
-    if (image) {
+
+    if (newImage) {
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const oldImageRef = ref(storage, `wisata/${id}`);
+        await deleteObject(oldImageRef);
+      }
       const storageRef = ref(storage, `wisata/${id}`);
-      await uploadBytes(storageRef, image);
-      const imageUrl = await getDownloadURL(storageRef);
-      updates.imageUrl = imageUrl;
+      await uploadBytes(storageRef, newImage);
+      const newImageUrl = await getDownloadURL(storageRef);
+      updates.imageUrl = newImageUrl;
     }
 
     await updateDoc(docRef, updates);
@@ -65,15 +71,18 @@ async function updateWisata(id, name, location, openTime, price, detail, mapLoca
 }
 
 async function deleteWisata(id) {
+  const docRef = doc(db, 'wisata', id);
+  const storageRef = ref(storage, `wisata/${id}`);
+  
   try {
-    const docRef = doc(db, 'wisata', id);
-    const storageRef = ref(storage, `wisata/${id}`);
     await deleteObject(storageRef);
     await deleteDoc(docRef);
   } catch (error) {
-    console.error('Error:', error);
+    console.error('Error deleting Wisata:', error);
     throw new Error('Failed to delete Wisata');
   }
 }
+module.exports = { addWisata, getWisataById, updateWisata, deleteWisata };
+
 
 module.exports = { addWisata, getWisataById, updateWisata, deleteWisata };

@@ -1,298 +1,114 @@
-// Variables
-$primary-color: #3498db;
-$secondary-color: #61A3BA;
-$background-color: #ecf0f1;
-$text-color: #2c3e50;
-$hover-color: #144d73;
-$font-family: 'Arial, sans-serif';
-
-// Mixin for Flexbox
-@mixin flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-// Base styles
-body {
-  font-family: $font-family;
-  background-color: $background-color;
+body, html {
   margin: 0;
   padding: 0;
-  color: $text-color;
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
+/* Add this CSS to your existing stylesheet */
+
+
+.appbar {
+  background-color: #333; /* Appbar background color */
+  color: #fff; /* Text color for appbar */
+  padding: 10px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 999; /* Ensure it appears above other elements */
+}
+header {
+  width: 20%; /* Adjust the width as needed */
+  float: left;
+  background-color: #f0f0f0; /* Header background color */
+  height: 100%; /* Extend to full height */
+}
+.user-info {
+  background: grey;
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-header {
-  background-color: #E6E6E6;
-  padding: 20px;
-  height: 25px;
-  text-align: center;
-  color: white;
+.user-info span {
+  font-weight: bold;
+  margin-right: 10px;
+}
 
-  .logo {
-    @include flex-center;
-    flex-direction: column;
-
-    img {
-      max-width: 100px;
-    }
-
-    h1 {
-      margin: 10px 0 0 0;
-      
-    }
-  }
+.user-info img {
+  width: 30px; /* Adjust as needed */
+  height: 30px; /* Adjust as needed */
+  border-radius: 50%; /* For rounded corners */
+  margin-top: 10px;
 }
 
 .sidebar {
-  width: 200px;
-  height: 100vh;
-  background-color: $secondary-color;
+  color: black; /* Text color for sidebar */
   padding: 20px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  flex-direction: column;
-  
-
-  .logo {
-    display: flex; 
-    align-items: center; /* Menyelaraskan item secara vertikal */
-
-    img {
-      width: 100px; /* Atur lebar gambar sesuai kebutuhan */
-      height: auto; /* Pertahankan aspek rasio gambar */
-      margin-right: 10px; /* Spasi antara gambar dan teks */
-    }
-
-    h1 {
-      font-size: 25px; /* Sesuaikan ukuran font */
-      color: white; /* Warna teks putih */
-      margin: 0; /* Hilangkan margin default */
-      
-    }
-  }
-
-  ul {
-    list-style-type: none;
-    padding: 0;
-    margin-top: 10px; /* Beri jarak antara logo dan daftar */
-    
-    
-    li {
-      margin: 30px 0; /* Margin vertikal untuk setiap item */
-      
-
-      a {
-        color: white;
-        text-decoration: none;
-        font-size: 18px;
-        transition: color 0.3s;
-        display: flex;
-        align-items: center; /* Menyelaraskan ikon dan teks secara vertikal */
-
-        i {
-          margin-right: 10px; /* Beri jarak antara ikon dan teks */
-        }
-
-        &:hover {
-          color: $hover-color;
-        }
-      }
-
-      &.active a {
-        font-weight: bold;
-      }
-    }
-  }
 }
-
-
-.user-info {
-  position: fixed;
-  top: 16px;
-  right: 10px;
-  background-color: $primary-color;
-  padding: 8px;
-  border-radius: 40px;
-  color: white;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 12px;
- 
+.sidebar .logo {
+  text-align: center;
+  margin-bottom: 20px;
 }
-
+.sidebar .logo img {
+  width: 80px; /* Adjust as needed */
+  height: 80px; /* Adjust as needed */
+  margin-bottom: 10px;
+}
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.sidebar ul li {
+  margin-bottom: 10px;
+}
+.sidebar ul li a {
+  color: black;
+  text-decoration: none;
+}
 main {
-  margin-left: 270px;
+  margin-left: 20%; /* Same as header width */
   padding: 20px;
-  
-  .container .card {
-    display: flex;
-    flex-direction: row;
-  }
-  
-  .container .card .icon {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #61A3BA;
-
-}
-
-.container .card .icon .fa {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 80px;
-    color: #fff;
-}
-
-.container .card .slide {
-  width: 300px;
-  height: 200px;
-  transition: 0.5s;
-  display: inline-block; /* Changed from flex to inline-block */
-  
-}
-
-
-.container .card .slide.slide1 {
-    position: relative;
-    display: flex;
-    margin-left: 15px;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
-    transition: .7s;
-    transform: translateY(100px);
-}
-
-.container .card:hover .slide.slide1{
-    transform: translateY(0px);
-}
-
-.container .card .slide.slide2 {
-    position: relative;
-    margin-left: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    box-sizing: border-box;
-    transition: .8s;
-    transform: translateY(-100px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-}
-
-.container .card:hover .slide.slide2{
-    transform: translateY(0);
-}
-
-.container .card .slide.slide2::after{
-    content: "";
-    position: absolute;
-    width: 30px;
-    height: 4px;
-    bottom: 15px;
-    left: 50%;
-    left: 50%;
-    transform: translateX(-50%);
-    background:#61A3BA;
-}
-.container .card .slide.slide2 .content p {
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    color: #414141;
-}
-.container .card .slide.slide2 .content h3 {
-    margin: 0 0 10px 0;
-    padding: 0;
-    font-size: 24px;
-    text-align: center;
-    color: #414141;
-} 
-
-  span {
-    display: block;
-    text-align: center;
-    margin-top: 10px;
-    font-size: 16px;
-    color: #333;
-    padding: 50px;
-    
-  }
+  flex: 1; /* Ensure main content grows and shrinks with the window */
 }
 
 footer {
-  background-color: #000;
-  color: white;
-  text-align: center;
-  padding: 25px;
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 0px;
-  display: flex;
-  justify-content: center; /* Pusatkan konten footer */
-  align-items: center;
-}
-
-footer img {
-  width: 100px;
-  position: absolute;
-  left: 20px; /* Tempatkan gambar di sisi kiri */
+  background-color: #333; /* Footer background color */
+  color: #fff; /* Text color for footer */
+  padding: 10px 0;
+  text-align: center;
 }
 
 .footer-content {
-  display: flex;
-  align-items: center;
-
-  p {
-    margin: 0 5px;
-  }
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
-
-
-// Responsive Design
-@media (max-width: 768px) {
-  .sidebar {
-    width: 200px;
-
-    ul {
-      li {
-        a {
-          font-size: 16px;
-        }
-      }
-    }
-  }
-
-  .user-info {
-    padding: 8px;
-
-    img {
-      width: 30px;
-      height: 30px;
-    }
-  }
-
-  main {
-    margin-left: 220px;
-  }
-
-  .cards {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .card {
-    width: 90%;
-  }
+.cards {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.card {
+  width: 200px;
+  margin-bottom: 20px;
+}
+.card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+.card span {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 16px;
+  color: #333;
 }

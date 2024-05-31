@@ -1,5 +1,6 @@
-const { getDocs, collection, deleteDoc, doc } = require('firebase/firestore');
+const { getDocs, collection } = require('firebase/firestore');
 const { db } = require('../../../backend/firebase.js');
+const { deletePenginapan } = require('../../../backend/penginapan/penginapan_handler.js'); // adjust the path accordingly
 
 const Penginapan = {
     async render() {
@@ -78,7 +79,7 @@ const Penginapan = {
                     button.addEventListener('click', async (event) => {
                         const penginapanId = event.target.getAttribute('data-id');
                         try {
-                            await deleteDoc(doc(db, 'penginapan', penginapanId));
+                            await deletePenginapan(penginapanId);
                             alert('Penginapan deleted successfully');
                             window.location.reload();
                         } catch (error) {

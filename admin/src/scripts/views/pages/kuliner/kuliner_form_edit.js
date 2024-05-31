@@ -22,21 +22,20 @@ const Kuliner_form_edit = {
           <input type="text" id="location" name="location" required>
         </div>
         <div class="form-group">
-          <label for="openTime">Open Time:</label>
+          <label for="openTime">Jam Buka:</label>
           <input type="text" id="openTime" name="openTime" required>
         </div>
         <div class="form-group">
-          <label for="price">Price:</label>
-          <input type="text" id="price" name="price" required>
-        </div>
-        <div class="form-group">
-          <label for="detail">Detail:</label>
-          <input type="text" id="detail" name="detail" required>
+          <label for="detail">Informasi Detail:</label>
+          <textarea id="detail" name="detail" rows="3" required></textarea>
         </div>
         <div class="form-group">
           <label for="image">Image:</label>
-          <input type="file" id="image" name="image" accept="image/png, image/jpeg, image/jpg">
-          <img id="imagePreview" style="display: none;" />
+          <input type="file" id="image" name="image" accept="image/*" required>
+          <div id="imagePreviewContainer">
+            <img id="imagePreview" src="" alt="Image Preview" style="display: none;">
+            <button id="switchImageButton" type="button" style="display: none;">Switch Image</button>
+          </div>
         </div>
         <div class="form-group">
           <label for="placeName">Place Name:</label>
@@ -47,7 +46,8 @@ const Kuliner_form_edit = {
           <input type="text" id="mapLocation" name="mapLocation" readonly>
           <div id="map" class="map-container"></div>
         </div>
-        <button type="submit">Update</button>
+        <button type="submit">Submit</button>
+        <div id="notification" class="notification"></div>
       </form>
     `;
   },

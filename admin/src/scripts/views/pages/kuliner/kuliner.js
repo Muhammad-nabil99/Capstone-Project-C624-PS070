@@ -1,5 +1,6 @@
-const { getDocs, collection, deleteDoc, doc } = require('firebase/firestore');
+const { getDocs, collection} = require('firebase/firestore');
 const { db } = require('../../../backend/firebase.js');
+const { deleteKuliner } = require('../../../backend/kuliner/kuliner_handler.js')
 
 const Kuliner = {
     async render() {
@@ -76,7 +77,7 @@ const Kuliner = {
                     button.addEventListener('click', async (event) => {
                         const kulinerId = event.target.getAttribute('data-id');
                         try {
-                            await deleteDoc(doc(db, 'kuliner', kulinerId));
+                            await deleteKuliner(kulinerId);
                             alert('Kuliner deleted successfully');
                             window.location.reload();
                         } catch (error) {
