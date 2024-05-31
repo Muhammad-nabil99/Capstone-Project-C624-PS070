@@ -1,10 +1,10 @@
 import { addPenginapan } from '../../../backend/penginapan/penginapan_handler.js';
 import mapSetup from '../../../utils/maps.js';
-import { showNotification } from '../../../utils/form_notification.js'; // Import notification handler
+import { showNotification } from '../../../utils/form_notification.js';
 
 const { initializeMap, addMarkerToMap } = mapSetup;
 
-const mapboxglAccessToken = 'pk.eyJ1IjoiZjE3MjZ5YjE0MCIsImEiOiJjbHdhMXYyOGcwYW40Mmlxazg2aTBqYWl6In0.7vkdPDBmhzZq38n2jFNEjA';
+const mapboxglAccessToken = 'your-mapbox-access-token';
 mapboxgl.accessToken = mapboxglAccessToken;
 
 let map;
@@ -28,7 +28,7 @@ const Penginapan_form = {
         </div>
         <div class="form-group">
           <label for="fasilitas">Fasilitas:</label>
-          <textarea id="fasilitas" name="fasilitas" rows="3" required></textarea>
+          <textarea id="fasilitas" name="fasilitas" required></textarea>
         </div>
         <div class="form-group">
           <label for="price">Harga:</label>
@@ -135,13 +135,12 @@ const Penginapan_form = {
         imagePreview.src = '';
         imagePreview.style.display = 'none';
         imageInput.style.display = 'block';
-        marker.remove(); 
+        marker.remove();
       } catch (error) {
         console.error('Error adding Penginapan:', error);
         showNotification('Failed to add Penginapan. Please try again.', true);
       }
     });
-
   }
 };
 

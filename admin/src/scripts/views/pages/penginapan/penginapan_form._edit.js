@@ -1,6 +1,6 @@
 import { getPenginapanById, updatePenginapan } from '../../../backend/penginapan/penginapan_handler.js';
 import mapSetup from '../../../utils/maps.js';
-import { showNotification } from '../../../utils/form_notification.js'; // Import notification handler
+import { showNotification } from '../../../utils/form_notification.js';
 
 const { initializeMap, addMarkerToMap } = mapSetup;
 
@@ -36,7 +36,7 @@ const Penginapan_form_edit = {
         </div>
         <div class="form-group">
           <label for="image">Gambar:</label>
-          <input type="file" id="image" name="image" accept="image/*" required>
+          <input type="file" id="image" name="image" accept="image/*">
           <div id="imagePreviewContainer">
             <img id="imagePreview" src="" alt="Image Preview" style="display: none;">
             <button id="switchImageButton" type="button" style="display: none;">Ganti Gambar</button>
@@ -63,7 +63,6 @@ const Penginapan_form_edit = {
       console.error('No Penginapan ID found in URL');
       return;
     }
-
     const mapContainer = document.getElementById('map');
     const mapLocationInput = document.getElementById('mapLocation');
     const penginapanForm = document.getElementById('penginapanForm');
@@ -110,6 +109,9 @@ const Penginapan_form_edit = {
         imagePreview.style.display = 'block';
         switchImageButton.style.display = 'block';
         imageInput.style.display = 'none';
+        imageInput.removeAttribute('required');
+      } else {
+        imageInput.setAttribute('required', 'required');
       }
 
       const existingCoordinates = penginapan.mapLocation.split(',').map(Number).reverse();
@@ -134,6 +136,7 @@ const Penginapan_form_edit = {
           imageInput.style.display = 'none';
         };
         reader.readAsDataURL(file);
+        imageInput.removeAttribute('required');
       }
     });
 
@@ -142,6 +145,7 @@ const Penginapan_form_edit = {
       imagePreview.style.display = 'none';
       switchImageButton.style.display = 'none';
       imageInput.style.display = 'block';
+      imageInput.setAttribute('required', 'required');
       imageInput.value = '';
     });
 
@@ -158,7 +162,7 @@ const Penginapan_form_edit = {
       const image = formData.get('image');
 
       try {
-        await updatePenginapan(penginapanId, name, detail, location, fasilitas, price, mapLocation, image);
+        await updatePenginapan(penginapanId, name, location, fasilitas, price, detail, mapLocation, image);
         console.log('Penginapan updated with ID:', penginapanId);
         showNotification('Penginapan updated successfully!');
         window.location.href = '/#/penginapan';
@@ -166,10 +170,6 @@ const Penginapan_form_edit = {
         console.error('Error updating Penginapan:', error);
         showNotification('Failed to update Penginapan. Please try again.', true);
       }
-    });
-
-    document.getElementById('goBack').addEventListener('click', () => {
-      window.location.href = '/#/penginapan';
     });
   }
 };

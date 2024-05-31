@@ -1,7 +1,7 @@
 const { db, storage } = require('../firebase');
 const { v4: uuidv4 } = require('uuid');
 const { ref, uploadBytes, getDownloadURL, deleteObject } = require('firebase/storage');
-const { doc, setDoc, getDoc, updateDoc } = require('firebase/firestore');
+const { doc, setDoc, getDoc, updateDoc, deleteDoc } = require('firebase/firestore');
 
 async function addWisata(name, location, openTime, price, detail, mapLocation, image) {
   const id = uuidv4();
@@ -14,7 +14,7 @@ async function addWisata(name, location, openTime, price, detail, mapLocation, i
       id,
       name,
       location,
-      openTime,
+      openTime, 
       price,
       detail,
       mapLocation,
@@ -75,14 +75,11 @@ async function deleteWisata(id) {
   const storageRef = ref(storage, `wisata/${id}`);
   
   try {
-    await deleteObject(storageRef);
     await deleteDoc(docRef);
+    await deleteObject(storageRef);
   } catch (error) {
     console.error('Error deleting Wisata:', error);
     throw new Error('Failed to delete Wisata');
   }
 }
-module.exports = { addWisata, getWisataById, updateWisata, deleteWisata };
-
-
 module.exports = { addWisata, getWisataById, updateWisata, deleteWisata };

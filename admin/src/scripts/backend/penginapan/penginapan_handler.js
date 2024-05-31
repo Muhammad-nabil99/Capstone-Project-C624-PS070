@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 const { ref, uploadBytes, getDownloadURL, deleteObject } = require('firebase/storage');
 const { doc, setDoc, getDoc, updateDoc, deleteDoc } = require('firebase/firestore');
 
-async function addPenginapan(name, location, fasilitas, price, detail, mapLocation, image) {
+async function addPenginapan(name, detail, location, fasilitas, price, mapLocation, image) {
   const id = uuidv4();
   const storageRef = ref(storage, `penginapan/${id}`);
 
@@ -13,11 +13,11 @@ async function addPenginapan(name, location, fasilitas, price, detail, mapLocati
     await setDoc(doc(db, 'penginapan', id), {
       id,
       name,
-      location,
-      fasilitas,
-      price,
-      detail,
-      mapLocation,
+      detail,         
+      location,      
+      fasilitas,     
+      price,          
+      mapLocation,    
       imageUrl,
     });
 
@@ -74,8 +74,8 @@ async function deletePenginapan(id) {
   const storageRef = ref(storage, `penginapan/${id}`);
   
   try {
-    await deleteObject(storageRef);
     await deleteDoc(docRef);
+    await deleteObject(storageRef);
   } catch (error) {
     console.error('Error deleting Penginapan:', error);
     throw new Error('Failed to delete Penginapan');

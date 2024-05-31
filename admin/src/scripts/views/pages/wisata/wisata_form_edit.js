@@ -13,40 +13,8 @@ const Wisata_form_edit = {
   async render() {
     return `
       <form id="wisataForm" class="wisata-form">
-        <div class="form-group">
-          <label for="name">Nama Tempat Wisata:</label>
-          <input type="text" id="name" name="name" required>
-        </div>
-        <div class="form-group">
-          <label for="location">Lokasi:</label>
-          <input type="text" id="location" name="location" required>
-        </div>
-        <div class="form-group">
-          <label for="openTime">Open Time:</label>
-          <input type="text" id="openTime" name="openTime" required>
-        </div>
-        <div class="form-group">
-          <label for="price">Price:</label>
-          <input type="text" id="price" name="price" required>
-        </div>
-        <div class="form-group">
-          <label for="detail">Detail:</label>
-          <input type="text" id="detail" name="detail" required>
-        </div>
-        <div class="form-group">
-          <label for="image">Image:</label>
-          <input type="file" id="image" name="image" accept="image/png, image/jpeg, image/jpg">
-          <img id="imagePreview" style="display: none;" />
-        </div>
-        <div class="form-group">
-          <label for="placeName">Place Name:</label>
-          <div id="geocoder" class="custom-geocoder"></div>
-        </div>
-        <div class="form-group">
-          <label for="mapLocation">Map Location:</label>
-          <input type="text" id="mapLocation" name="mapLocation" readonly>
-          <div id="map" class="map-container"></div>
-        </div>
+        <!-- Form Fields -->
+        ...
         <button type="submit">Update</button>
       </form>
     `;
@@ -90,8 +58,10 @@ const Wisata_form_edit = {
       }
     });
 
+    let initialData;
     try {
       const wisata = await getWisataById(wisataId);
+      initialData = wisata;
       document.getElementById('name').value = wisata.name;
       document.getElementById('location').value = wisata.location;
       document.getElementById('openTime').value = wisata.openTime;
@@ -125,13 +95,27 @@ const Wisata_form_edit = {
       const mapLocation = document.getElementById('mapLocation').value;
       const image = document.getElementById('image').files[0];
 
+      const updates = {};
+      if (name !== initialData.name) updates.name = name;
+      if (location !== initialData.location) updates.location = location;
+      if (openTime !== initialData.openTime) updates.openTime = openTime;
+      if (price !== initialData.price) updates.price = price;
+      if (detail !== initialData.detail) updates.detail = detail;
+      if (mapLocation !== initialData.mapLocation) updates.mapLocation = mapLocation;
+
+      if (Object.keys(updates).length === 0 && !image) {
+        console.log('No changes detected');
+        alert('No changes detected');
+        return;
+      }
+
       if (image && !['image/png', 'image/jpeg', 'image/jpg'].includes(image.type)) {
         alert('Only PNG, JPEG, and JPG images are allowed');
         return;
       }
 
       try {
-        await updateWisata(wisataId, name, location, openTime, price, detail, mapLocation, image);
+        await updateWisata(wisataId, updates, image);
         console.log('Wisata updated with ID:', wisataId);
         alert('Wisata updated successfully');
         window.location.href = '/#/wisata';

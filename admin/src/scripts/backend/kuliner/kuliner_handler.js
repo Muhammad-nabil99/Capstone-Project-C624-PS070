@@ -1,7 +1,7 @@
 const { db, storage } = require('../firebase');
 const { v4: uuidv4 } = require('uuid');
 const { ref, uploadBytes, getDownloadURL, deleteObject } = require('firebase/storage');
-const { doc, setDoc, getDoc, updateDoc } = require('firebase/firestore');
+const { doc, setDoc, getDoc, updateDoc, deleteDoc } = require('firebase/firestore');
 
 async function addKuliner(name, location, openTime, detail, mapLocation, image) {
   const id = uuidv4();
@@ -73,8 +73,8 @@ async function deleteKuliner(id) {
   const storageRef = ref(storage, `kuliner/${id}`);
   
   try {
-    await deleteObject(storageRef);
     await deleteDoc(docRef);
+    await deleteObject(storageRef);
   } catch (error) {
     console.error('Error deleting Kuliner:', error);
     throw new Error('Failed to delete Kuliner');
