@@ -1,4 +1,4 @@
-import { addPenginapan } from '../../../backend/penginapan/penginapan_handler.js';
+import { getPenginapanById, updatePenginapan } from '../../../backend/penginapan/penginapan_handler.js';
 import mapSetup from '../../../utils/maps.js';
 import { showNotification } from '../../../utils/form_notification.js'; // Import notification handler
 
@@ -10,9 +10,12 @@ mapboxgl.accessToken = mapboxglAccessToken;
 let map;
 let marker;
 
-const Penginapan_form = {
+const Penginapan_form_edit = {
   async render() {
     return `
+      <div class="button-wrapper">
+        <button id="goBack">Back to List</button>
+      </div>
       <form id="penginapanForm" class="penginapan-form">
         <div class="form-group">
           <label for="name">Nama Penginapan:</label>
@@ -36,7 +39,7 @@ const Penginapan_form = {
         </div>
         <div class="form-group">
           <label for="image">Gambar:</label>
-          <input type="file" id="image" name="image" accept="image/*" required>
+          <input type="file" id="image" name="image" accept="image/*">
           <div id="imagePreviewContainer">
             <img id="imagePreview" src="" alt="Image Preview" style="display: none;">
             <button id="switchImageButton" type="button" style="display: none;">Ganti Gambar</button>
@@ -51,20 +54,26 @@ const Penginapan_form = {
           <input type="text" id="mapLocation" name="mapLocation" readonly>
           <div id="map" class="map-container"></div>
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit">Update</button>
         <div id="notification" class="notification"></div>
       </form>
     `;
   },
 
   async afterRender() {
+    const penginapanId = window.location.hash.split('/')[2];
+    if (!penginapanId) {
+      console.error('No Penginapan ID found in URL');
+      return;
+    }
+
     const mapContainer = document.getElementById('map');
     const mapLocationInput = document.getElementById('mapLocation');
     const penginapanForm = document.getElementById('penginapanForm');
     const imageInput = document.getElementById('image');
     const imagePreview = document.getElementById('imagePreview');
     const switchImageButton = document.getElementById('switchImageButton');
-    
+
     const defaultCoordinates = [106.8456, -6.2088];
     map = initializeMap(mapboxgl, mapContainer, defaultCoordinates);
     marker = addMarkerToMap(map, defaultCoordinates, mapLocationInput, marker);
@@ -89,6 +98,33 @@ const Penginapan_form = {
         marker = addMarkerToMap(map, coordinates, mapLocationInput, marker);
       }
     });
+
+    try {
+      const penginapan = await getPenginapanById(penginapanId);
+      document.getElementById('name').value = penginapan.name;
+      document.getElementById('detail').value = penginapan.detail;
+      document.getElementById('location').value = penginapan.location;
+      document.getElementById('fasilitas').value = penginapan.fasilitas;
+      document.getElementById('price').value = penginapan.price;
+      document.getElementById('mapLocation').value = penginapan.mapLocation;
+
+      if (penginapan.imageUrl) {
+        imagePreview.src = penginapan.imageUrl;
+        imagePreview.style.display = 'block';
+        switchImageButton.style.display = 'block';
+        imageInput.style.display = 'none';
+      }
+
+      const existingCoordinates = penginapan.mapLocation.split(',').map(Number).reverse();
+      map.flyTo({ center: existingCoordinates, zoom: 15 });
+      if (marker) {
+        marker.setLngLat(existingCoordinates);
+      } else {
+        marker = addMarkerToMap(map, existingCoordinates, mapLocationInput, marker);
+      }
+    } catch (error) {
+      console.error('Error fetching Penginapan data:', error);
+    }
 
     imageInput.addEventListener('change', (e) => {
       const file = e.target.files[0];
@@ -116,33 +152,29 @@ const Penginapan_form = {
       e.preventDefault();
 
       const formData = new FormData(penginapanForm);
+      const name = formData.get('name');
+      const detail = formData.get('detail');
+      const location = formData.get('location');
+      const fasilitas = formData.get('fasilitas');
+      const price = formData.get('price');
+      const mapLocation = formData.get('mapLocation');
       const image = formData.get('image');
 
       try {
-        const id = await addPenginapan(
-          formData.get('name'),
-          formData.get('detail'),
-          formData.get('location'),
-          formData.get('fasilitas'),
-          formData.get('price'),
-          formData.get('mapLocation'),
-          image
-        );
-
-        console.log('Penginapan added with ID:', id);
-        showNotification('Penginapan added successfully!');
-        penginapanForm.reset();
-        imagePreview.src = '';
-        imagePreview.style.display = 'none';
-        imageInput.style.display = 'block';
-        marker.remove(); 
+        await updatePenginapan(penginapanId, name, detail, location, fasilitas, price, mapLocation, image);
+        console.log('Penginapan updated with ID:', penginapanId);
+        showNotification('Penginapan updated successfully!');
+        window.location.href = '/#/penginapan';
       } catch (error) {
-        console.error('Error adding Penginapan:', error);
-        showNotification('Failed to add Penginapan. Please try again.', true);
+        console.error('Error updating Penginapan:', error);
+        showNotification('Failed to update Penginapan. Please try again.', true);
       }
     });
 
+    document.getElementById('goBack').addEventListener('click', () => {
+      window.location.href = '/#/penginapan';
+    });
   }
 };
 
-export default Penginapan_form;
+export default Penginapan_form_edit;

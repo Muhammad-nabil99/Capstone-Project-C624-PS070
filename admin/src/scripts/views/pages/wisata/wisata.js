@@ -1,12 +1,12 @@
 const { getDocs, collection, deleteDoc, doc } = require('firebase/firestore');
 const { db } = require('../../../backend/firebase.js');
-const search_box = require('../../../utils/search.js');
+const search_box = require('../../../utils/search_box/search.js');
 
 const Wisata = {
     async render() {
         return `
             <div class="button-wrapper">
-                <button id="goToAnotherPage">Go to Another Page</button>
+                <button id="goToAnotherPage">Isi Data</button>
             </div>
             <div class="search-bar">
                 <span>Show:</span>
@@ -16,7 +16,7 @@ const Wisata = {
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama</th>
+                        <th>Nama Wisata</th>
                         <th>Detail</th>
                         <th>Lokasi</th>
                         <th>Jam Buka</th>

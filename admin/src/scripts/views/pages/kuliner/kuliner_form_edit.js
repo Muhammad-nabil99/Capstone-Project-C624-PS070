@@ -1,4 +1,4 @@
-import { getWisataById, updateWisata } from '../../../backend/wisata/wisata_handler.js';
+import { getKulinerById, updateKuliner } from '../../../backend/kuliner/kuliner_handler.js';
 import mapSetup from '../../../utils/maps.js';
 
 const { initializeMap, addMarkerToMap } = mapSetup;
@@ -9,12 +9,12 @@ mapboxgl.accessToken = mapboxglAccessToken;
 let map;
 let marker;
 
-const Wisata_form_edit = {
+const Kuliner_form_edit = {
   async render() {
     return `
-      <form id="wisataForm" class="wisata-form">
+      <form id="kulinerForm" class="kuliner-form">
         <div class="form-group">
-          <label for="name">Nama Tempat Wisata:</label>
+          <label for="name">Nama Tempat Kuliner:</label>
           <input type="text" id="name" name="name" required>
         </div>
         <div class="form-group">
@@ -53,15 +53,15 @@ const Wisata_form_edit = {
   },
 
   async afterRender() {
-    const wisataId = window.location.hash.split('/')[2];
-    if (!wisataId) {
-      console.error('No Wisata ID found in URL');
+    const kulinerId = window.location.hash.split('/')[2];
+    if (!kulinerId) {
+      console.error('No Kuliner ID found in URL');
       return;
     }
 
     const mapContainer = document.getElementById('map');
     const mapLocationInput = document.getElementById('mapLocation');
-    const wisataForm = document.getElementById('wisataForm');
+    const kulinerForm = document.getElementById('kulinerForm');
     const imagePreview = document.getElementById('imagePreview');
     const imageInput = document.getElementById('image');
 
@@ -91,20 +91,20 @@ const Wisata_form_edit = {
     });
 
     try {
-      const wisata = await getWisataById(wisataId);
-      document.getElementById('name').value = wisata.name;
-      document.getElementById('location').value = wisata.location;
-      document.getElementById('openTime').value = wisata.openTime;
-      document.getElementById('price').value = wisata.price;
-      document.getElementById('detail').value = wisata.detail;
-      document.getElementById('mapLocation').value = wisata.mapLocation;
+      const kuliner = await getKulinerById(kulinerId);
+      document.getElementById('name').value = kuliner.name;
+      document.getElementById('location').value = kuliner.location;
+      document.getElementById('openTime').value = kuliner.openTime;
+      document.getElementById('price').value = kuliner.price;
+      document.getElementById('detail').value = kuliner.detail;
+      document.getElementById('mapLocation').value = kuliner.mapLocation;
 
-      if (wisata.imageUrl) {
-        imagePreview.src = wisata.imageUrl;
+      if (kuliner.imageUrl) {
+        imagePreview.src = kuliner.imageUrl;
         imagePreview.style.display = 'block';
       }
 
-      const existingCoordinates = wisata.mapLocation.split(',').map(Number).reverse();
+      const existingCoordinates = kuliner.mapLocation.split(',').map(Number).reverse();
       map.flyTo({ center: existingCoordinates, zoom: 15 });
       if (marker) {
         marker.setLngLat(existingCoordinates);
@@ -112,10 +112,10 @@ const Wisata_form_edit = {
         marker = addMarkerToMap(map, existingCoordinates, mapLocationInput, marker);
       }
     } catch (error) {
-      console.error('Error fetching Wisata data:', error);
+      console.error('Error fetching Kuliner data:', error);
     }
 
-    wisataForm.addEventListener('submit', async (e) => {
+    kulinerForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const name = document.getElementById('name').value;
       const location = document.getElementById('location').value;
@@ -131,16 +131,16 @@ const Wisata_form_edit = {
       }
 
       try {
-        await updateWisata(wisataId, name, location, openTime, price, detail, mapLocation, image);
-        console.log('Wisata updated with ID:', wisataId);
-        alert('Wisata updated successfully');
-        window.location.href = '/#/wisata';
+        await updateKuliner(kulinerId, name, location, openTime, price, detail, mapLocation, image);
+        console.log('Kuliner updated with ID:', kulinerId);
+        alert('Kuliner updated successfully');
+        window.location.href = '/#/kuliner';
       } catch (error) {
-        console.error('Error updating Wisata:', error);
-        alert('Failed to update Wisata. Please try again.');
+        console.error('Error updating Kuliner:', error);
+        alert('Failed to update Kuliner. Please try again.');
       }
     });
   }
 };
 
-export default Wisata_form_edit;
+export default Kuliner_form_edit;

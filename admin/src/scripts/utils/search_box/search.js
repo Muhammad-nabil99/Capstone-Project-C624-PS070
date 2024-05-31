@@ -2,7 +2,6 @@ const search_box = {
     filterWisataData(wisataData, searchTerm) {
         return wisataData.filter(wisata => wisata.name.toLowerCase().includes(searchTerm.toLowerCase()));
     },
-
     renderTable(wisataData, wisataTableBody) {
         let tableRows = '';
         wisataData.forEach((wisata, index) => {

@@ -3,19 +3,18 @@ const { v4: uuidv4 } = require('uuid');
 const { ref, uploadBytes, getDownloadURL, deleteObject } = require('firebase/storage');
 const { doc, setDoc, getDoc, updateDoc } = require('firebase/firestore');
 
-async function addKuliner(name, location, fasilitas, price, detail, mapLocation, image) {
+async function addKuliner(name, location, openTime, detail, mapLocation, image) {
   const id = uuidv4();
-  const storageRef = ref(storage, `penginapan/${id}`);
+  const storageRef = ref(storage, `kuliner/${id}`);
 
   try {
     await uploadBytes(storageRef, image);
     const imageUrl = await getDownloadURL(storageRef);
-    await setDoc(doc(db, 'penginapan', id), {
+    await setDoc(doc(db, 'kuliner', id), {
       id,
       name,
       location,
-      fasilitas,
-      price,
+      openTime,
       detail,
       mapLocation,
       imageUrl,
@@ -30,7 +29,7 @@ async function addKuliner(name, location, fasilitas, price, detail, mapLocation,
 
 async function getKulinerById(id) {
   try {
-    const docRef = doc(db, 'penginapan', id);
+    const docRef = doc(db, 'kuliner', id);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
@@ -44,14 +43,14 @@ async function getKulinerById(id) {
   }
 }
 
-async function updateKuliner(id, name, location, fasilitas, price, detail, mapLocation, image) {
-  const docRef = doc(db, 'penginapan', id);
+async function updateKuliner(id, name, location, openTime, detail, mapLocation, image) {
+  const docRef = doc(db, 'kuliner', id);
 
   try {
-    const updates = { name, location, fasilitas, price, detail, mapLocation };
+    const updates = { name, location, openTime, detail, mapLocation };
 
     if (image) {
-      const storageRef = ref(storage, `penginapan/${id}`);
+      const storageRef = ref(storage, `kuliner/${id}`);
       await uploadBytes(storageRef, image);
       const imageUrl = await getDownloadURL(storageRef);
       updates.imageUrl = imageUrl;
@@ -66,8 +65,8 @@ async function updateKuliner(id, name, location, fasilitas, price, detail, mapLo
 
 async function deleteKuliner(id) {
   try {
-    const docRef = doc(db, 'penginapan', id);
-    const storageRef = ref(storage, `penginapan/${id}`);
+    const docRef = doc(db, 'kuliner', id);
+    const storageRef = ref(storage, `kuliner/${id}`);
     await deleteObject(storageRef);
     await deleteDoc(docRef);
   } catch (error) {
