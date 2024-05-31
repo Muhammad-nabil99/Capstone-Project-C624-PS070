@@ -1,137 +1,298 @@
-body, html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: Arial, sans-serif;
+// Variables
+$primary-color: #3498db;
+$secondary-color: #61A3BA;
+$background-color: #ecf0f1;
+$text-color: #2c3e50;
+$hover-color: #144d73;
+$font-family: 'Arial, sans-serif';
+
+// Mixin for Flexbox
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.appbar {
-  background-color: #333; 
-  color: #fff; 
-  padding: 10px;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  z-index: 999;
+// Base styles
+body {
+  font-family: $font-family;
+  background-color: $background-color;
+  margin: 0;
+  padding: 0;
+  color: $text-color;
 }
 
 header {
-  width: 20%; 
-  float: left;
-  background-color: #5DADE2;
-  height: 100%; 
-}
-
-.user-info {
-  background: grey;
-  padding: 10px;
+  background-color: #E6E6E6;
+  padding: 20px;
+  height: 25px;
   text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: right;
-}
+  color: white;
 
-.user-info span {
-  font-weight: bold;
-  margin-right: 30px;
-}
+  .logo {
+    @include flex-center;
+    flex-direction: column;
 
-.user-info img {
-  width: 30px; 
-  height: 30px; 
-  border-radius: 50%; 
+    img {
+      max-width: 100px;
+    }
+
+    h1 {
+      margin: 10px 0 0 0;
+      
+    }
+  }
 }
 
 .sidebar {
-  color: white;
+  width: 200px;
+  height: 100vh;
+  background-color: $secondary-color;
   padding: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  
+
+  .logo {
+    display: flex; 
+    align-items: center; /* Menyelaraskan item secara vertikal */
+
+    img {
+      width: 100px; /* Atur lebar gambar sesuai kebutuhan */
+      height: auto; /* Pertahankan aspek rasio gambar */
+      margin-right: 10px; /* Spasi antara gambar dan teks */
+    }
+
+    h1 {
+      font-size: 25px; /* Sesuaikan ukuran font */
+      color: white; /* Warna teks putih */
+      margin: 0; /* Hilangkan margin default */
+      
+    }
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px; /* Beri jarak antara logo dan daftar */
+    
+    
+    li {
+      margin: 30px 0; /* Margin vertikal untuk setiap item */
+      
+
+      a {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        transition: color 0.3s;
+        display: flex;
+        align-items: center; /* Menyelaraskan ikon dan teks secara vertikal */
+
+        i {
+          margin-right: 10px; /* Beri jarak antara ikon dan teks */
+        }
+
+        &:hover {
+          color: $hover-color;
+        }
+      }
+
+      &.active a {
+        font-weight: bold;
+      }
+    }
+  }
 }
 
-.sidebar .logo {
-  text-align: center;
-  margin-bottom: 20px;
-}
 
-.sidebar .logo img {
-  width: 80px; 
-  height: 80px;
-  margin-bottom: 10px;
-}
-
-.sidebar ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-.sidebar ul li {
-  margin-bottom: 10px;
-}
-
-.sidebar ul li a {
+.user-info {
+  position: fixed;
+  top: 16px;
+  right: 10px;
+  background-color: $primary-color;
+  padding: 8px;
+  border-radius: 40px;
   color: white;
-  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+ 
 }
 
 main {
-  margin-left: 20%;
+  margin-left: 270px;
   padding: 20px;
-  height: calc(100vh - 160px); 
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+  
+  .container .card {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .container .card .icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #61A3BA;
+
 }
 
-#maincontent {
-  flex: 1;
-  overflow-y: auto; 
-  padding: 20px;
-  box-sizing: border-box;
+.container .card .icon .fa {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 80px;
+    color: #fff;
+}
+
+.container .card .slide {
+  width: 300px;
+  height: 200px;
+  transition: 0.5s;
+  display: inline-block; /* Changed from flex to inline-block */
+  
+}
+
+
+.container .card .slide.slide1 {
+    position: relative;
+    display: flex;
+    margin-left: 15px;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    transition: .7s;
+    transform: translateY(100px);
+}
+
+.container .card:hover .slide.slide1{
+    transform: translateY(0px);
+}
+
+.container .card .slide.slide2 {
+    position: relative;
+    margin-left: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    transition: .8s;
+    transform: translateY(-100px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.container .card:hover .slide.slide2{
+    transform: translateY(0);
+}
+
+.container .card .slide.slide2::after{
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 4px;
+    bottom: 15px;
+    left: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    background:#61A3BA;
+}
+.container .card .slide.slide2 .content p {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    color: #414141;
+}
+.container .card .slide.slide2 .content h3 {
+    margin: 0 0 10px 0;
+    padding: 0;
+    font-size: 24px;
+    text-align: center;
+    color: #414141;
+} 
+
+  span {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
+    padding: 50px;
+    
+  }
 }
 
 footer {
+  background-color: #000;
+  color: white;
+  text-align: center;
+  padding: 25px;
   position: fixed;
   bottom: 0;
   width: 100%;
-  background-color: #333; 
-  color: #fff; 
-  padding: 10px 0;
-  text-align: center;
+  height: 0px;
+  display: flex;
+  justify-content: center; /* Pusatkan konten footer */
+  align-items: center;
+}
+
+footer img {
+  width: 100px;
+  position: absolute;
+  left: 20px; /* Tempatkan gambar di sisi kiri */
 }
 
 .footer-content {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.cards {
-  display: flex;
-  justify-content: space-around;
-  padding: 20px;
-}
-
-.card {
-  background-color: #5DADE2; 
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
-  width: 250px; 
-  height: 100px; 
-  padding: 10px;
-  text-align: left;
+
+  p {
+    margin: 0 5px;
+  }
 }
 
-.card img {
-  width: 40%; 
-  height: 100%; 
-  margin-right: 10px; 
-}
 
-.card span {
-  color: white;
-  font-size: 1.2em;
-  font-weight: bold;
-}
 
+// Responsive Design
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px;
+
+    ul {
+      li {
+        a {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+
+  .user-info {
+    padding: 8px;
+
+    img {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  main {
+    margin-left: 220px;
+  }
+
+  .cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    width: 90%;
+  }
+}
