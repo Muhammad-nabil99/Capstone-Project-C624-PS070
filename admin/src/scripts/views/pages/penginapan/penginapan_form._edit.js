@@ -67,9 +67,8 @@ const Penginapan_form_edit = {
     const mapContainer = document.getElementById('map');
     const mapLocationInput = document.getElementById('mapLocation');
     const penginapanForm = document.getElementById('penginapanForm');
-    const imageInput = document.getElementById('image');
     const imagePreview = document.getElementById('imagePreview');
-    const switchImageButton = document.getElementById('switchImageButton');
+    const imageInput = document.getElementById('image');
 
     const defaultCoordinates = [106.8456, -6.2088];
     map = initializeMap(mapboxgl, mapContainer, defaultCoordinates);
@@ -110,11 +109,6 @@ const Penginapan_form_edit = {
       if (penginapan.imageUrl) {
         imagePreview.src = penginapan.imageUrl;
         imagePreview.style.display = 'block';
-        switchImageButton.style.display = 'block';
-        imageInput.style.display = 'none';
-        imageInput.removeAttribute('required');
-      } else {
-        imageInput.setAttribute('required', 'required');
       }
 
       const existingCoordinates = penginapan.mapLocation.split(',').map(Number).reverse();
@@ -128,40 +122,28 @@ const Penginapan_form_edit = {
       console.error('Error fetching Penginapan data:', error);
     }
 
-// Update image preview when a new image is selected
-imageInput.addEventListener('change', (e) => {
-  const file = e.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      imagePreview.src = e.target.result;
-      imagePreview.style.display = 'block';
-    };
-    reader.readAsDataURL(file);
-  }
-});
-
-
-    switchImageButton.addEventListener('click', () => {
-      imagePreview.src = '';
-      imagePreview.style.display = 'none';
-      switchImageButton.style.display = 'none';
-      imageInput.style.display = 'block';
-      imageInput.setAttribute('required', 'required');
-      imageInput.value = '';
+    // Update image preview when a new image is selected
+    imageInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          imagePreview.src = e.target.result;
+          imagePreview.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      }
     });
 
     penginapanForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-
-      const formData = new FormData(penginapanForm);
-      const name = formData.get('name');
-      const detail = formData.get('detail');
-      const location = formData.get('location');
-      const fasilitas = formData.get('fasilitas');
-      const price = formData.get('price');
-      const mapLocation = formData.get('mapLocation');
-      const image = formData.get('image');
+      const name = document.getElementById('name').value;
+      const detail = document.getElementById('detail').value;
+      const location = document.getElementById('location').value;
+      const fasilitas = document.getElementById('fasilitas').value;
+      const price = document.getElementById('price').value;
+      const mapLocation = document.getElementById('mapLocation').value;
+      const image = document.getElementById('image').files[0];
 
       const updates = {};
       if (name !== initialData.name) updates.name = name;
@@ -171,14 +153,20 @@ imageInput.addEventListener('change', (e) => {
       if (detail !== initialData.detail) updates.detail = detail;
       if (mapLocation !== initialData.mapLocation) updates.mapLocation = mapLocation;
 
+
+      if (image && !['image/png', 'image/jpeg', 'image/jpg'].includes(image.type)) {
+        alert('Only PNG, JPEG, and JPG images are allowed');
+        return;
+      }
+
       try {
         await updatePenginapan(penginapanId, updates, image);
         console.log('Penginapan updated with ID:', penginapanId);
-        showNotification('Penginapan updated successfully!');
+        alert('Penginapan updated successfully');
         window.location.href = '/#/penginapan';
       } catch (error) {
         console.error('Error updating Penginapan:', error);
-        showNotification('Failed to update Penginapan. Please try again.', true);
+        alert('Failed to update Penginapan. Please try again.');
       }
     });
   }
