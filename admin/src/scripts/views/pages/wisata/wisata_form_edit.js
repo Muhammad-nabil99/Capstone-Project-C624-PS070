@@ -13,8 +13,40 @@ const Wisata_form_edit = {
   async render() {
     return `
       <form id="wisataForm" class="wisata-form">
-        <!-- Form Fields -->
-        ...
+        <div class="form-group">
+          <label for="name">Nama Tempat Wisata:</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="location">Lokasi:</label>
+          <input type="text" id="location" name="location" required>
+        </div>
+        <div class="form-group">
+          <label for="openTime">Open Time:</label>
+          <input type="text" id="openTime" name="openTime" required>
+        </div>
+        <div class="form-group">
+          <label for="price">Price:</label>
+          <input type="text" id="price" name="price" required>
+        </div>
+        <div class="form-group">
+          <label for="detail">Detail:</label>
+          <input type="text" id="detail" name="detail" required>
+        </div>
+        <div class="form-group">
+          <label for="image">Image:</label>
+          <input type="file" id="image" name="image" accept="image/png, image/jpeg, image/jpg">
+          <img id="imagePreview" style="display: none;" />
+        </div>
+        <div class="form-group">
+          <label for="placeName">Place Name:</label>
+          <div id="geocoder" class="custom-geocoder"></div>
+        </div>
+        <div class="form-group">
+          <label for="mapLocation">Map Location:</label>
+          <input type="text" id="mapLocation" name="mapLocation" readonly>
+          <div id="map" class="map-container"></div>
+        </div>
         <button type="submit">Update</button>
       </form>
     `;
@@ -102,12 +134,6 @@ const Wisata_form_edit = {
       if (price !== initialData.price) updates.price = price;
       if (detail !== initialData.detail) updates.detail = detail;
       if (mapLocation !== initialData.mapLocation) updates.mapLocation = mapLocation;
-
-      if (Object.keys(updates).length === 0 && !image) {
-        console.log('No changes detected');
-        alert('No changes detected');
-        return;
-      }
 
       if (image && !['image/png', 'image/jpeg', 'image/jpg'].includes(image.type)) {
         alert('Only PNG, JPEG, and JPG images are allowed');

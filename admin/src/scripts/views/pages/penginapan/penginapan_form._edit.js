@@ -63,6 +63,7 @@ const Penginapan_form_edit = {
       console.error('No Penginapan ID found in URL');
       return;
     }
+
     const mapContainer = document.getElementById('map');
     const mapLocationInput = document.getElementById('mapLocation');
     const penginapanForm = document.getElementById('penginapanForm');
@@ -95,8 +96,10 @@ const Penginapan_form_edit = {
       }
     });
 
+    let initialData;
     try {
       const penginapan = await getPenginapanById(penginapanId);
+      initialData = penginapan;
       document.getElementById('name').value = penginapan.name;
       document.getElementById('detail').value = penginapan.detail;
       document.getElementById('location').value = penginapan.location;
@@ -125,20 +128,19 @@ const Penginapan_form_edit = {
       console.error('Error fetching Penginapan data:', error);
     }
 
-    imageInput.addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      if (file && file.type.startsWith('image/')) {
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          imagePreview.src = event.target.result;
-          imagePreview.style.display = 'block';
-          switchImageButton.style.display = 'block';
-          imageInput.style.display = 'none';
-        };
-        reader.readAsDataURL(file);
-        imageInput.removeAttribute('required');
-      }
-    });
+// Update image preview when a new image is selected
+imageInput.addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      imagePreview.src = e.target.result;
+      imagePreview.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+  }
+});
+
 
     switchImageButton.addEventListener('click', () => {
       imagePreview.src = '';
@@ -161,8 +163,16 @@ const Penginapan_form_edit = {
       const mapLocation = formData.get('mapLocation');
       const image = formData.get('image');
 
+      const updates = {};
+      if (name !== initialData.name) updates.name = name;
+      if (location !== initialData.location) updates.location = location;
+      if (fasilitas !== initialData.fasilitas) updates.fasilitas = fasilitas;
+      if (price !== initialData.price) updates.price = price;
+      if (detail !== initialData.detail) updates.detail = detail;
+      if (mapLocation !== initialData.mapLocation) updates.mapLocation = mapLocation;
+
       try {
-        await updatePenginapan(penginapanId, name, location, fasilitas, price, detail, mapLocation, image);
+        await updatePenginapan(penginapanId, updates, image);
         console.log('Penginapan updated with ID:', penginapanId);
         showNotification('Penginapan updated successfully!');
         window.location.href = '/#/penginapan';

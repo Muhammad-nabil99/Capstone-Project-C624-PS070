@@ -43,25 +43,20 @@ async function getKulinerById(id) {
   }
 }
 
-async function updateKuliner(id, name, location, openTime, detail, mapLocation, newImage) {
+async function updateKuliner(id, updates, newImage) {
   const docRef = doc(db, 'kuliner', id);
 
   try {
-    const updates = { name, location, openTime, detail, mapLocation };
-
     if (newImage) {
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        const oldImageRef = ref(storage, `kuliner/${id}`);
-        await deleteObject(oldImageRef);
-      }
       const storageRef = ref(storage, `kuliner/${id}`);
       await uploadBytes(storageRef, newImage);
       const newImageUrl = await getDownloadURL(storageRef);
       updates.imageUrl = newImageUrl;
     }
 
-    await updateDoc(docRef, updates);
+    if (Object.keys(updates).length > 0) {
+      await updateDoc(docRef, updates);
+    }
   } catch (error) {
     console.error('Error:', error);
     throw new Error('Failed to update Kuliner');

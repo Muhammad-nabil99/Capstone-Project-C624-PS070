@@ -44,30 +44,26 @@ async function getPenginapanById(id) {
   }
 }
 
-async function updatePenginapan(id, name, location, fasilitas, price, detail, mapLocation, newImage) {
+async function updatePenginapan(id, updates, newImage) {
   const docRef = doc(db, 'penginapan', id);
 
   try {
-    const updates = { name, location, fasilitas, price, detail, mapLocation };
-
     if (newImage) {
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        const oldImageRef = ref(storage, `penginapan/${id}`);
-        await deleteObject(oldImageRef);
-      }
       const storageRef = ref(storage, `penginapan/${id}`);
       await uploadBytes(storageRef, newImage);
       const newImageUrl = await getDownloadURL(storageRef);
       updates.imageUrl = newImageUrl;
     }
 
-    await updateDoc(docRef, updates);
+    if (Object.keys(updates).length > 0) {
+      await updateDoc(docRef, updates);
+    }
   } catch (error) {
     console.error('Error:', error);
     throw new Error('Failed to update Penginapan');
   }
 }
+
 
 async function deletePenginapan(id) {
   const docRef = doc(db, 'penginapan', id);

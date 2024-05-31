@@ -31,10 +31,9 @@ const Kuliner_form_edit = {
         </div>
         <div class="form-group">
           <label for="image">Image:</label>
-          <input type="file" id="image" name="image" accept="image/*" required>
+          <input type="file" id="image" name="image" accept="image/*">
           <div id="imagePreviewContainer">
             <img id="imagePreview" src="" alt="Image Preview" style="display: none;">
-            <button id="switchImageButton" type="button" style="display: none;">Switch Image</button>
           </div>
         </div>
         <div class="form-group">
@@ -90,12 +89,13 @@ const Kuliner_form_edit = {
       }
     });
 
+    let initialData;
     try {
       const kuliner = await getKulinerById(kulinerId);
+      initialData = kuliner;
       document.getElementById('name').value = kuliner.name;
       document.getElementById('location').value = kuliner.location;
       document.getElementById('openTime').value = kuliner.openTime;
-      document.getElementById('price').value = kuliner.price;
       document.getElementById('detail').value = kuliner.detail;
       document.getElementById('mapLocation').value = kuliner.mapLocation;
 
@@ -115,15 +115,34 @@ const Kuliner_form_edit = {
       console.error('Error fetching Kuliner data:', error);
     }
 
+    // Update image preview when a new image is selected
+    imageInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          imagePreview.src = e.target.result;
+          imagePreview.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
     kulinerForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const name = document.getElementById('name').value;
       const location = document.getElementById('location').value;
       const openTime = document.getElementById('openTime').value;
-      const price = document.getElementById('price').value;
       const detail = document.getElementById('detail').value;
       const mapLocation = document.getElementById('mapLocation').value;
       const image = document.getElementById('image').files[0];
+
+      const updates = {};
+      if (name !== initialData.name) updates.name = name;
+      if (location !== initialData.location) updates.location = location;
+      if (openTime !== initialData.openTime) updates.openTime = openTime;
+      if (detail !== initialData.detail) updates.detail = detail;
+      if (mapLocation !== initialData.mapLocation) updates.mapLocation = mapLocation;
 
       if (image && !['image/png', 'image/jpeg', 'image/jpg'].includes(image.type)) {
         alert('Only PNG, JPEG, and JPG images are allowed');
@@ -131,7 +150,7 @@ const Kuliner_form_edit = {
       }
 
       try {
-        await updateKuliner(kulinerId, name, location, openTime, price, detail, mapLocation, image);
+        await updateKuliner(kulinerId, updates, image);
         console.log('Kuliner updated with ID:', kulinerId);
         alert('Kuliner updated successfully');
         window.location.href = '/#/kuliner';

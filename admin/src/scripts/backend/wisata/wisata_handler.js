@@ -14,7 +14,7 @@ async function addWisata(name, location, openTime, price, detail, mapLocation, i
       id,
       name,
       location,
-      openTime, 
+      openTime,
       price,
       detail,
       mapLocation,
@@ -44,26 +44,20 @@ async function getWisataById(id) {
   }
 }
 
-async function updateWisata(id, name, location, openTime, price, detail, mapLocation, newImage) {
+async function updateWisata(id, updates, newImage) {
   const docRef = doc(db, 'wisata', id);
 
   try {
-    const updates = { name, location, openTime, price, detail, mapLocation };
-
-
     if (newImage) {
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        const oldImageRef = ref(storage, `wisata/${id}`);
-        await deleteObject(oldImageRef);
-      }
       const storageRef = ref(storage, `wisata/${id}`);
       await uploadBytes(storageRef, newImage);
       const newImageUrl = await getDownloadURL(storageRef);
       updates.imageUrl = newImageUrl;
     }
 
-    await updateDoc(docRef, updates);
+    if (Object.keys(updates).length > 0) {
+      await updateDoc(docRef, updates);
+    }
   } catch (error) {
     console.error('Error:', error);
     throw new Error('Failed to update Wisata');
@@ -82,4 +76,5 @@ async function deleteWisata(id) {
     throw new Error('Failed to delete Wisata');
   }
 }
+
 module.exports = { addWisata, getWisataById, updateWisata, deleteWisata };
