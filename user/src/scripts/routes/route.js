@@ -1,7 +1,7 @@
 import Beranda from "../views/pages/beranda"
 import Detail from "../views/pages/detail"
 import Penghinapan from "../views/pages/penghinapan";
-import Wisata from "../views/pages/Wisata";
+import Wisata from "../views/pages/wisata";
 import Kuliner from "../views/pages/kuliner";
 
 const routes = {

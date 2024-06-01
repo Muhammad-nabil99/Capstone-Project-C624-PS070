@@ -1,17 +1,28 @@
-import { createTemplateItems } from "../templates/template-creator";
-const Penghinapan = {
-    async render(){
-        return `
-            <h1 class="active penghinapanPage">Penghinapan</h1>
-            <div class="penghinapanContainer"></div>
-        `
-    },
-    async afterRender(){
-        const container = document.querySelector('.penghinapanContainer')
-        for(let i = 0; i <= 5; i++){
-            container.innerHTML += createTemplateItems();
-        };
-        
+const { createTemplateItems } = require('../templates/template-creator');
+const { db } = require('../../backend/firebase');
+const { collection, getDocs } = require('firebase/firestore');
+
+const Penginapan = {
+  async render() {
+    return `
+      <div class="penginapanContainer Container"></div>
+    `;
+  },
+  async afterRender() {
+    const container = document.querySelector('.penginapanContainer');
+
+    try {
+      const penginapanCollection = collection(db, 'penginapan');
+      const penginapanSnapshot = await getDocs(penginapanCollection);
+      const penginapanList = penginapanSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+      penginapanList.forEach(item => {
+        container.innerHTML += createTemplateItems(item);
+      });
+    } catch (error) {
+      console.error("Error fetching penginapan data:", error);
     }
-}
-export default Penghinapan;
+  },
+};
+
+module.exports = Penginapan;
