@@ -1,6 +1,7 @@
 const { getDocs, collection } = require('firebase/firestore');
 const { db } = require('../../../backend/firebase.js');
-const { deletePenginapan } = require('../../../backend/penginapan/penginapan_handler.js'); // adjust the path accordingly
+const { deletePenginapan } = require('../../../backend/penginapan/penginapan_handler.js');
+const searchBox = require('../../../utils/search_box/search_penginapan.js'); 
 
 const Penginapan = {
     async render() {
@@ -94,13 +95,7 @@ const Penginapan = {
 
             searchInput.addEventListener('input', () => {
                 const searchTerm = searchInput.value.toLowerCase();
-                const filteredData = penginapanData.filter(data => 
-                    data.name.toLowerCase().includes(searchTerm) ||
-                    data.detail.toLowerCase().includes(searchTerm) ||
-                    data.fasilitas.toLowerCase().includes(searchTerm) ||
-                    data.location.toLowerCase().includes(searchTerm) ||
-                    data.price.toLowerCase().includes(searchTerm)
-                );
+                const filteredData = searchBox.filterData(penginapanData, searchTerm);
                 renderTable(filteredData);
             });
 

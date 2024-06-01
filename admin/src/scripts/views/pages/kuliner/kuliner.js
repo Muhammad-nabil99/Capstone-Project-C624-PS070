@@ -1,6 +1,7 @@
-const { getDocs, collection} = require('firebase/firestore');
+const { getDocs, collection } = require('firebase/firestore');
 const { db } = require('../../../backend/firebase.js');
-const { deleteKuliner } = require('../../../backend/kuliner/kuliner_handler.js')
+const { deleteKuliner } = require('../../../backend/kuliner/kuliner_handler.js'); // adjust the path accordingly
+const searchBox = require('../../../utils/search_box/search_kuliner.js'); // Import the search module
 
 const Kuliner = {
     async render() {
@@ -92,11 +93,7 @@ const Kuliner = {
 
             searchInput.addEventListener('input', () => {
                 const searchTerm = searchInput.value.toLowerCase();
-                const filteredData = kulinerData.filter(data => 
-                    data.name.toLowerCase().includes(searchTerm) ||
-                    data.detail.toLowerCase().includes(searchTerm) ||
-                    data.location.toLowerCase().includes(searchTerm)
-                );
+                const filteredData = searchBox.filterData(kulinerData, searchTerm);
                 renderTable(filteredData);
             });
 
