@@ -1,31 +1,36 @@
-// import DrawerInitiator from '../utils/drawer-inisiator'
-import UrlParser from '../routes/url-parse'
-import routes from '../routes/route'
+import UrlParser from '../routes/url-parse';
+import routes from '../routes/route';
+
 class App {
-  constructor ({ button, drawer, content }) {
-    this._button = button
-    this._drawer = drawer
-    this._content = content
+  constructor({ button, drawer, content }) {
+    this._button = button;
+    this._drawer = drawer;
+    this._content = content;
 
-    this._initialAppShell()
+    this._initialAppShell();
   }
 
-  _initialAppShell () {
-
+  _initialAppShell() {
   }
 
-  async renderPage () {
+  async renderPage() {
     const url = UrlParser.parseActiveUrlWithCombiner();
-    console.log(url);
-    const page = routes[url];
-    console.log(page);
-    this._content.innerHTML = await page.render();
-    await page.afterRender()
-    // const skipLinkElem = document.querySelector('.skip-link')
-    // skipLinkElem.addEventListener('click', (event) => {
-    //   event.preventDefault()
-    //   document.querySelector('#maincontent').focus()
-    // })
+    console.log("Parsed URL:", url);
+
+    let page = routes[url];
+    if (!page && url.startsWith('/detail/')) {
+      page = routes['/detail/:type/:id'];
+    }
+
+    console.log("Page:", page);
+
+    if (page) {
+      this._content.innerHTML = await page.render();
+      await page.afterRender();
+    } else {
+      this._content.innerHTML = '<p>Page not found!</p>';
+    }
   }
 }
-export default App
+
+export default App;

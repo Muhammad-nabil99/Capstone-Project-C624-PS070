@@ -46,133 +46,58 @@ const createRecomendationsItemsTemplate = () => {
             </div>
    `;
 }
-
-const createTemplateItems = (item) => {
-   return `
-   <div class="detail-Container">
-       <div class="image-item">
-           <picture>
-               <source>
-               <img src="${item.imageUrl}" alt="${item.name}">
-           </picture>
-       </div>
-       <div class="description-item">
-           <div class="title-item">
-               <a href="#/detail/${item.id}">${item.name}</a>
-           </div>
-           <div class="location">
-               <i class="fa fa-location-dot" style="color: #000;"></i>
-               <p>${item.location}</p>
-           </div>
-           <div class="description-item">
-               <p>${item.detail}</p>
-           </div>
-       </div>
-   </div>
-   `;
-}
-
-// const createTemplateDetail = (detail) => {
-//    return `
-//    <div class="detail-container">
-//        <div class="image-detail">
-//            <picture>
-//                <source>
-//                <img src="${detail.imageUrl}" alt="${detail.name}">
-//            </picture>
-//            <h2>${detail.name}</h2>
-//        </div>
-//        <div class="description-detail">
-//        ${detail.detail}
-//        </div>
-//        <div class="more-detail">
-//            <div class="location-detail">
-//                <h4>Lokasi:</h4>
-//                <p class="locatedOn">${detail.location}</p>
-//                <p class="openAt">Buka: ${detail.openTime}</p>
-//                <p class="ticket-price">Harga Tiket: ${detail.price}</p>
-//            </div> 
-//            <button class="maps-detail">Maps</button>
-//        </div>
-//    </div>
-//    `;
-// }
-
-const createWisataDetailTemplate = (detail) => `
-  <div class="detail-container">
-    <div class="image-detail">
+const createTemplateItems = (item, type) => `
+  <div class="detail-Container">
+    <div class="image-item">
       <picture>
         <source>
-        <img src="${detail.imageurl}" alt="${detail.name}">
+        <img src="${item.imageUrl}" alt="${item.name}">
       </picture>
-      <h2>${detail.name}</h2>
     </div>
-    <div class="description-detail">
-      ${detail.detail}
-    </div>
-    <div class="more-detail">
-      <div class="location-detail">
-        <h4>Location:</h4>
-        <p class="locatedOn">${detail.location}</p>
-        <p class="openAt">Open: ${detail.opentime}</p>
-        <p class="ticket-price">Price: ${detail.price}</p>
-      </div> 
-      <a class="maps-detail" target="_blank" href="https://maps.google.com/?q=${encodeURIComponent(detail.location)}">
-        Maps
-      </a>
+    <div class="description-item">
+      <div class="title-item">
+        <a href="#/detail/${type}/${item.id}">${item.name}</a>
+      </div>
+      <div class="description-item">
+        <p>${item.detail}</p>
+      </div>
     </div>
   </div>
 `;
 
-const createKulinerDetailTemplate = (detail) => `
-  <div class="detail-container">
-    <div class="image-detail">
-      <picture>
-        <source>
-        <img src="${detail.imageurl}" alt="${detail.name}">
-      </picture>
-      <h2>${detail.name}</h2>
-    </div>
-    <div class="description-detail">
-      ${detail.detail}
-    </div>
-    <div class="more-detail">
-      <div class="location-detail">
-        <h4>Location:</h4>
-        <p class="locatedOn">${detail.location}</p>
-        <p class="openAt">Open: ${detail.opentime}</p>
-      </div> 
-      <a class="maps-detail" target="_blank" href="https://maps.google.com/?q=${encodeURIComponent(detail.location)}">
-        Maps
-      </a>
-    </div>
-  </div>
-`;
+const createDetailTemplate = (item, type) => {
+  let extraDetail = '';
+  if (type === 'wisata') {
+    extraDetail = `<p class="ticket-price">Harga Tiket: ${item.price}</p>`;
+  } else if (type === 'kuliner') {
+    extraDetail = `<p class="openAt">Buka: ${item.openTime}</p>`;
+  } else if (type === 'penginapan') {
+    extraDetail = `<p class="openAt">Fasilitas: ${item.fasilitas}</p>`;
+  }
 
-const createPenginapanDetailTemplate = (detail) => `
-  <div class="detail-container">
-    <div class="image-detail">
-      <picture>
-        <source>
-        <img src="${detail.imageurl}" alt="${detail.name}">
-      </picture>
-      <h2>${detail.name}</h2>
+  return `
+    <div class="detail-container">
+      <div class="image-detail">
+        <picture>
+          <source>
+          <img src="${item.imageUrl}" alt="${item.name}">
+        </picture>
+        <h2>${item.name}</h2>
+      </div>
+      <div class="description-detail">
+        <p>${item.detail}</p>
+      </div>
+      <div class="more-detail">
+        <div class="location-detail">
+          <h4>Lokasi: </h4>
+          <p class="locatedOn">${item.location}</p>
+          ${extraDetail}
+        </div> 
+        <button class="maps-detail">Maps</button>
+      </div>
     </div>
-    <div class="description-detail">
-      ${detail.detail}
-    </div>
-    <div class="more-detail">
-      <div class="location-detail">
-        <h4>Location:</h4>
-        <p class="locatedOn">${detail.location}</p>
-        <p class="openAt">Open: ${detail.opentime}</p>
-      </div> 
-      <a class="maps-detail" target="_blank" href="https://maps.google.com/?q=${encodeURIComponent(detail.location)}">
-        Maps
-      </a>
-    </div>
-  </div>
-`;
+  `;
+};
 
 const createHeaderHero = () => {
    return `
@@ -184,4 +109,4 @@ const createHeaderHero = () => {
    `;
 }
 
-export { createHeaderHero,  createWisataDetailTemplate, createKulinerDetailTemplate, createPenginapanDetailTemplate , createTemplateItems, createRecomendationsItemsTemplate, createServiceItemsTemplate }
+export { createHeaderHero, createDetailTemplate , createTemplateItems, createRecomendationsItemsTemplate, createServiceItemsTemplate }

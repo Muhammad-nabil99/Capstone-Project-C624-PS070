@@ -12,10 +12,12 @@ const Kuliner = {
     const container = document.querySelector('.kulinerContainer');
 
     try {
+      // Fetch data from Firestore
       const kulinerCollection = collection(db, 'kuliner');
       const kulinerSnapshot = await getDocs(kulinerCollection);
       const kulinerList = kulinerSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
+      // Render data
       kulinerList.forEach(item => {
         container.innerHTML += createTemplateItems(item, 'kuliner');
       });
