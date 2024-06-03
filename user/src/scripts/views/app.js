@@ -11,6 +11,7 @@ class App {
   }
 
   _initialAppShell() {
+    // Initialize the app shell if needed
   }
 
   async renderPage() {
@@ -18,8 +19,14 @@ class App {
     console.log("Parsed URL:", url);
 
     let page = routes[url];
-    if (!page && url.startsWith('/detail/')) {
-      page = routes['/detail/:type/:id'];
+
+    if (!page) {
+      // Handle dynamic routes
+      const parsedUrl = UrlParser.parseActiveUrlWithoutCombiner();
+      if (parsedUrl.resource && parsedUrl.type && parsedUrl.id) {
+        const dynamicUrl = `/${parsedUrl.resource}/:type/:id`;
+        page = routes[dynamicUrl];
+      }
     }
 
     console.log("Page:", page);

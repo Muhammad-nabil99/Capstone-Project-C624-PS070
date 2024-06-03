@@ -24,12 +24,18 @@ const Detail = {
     }
 
     try {
+      // Fetch data from Firestore
       const docRef = doc(db, type, id);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
         const item = docSnap.data();
         container.innerHTML = createDetailTemplate(item, type);
+
+        const mapButton = document.querySelector('.maps-detail');
+        mapButton.addEventListener('click', () => {
+          window.location.hash = `#/map/${type}/${id}`;
+        });
       } else {
         container.innerHTML = '<p>No such document!</p>';
         console.error("No such document!");
