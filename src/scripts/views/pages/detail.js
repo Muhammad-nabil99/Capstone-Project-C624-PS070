@@ -2,7 +2,7 @@ const { createLikeButtonTemplate, createDetailTemplate } = require('../templates
 const { db } = require('../../backend/firebase');
 const { doc, getDoc } = require('firebase/firestore');
 const UrlParser = require('../../routes/url-parse');
-// const likeButtonInitiator = require('../../utils/likeButtonInitiator')
+const likeButtonInitiator = require('../../utils/likeButtonInitiator')
 
 const Detail = {
   async render() {
@@ -37,10 +37,10 @@ const Detail = {
         container.innerHTML = createDetailTemplate(item, type);
         // console.log('atmin', item);
         likeButton.innerHTML = createLikeButtonTemplate();
-        // likeButtonInitiator.init({
-        //   button : document.querySelector('.likeContainer'),
-        //   item
-        // });
+        likeButtonInitiator.init({
+          button : document.querySelector('.likeContainer'),
+          item
+        });
         const mapButton = document.querySelector('.maps-detail');
         mapButton.addEventListener('click', () => {
           window.location.hash = `#/map/${type}/${id}`;
