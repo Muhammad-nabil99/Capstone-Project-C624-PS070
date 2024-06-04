@@ -24,7 +24,6 @@ const Detail = {
     }
 
     try {
-      // Fetch data from Firestore
       const docRef = doc(db, type, id);
       const docSnap = await getDoc(docRef);
 

@@ -104,7 +104,7 @@ const createHeaderHero = () => {
    <div class="tagline_hero">
      <h2>Parawisata Kabupaten Pekalongan</h2>
      <p>Website parawisata Kabupaten Pekalongan</p>
-     <img src="/public/images/heros/hero-image_3.jpg" alt="Hero Image">
+     <img src='./public/images/heros/hero-image_3' alt="Hero Image">
    </div>
    `;
 }

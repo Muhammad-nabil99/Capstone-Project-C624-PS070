@@ -10,6 +10,11 @@ const MapPage = {
           <div class="spinner"></div>
         </div>
       </div>
+      <div id="transportationModes">
+        <button data-mode="driving">Driving</button>
+        <button data-mode="walking">Walking</button>
+        <button data-mode="cycling">Cycling</button>
+      </div>
       <button id="backButton">Back</button>
       <p id="errorMessage" style="color: red;"></p>
     `;
@@ -26,6 +31,13 @@ const MapPage = {
         const [lat, lng] = mapLocation.split(',').map(Number);
         this._initializeMap(lat, lng);
         this._getUserLocation(lat, lng);
+
+        document.querySelectorAll('#transportationModes button').forEach(button => {
+          button.addEventListener('click', () => {
+            const mode = button.getAttribute('data-mode');
+            this._getUserLocation(lat, lng, mode);
+          });
+        });
       }
     } catch (error) {
       console.error('Error:', error);
@@ -53,30 +65,32 @@ const MapPage = {
 
   _initializeMap(lat, lng) {
     mapboxgl.accessToken = 'pk.eyJ1IjoiZjE3MjZ5YjE0MCIsImEiOiJjbHdhMXYyOGcwYW40Mmlxazg2aTBqYWl6In0.7vkdPDBmhzZq38n2jFNEjA';
-    const map = new mapboxgl.Map({
+    this.map = new mapboxgl.Map({
       container: 'mapContainer',
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [lng, lat],
       zoom: 14,
     });
 
-    new mapboxgl.Marker().setLngLat([lng, lat]).addTo(map);
+    new mapboxgl.Marker().setLngLat([lng, lat]).addTo(this.map);
 
     document.getElementById('loadingSpinner').style.display = 'none';
   },
 
-  _getUserLocation(destinationLat, destinationLng) {
+  _getUserLocation(destinationLat, destinationLng, mode = 'driving') {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const userLat = position.coords.latitude;
           const userLng = position.coords.longitude;
-          this._fetchRoute(userLat, userLng, destinationLat, destinationLng);
+          console.log(`User Location: ${userLat}, ${userLng}`);
+          this._fetchRoute(userLat, userLng, destinationLat, destinationLng, mode);
         },
         (error) => {
           console.error('Error getting user location:', error);
           this._displayError('Geolocation access denied. Unable to show route.');
-        }
+        },
+        { enableHighAccuracy: true }
       );
     } else {
       console.error('Geolocation is not supported by this browser.');
@@ -84,12 +98,23 @@ const MapPage = {
     }
   },
 
-  async _fetchRoute(userLat, userLng, destinationLat, destinationLng) {
+  async _fetchRoute(userLat, userLng, destinationLat, destinationLng, mode) {
+    const validModes = ['driving', 'walking', 'cycling'];
+    if (!validModes.includes(mode)) {
+      mode = 'driving';
+    }
+
     try {
-      const response = await fetch(`https://api.mapbox.com/directions/v5/mapbox/driving/${userLng},${userLat};${destinationLng},${destinationLat}?geometries=geojson&access_token=${mapboxgl.accessToken}`);
+      const response = await fetch(`https://api.mapbox.com/directions/v5/mapbox/${mode}/${userLng},${userLat};${destinationLng},${destinationLat}?geometries=geojson&overview=full&steps=true&access_token=${mapboxgl.accessToken}`);
       const data = await response.json();
-      const route = data.routes[0].geometry.coordinates;
-      this._drawRoute(route);
+
+      if (data.routes && data.routes.length > 0) {
+        const route = data.routes[0].geometry.coordinates;
+        console.log(`Route: ${JSON.stringify(route)}`);
+        this._drawRoute(route);
+      } else {
+        this._displayError('No route found. Please try a different mode of transportation.');
+      }
     } catch (error) {
       console.error('Error fetching route:', error);
       this._displayError('Error fetching route. Please try again.');
@@ -97,15 +122,17 @@ const MapPage = {
   },
 
   _drawRoute(route) {
-    const map = new mapboxgl.Map({
-      container: 'mapContainer',
-      style: 'mapbox://styles/mapbox/streets-v11',
-      center: route[0],
-      zoom: 14,
-    });
-
-    map.on('load', () => {
-      map.addLayer({
+    if (this.map.getSource('route')) {
+      this.map.getSource('route').setData({
+        type: 'Feature',
+        properties: {},
+        geometry: {
+          type: 'LineString',
+          coordinates: route,
+        },
+      });
+    } else {
+      this.map.addLayer({
         id: 'route',
         type: 'line',
         source: {
@@ -128,13 +155,13 @@ const MapPage = {
           'line-width': 6,
         },
       });
+    }
 
-      const bounds = route.reduce((bounds, coord) => {
-        return bounds.extend(coord);
-      }, new mapboxgl.LngLatBounds(route[0], route[0]));
+    const bounds = route.reduce((bounds, coord) => {
+      return bounds.extend(coord);
+    }, new mapboxgl.LngLatBounds(route[0], route[0]));
 
-      map.fitBounds(bounds, { padding: 50 });
-    });
+    this.map.fitBounds(bounds, { padding: 50 });
   },
 
   _displayError(message) {
