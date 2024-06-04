@@ -35,7 +35,8 @@
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1",
     "webpack-merge": "^5.9.0",
-    "whatwg-fetch": "^3.6.2"
+    "whatwg-fetch": "^3.6.2",
+    "workbox-webpack-plugin": "^7.1.0"
   },
   "dependencies": {
     "@google-cloud/firestore": "^7.7.0",
@@ -43,6 +44,7 @@
     "@hapi/joi": "^17.1.1",
     "firebase": "^10.12.0",
     "firebase-admin": "^12.1.0",
-    "regenerator-runtime": "^0.14.0"
+    "regenerator-runtime": "^0.14.0",
+    "workbox-window": "^7.1.0"
   }
 }

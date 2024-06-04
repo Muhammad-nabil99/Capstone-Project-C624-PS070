@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { GenerateSW } = require('workbox-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -17,22 +18,15 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-          {
-            loader: 'style-loader'
-          },
-          {
-            loader: 'css-loader'
-          },
-          {
-            loader: 'sass-loader'
-          }
-        ]
+          'style-loader',
+          'css-loader',
+          'sass-loader',
+        ],
       },
-    ]
+    ],
   },
   plugins: [
     new CleanWebpackPlugin(),
-
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: path.resolve(__dirname, 'src/templates/index.html'),
@@ -42,6 +36,31 @@ module.exports = {
         {
           from: path.resolve(__dirname, 'src/public/'),
           to: path.resolve(__dirname, 'dist/'),
+        },
+      ],
+    }),
+    new GenerateSW({
+      swDest: path.resolve(__dirname, 'dist/sw.js'), 
+      clientsClaim: true,
+      skipWaiting: true,
+      runtimeCaching: [
+        {
+          urlPattern: /\.(?:js|css|html|json|png|jpg|jpeg|svg|gif)$/,
+          handler: 'StaleWhileRevalidate',
+          options: {
+            cacheName: 'static-resources',
+          },
+        },
+        {
+          urlPattern: new RegExp('^https://api.mapbox.com/'),
+          handler: 'NetworkFirst',
+          options: {
+            cacheName: 'mapbox-api',
+            expiration: {
+              maxEntries: 50,
+              maxAgeSeconds: 30 * 24 * 60 * 60,
+            },
+          },
         },
       ],
     }),

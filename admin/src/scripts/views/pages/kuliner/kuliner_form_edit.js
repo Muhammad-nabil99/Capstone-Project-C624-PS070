@@ -114,8 +114,6 @@ const Kuliner_form_edit = {
     } catch (error) {
       console.error('Error fetching Kuliner data:', error);
     }
-
-    // Update image preview when a new image is selected
     imageInput.addEventListener('change', (e) => {
       const file = e.target.files[0];
       if (file) {
