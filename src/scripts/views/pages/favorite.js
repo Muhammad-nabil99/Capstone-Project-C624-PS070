@@ -8,7 +8,7 @@ const Favorite = {
         `;
   },
   async afterRender() {
-        const favoriteItems = await FavoriteTourDB.getAllTours();
+        const favoriteItems = await FavoriteTourDB.default.getAllTours();
         const container = document.querySelector('.favoriteContainer');
         if(chechAnyExistingData.initialize(favoriteItems)){
           favoriteItems.forEach(item =>{
