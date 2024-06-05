@@ -1,7 +1,3 @@
 # Capstone-Project-C624-PS070
 this project is the last section of our program on dicoding 
-background color : #EBEBEB;
-primar-color : #F8F8FF;
-secondary-color : ;
-color :
-font : 
+branch telah di push sebanyak 28 kali namun saya menggunakan force, jadi commitnya hilang
