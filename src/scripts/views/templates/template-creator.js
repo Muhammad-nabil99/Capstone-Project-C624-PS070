@@ -1,25 +1,31 @@
 const createCaterogyItemsTemplate = () => {
   return `
-    <div class="container-option-items">
-       <div class="item_option wisata">
-           <button tabindex="0" arial-label="penghinapan">
-               <img src="./images/wisata.jpeg" alt="wisata">
-           </button>
-           <span>wisata</span>
-       </div>
-       <div class="item_option kuliner">
-           <button tabindex="0" arial-label="penghinapan">
-               <img src="./images/kuliner.jpeg" alt="kuliner">
-           </button>
-           <span>kuliner</span>
-       </div>
-       <div class="item_option penghinapan">
-           <button tabindex="0" arial-label="penghinapan">
-               <img src="./images/penghinapan.jpeg" alt="penghinapan">
-           </button>
-           <span>penghinapan</span>
-       </div>
-   </div>
+  <div class="container-option-items">
+    <div class="item_option">
+        <button tabindex="0" arial-label="penghinapan">
+            <a href="#/wisata">
+                <img src="./images/wisata.jpeg" alt="wisata">
+            </a>
+        </button>
+        <span>wisata</span>
+    </div>
+    <div class="item_option">
+        <button tabindex="0" arial-label="kuliner">
+        <a href="#/kuliner">
+            <img src="./images/kuliner.jpeg" alt="wisata">
+        </a>
+        </button>
+        <span>kuliner</span>
+    </div>
+    <div class="item_option">
+        <button tabindex="0" arial-label="penghinapan">
+        <a href="#/penghinapan">
+            <img src="./images/penghinapan.jpeg" alt="wisata">
+        </a>
+        </button>
+        <span>penghinapan</span>
+    </div>
+  </div>
     `;
 };
 
