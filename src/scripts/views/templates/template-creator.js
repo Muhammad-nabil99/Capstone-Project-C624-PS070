@@ -23,27 +23,19 @@ const createServiceItemsTemplate = () => {
     `;
 };
 
-const createRecomendationsItemsTemplate = () => {
+const createRecomendationsItemsTemplate = (item) => {
   return `
-           <h1 tabindex="0" arial-label="rekomendasi destinasi">Rekomendasi Destinasi</h1>
-            <div class="container-recomendation-items">
-               <div class="item_recomendation">
-                   <img src="" alt="title">
-                   <button>title</button>
-               </div>
-               <div class="item_recomendation">
-                   <img src="" alt="title">
-                   <button>title</button>
-               </div>
-               <div class="item_recomendation">
-                   <img src="" alt="title">
-                   <button>title</button>
-               </div>
-               <div class="item_recomendation">
-                   <img src="" alt="title">
-                   <button>title</button>
-               </div>
-            </div>
+      <div class="item_recomendation">
+      <picture>
+          <source>
+              <img src="./images/recomendasi/${item}.jpeg" alt="title">         
+      </picture>D
+      <h2 class="title"><a href="#/detail/:id">Title</a></h2>
+      <div class="location">
+          <i class="fa fa-location-dot" style="color: #00000;"></i>
+          <p>Jl. A. Yani No.44, Bener Dua, Bener, Kec. Wiradesa, Kabupaten Pekalongan, Jawa Tengah 51152</p>
+      </div>
+    </div>
    `;
 };
 const createTemplateItems = (item, type) => `
