@@ -2,10 +2,15 @@ const FavoriteTourDB = require("../../public/data/favoriteWisatadb");
 const { createLikeButtonTemplate, createLikedButtonTemplate } = require("../views/templates/template-creator");
 
 const likeButtonInitiator = {
-    init({button,item}){
+    init({button,item,type}){
         this._button = button;
         this._item = item;
+        this.assignAPropertyToTheExistingObj(item,type)
         this._renderButton();
+    },
+    async assignAPropertyToTheExistingObj(obj,newproperty){
+        // assigned a type key on item obj as a property
+        obj["type"] = newproperty;
     },
     async _renderButton(){
         const {id} = this._item;

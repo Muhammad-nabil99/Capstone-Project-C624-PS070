@@ -35,11 +35,11 @@ const Detail = {
       if (docSnap.exists()) {
         const item = docSnap.data();
         container.innerHTML = createDetailTemplate(item, type);
-        // console.log('atmin', item);
         likeButton.innerHTML = createLikeButtonTemplate();
         likeButtonInitiator.init({
           button : document.querySelector('.likeContainer'),
-          item
+          item, 
+          type,
         });
         const mapButton = document.querySelector('.maps-detail');
         mapButton.addEventListener('click', () => {
