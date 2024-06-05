@@ -1,23 +1,23 @@
-const createServiceItemsTemplate = () => {
+const createCaterogyItemsTemplate = () => {
   return `
     <div class="container-option-items">
        <div class="item_option wisata">
            <button tabindex="0" arial-label="penghinapan">
-               <img src="./public/images/wisata.jpeg" alt="wisata">
+               <img src="./images/wisata.jpeg" alt="wisata">
            </button>
            <span>wisata</span>
        </div>
-       <div class="item_option wisata">
+       <div class="item_option kuliner">
            <button tabindex="0" arial-label="penghinapan">
-               <img src="./public/images/wisata.jpeg" alt="wisata">
+               <img src="./images/kuliner.jpeg" alt="kuliner">
            </button>
-           <span>wisata</span>
+           <span>kuliner</span>
        </div>
-       <div class="item_option wisata">
+       <div class="item_option penghinapan">
            <button tabindex="0" arial-label="penghinapan">
-               <img src="./public/images/wisata.jpeg" alt="wisata">
+               <img src="./images/penghinapan.jpeg" alt="penghinapan">
            </button>
-           <span>wisata</span>
+           <span>penghinapan</span>
        </div>
    </div>
     `;
@@ -29,7 +29,7 @@ const createRecomendationsItemsTemplate = (item) => {
       <picture>
           <source>
               <img src="./images/recomendasi/${item}.jpeg" alt="title">         
-      </picture>D
+      </picture>
       <h2 class="title"><a href="#/detail/:id">Title</a></h2>
       <div class="location">
           <i class="fa fa-location-dot" style="color: #00000;"></i>
@@ -96,7 +96,7 @@ const createHeaderHero = () => {
     <div class="tagline_hero">
       <h2>Parawisata Kabupaten Pekalongan</h2>
       <p>Website parawisata Kabupaten Pekalongan</p>
-      <img src="/public/images/heros/hero-image_3.jpg" alt="Hero Image">
+      <img src="./public/images/heros/hero-image_3.jpg" alt="Hero Image">
     </div>
    `;
 };
@@ -117,5 +117,5 @@ export {
   createDetailTemplate,
   createTemplateItems,
   createRecomendationsItemsTemplate,
-  createServiceItemsTemplate,
+  createCaterogyItemsTemplate,
 };
