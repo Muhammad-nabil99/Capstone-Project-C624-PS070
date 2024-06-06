@@ -87,13 +87,13 @@ main#maincontent {
   position: relative;
   flex-direction: column;
 }
-/* options */
-main#maincontent .options {
+/* caterogry */
+main#maincontent .category {
   display: flex;
   justify-content: space-around;
   width: 100%;
 }
-main#maincontent .options .container-option-items {
+main#maincontent .category .container-option-items {
   margin: auto;
   display: flex;
   justify-content: space-around;
@@ -104,7 +104,7 @@ main#maincontent .options .container-option-items {
 main#maincontent .wisata {
   position: relative;
 }
-main#maincontent .options .container-option-items button {
+main#maincontent .category .container-option-items button {
   position: relative;
   width: 100px;
   height: 100px;
@@ -116,13 +116,13 @@ main#maincontent .options .container-option-items button {
   background: #e0e0e0;
   box-shadow: 2px 2px 7px #bababa, -2px -2px 7px #ffffff;
 }
-main#maincontent .options .container-option-items button img {
+main#maincontent .category .container-option-items button img {
   position: absolute;
   top: 0;
   width: 100%;
   left: 0;
 }
-main#maincontent .options .container-option-items .item_option {
+main#maincontent .category .container-option-items .item_option {
   display: flex;
   flex-direction: column;
   text-transform: capitalize;
@@ -329,18 +329,4 @@ footer .footer-content {
   font-size: 1.2rem;
   font-weight: bold;
   color: white;
-}
-/* Add this CSS to your styles */
-.spinner {
-  border: 8px solid #f3f3f3; /* Light grey */
-  border-top: 8px solid #3498db; /* Blue */
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  animation: spin 2s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
 }

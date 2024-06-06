@@ -2,14 +2,13 @@ const { createLikeButtonTemplate, createDetailTemplate } = require('../templates
 const { db } = require('../../backend/firebase');
 const { doc, getDoc } = require('firebase/firestore');
 const UrlParser = require('../../routes/url-parse');
-const likeButtonInitiator = require('../../utils/likeButtonInitiator')
+const likeButtonInitiator = require('../../utils/likeButtonInitiator');
 
 const Detail = {
   async render() {
     return `
       <div class="detailContainer"></div>
       <div class="likeContainer"></div>
-      
     `;
   },
 
@@ -26,6 +25,7 @@ const Detail = {
     }
 
     try {
+      // Fetch data from Firestore
       const docRef = doc(db, type, id);
       const docSnap = await getDoc(docRef);
 
@@ -34,10 +34,11 @@ const Detail = {
         container.innerHTML = createDetailTemplate(item, type);
         likeButton.innerHTML = createLikeButtonTemplate();
         likeButtonInitiator.init({
-          button : document.querySelector('.likeContainer'),
-          item, 
+          button: document.querySelector('#likeButton'),
+          item,
           type,
         });
+
         const mapButton = document.querySelector('.maps-detail');
         mapButton.addEventListener('click', () => {
           window.location.hash = `#/map/${type}/${id}`;

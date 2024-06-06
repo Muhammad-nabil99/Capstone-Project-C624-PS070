@@ -1,51 +1,49 @@
-const createServiceItemsTemplate = () => {
-    return `
-    <div class="container-option-items">
-       <div class="item_option wisata">
-           <button tabindex="0" arial-label="penghinapan">
-               <img src="./public/images/wisata.jpeg" alt="wisata">
-           </button>
-           <span>wisata</span>
-       </div>
-       <div class="item_option wisata">
-           <button tabindex="0" arial-label="penghinapan">
-               <img src="./public/images/wisata.jpeg" alt="wisata">
-           </button>
-           <span>wisata</span>
-       </div>
-       <div class="item_option wisata">
-           <button tabindex="0" arial-label="penghinapan">
-               <img src="./public/images/wisata.jpeg" alt="wisata">
-           </button>
-           <span>wisata</span>
-       </div>
-   </div>
+const createCaterogyItemsTemplate = () => {
+  return `
+  <div class="container-option-items">
+    <div class="item_option">
+        <button tabindex="0" arial-label="penghinapan">
+            <a href="#/wisata">
+                <img src="./images/wisata.jpeg" alt="wisata">
+            </a>
+        </button>
+        <span>wisata</span>
+    </div>
+    <div class="item_option">
+        <button tabindex="0" arial-label="kuliner">
+        <a href="#/kuliner">
+            <img src="./images/kuliner.jpeg" alt="wisata">
+        </a>
+        </button>
+        <span>kuliner</span>
+    </div>
+    <div class="item_option">
+        <button tabindex="0" arial-label="penghinapan">
+        <a href="#/penghinapan">
+            <img src="./images/penghinapan.jpeg" alt="wisata">
+        </a>
+        </button>
+        <span>penghinapan</span>
+    </div>
+  </div>
     `;
-}
+};
 
-const createRecomendationsItemsTemplate = () => {
-   return `
-           <h1 tabindex="0" arial-label="rekomendasi destinasi">Rekomendasi Destinasi</h1>
-            <div class="container-recomendation-items">
-               <div class="item_recomendation">
-                   <img src="" alt="title">
-                   <button>title</button>
-               </div>
-               <div class="item_recomendation">
-                   <img src="" alt="title">
-                   <button>title</button>
-               </div>
-               <div class="item_recomendation">
-                   <img src="" alt="title">
-                   <button>title</button>
-               </div>
-               <div class="item_recomendation">
-                   <img src="" alt="title">
-                   <button>title</button>
-               </div>
-            </div>
+const createRecomendationsItemsTemplate = (item) => {
+  return `
+      <div class="item_recomendation">
+      <picture>
+          <source>
+              <img src="./images/recomendasi/${item}.jpeg" alt="title">         
+      </picture>
+      <h2 class="title"><a href="#/detail/:id">Title</a></h2>
+      <div class="location">
+          <i class="fa fa-location-dot" style="color: #00000;"></i>
+          <p>Jl. A. Yani No.44, Bener Dua, Bener, Kec. Wiradesa, Kabupaten Pekalongan, Jawa Tengah 51152</p>
+      </div>
+    </div>
    `;
-}
+};
 const createTemplateItems = (item, type) => `
   <div class="detail-Container">
     <div class="image-item">
@@ -66,12 +64,12 @@ const createTemplateItems = (item, type) => `
 `;
 
 const createDetailTemplate = (item, type) => {
-  let extraDetail = '';
-  if (type === 'wisata') {
+  let extraDetail = "";
+  if (type === "wisata") {
     extraDetail = `<p class="ticket-price">Harga Tiket: ${item.price}</p>`;
-  } else if (type === 'kuliner') {
+  } else if (type === "kuliner") {
     extraDetail = `<p class="openAt">Buka: ${item.openTime}</p>`;
-  } else if (type === 'penginapan') {
+  } else if (type === "penginapan") {
     extraDetail = `<p class="openAt">Fasilitas: ${item.fasilitas}</p>`;
   }
 
@@ -100,13 +98,30 @@ const createDetailTemplate = (item, type) => {
 };
 
 const createHeaderHero = () => {
-   return `
-   <div class="tagline_hero">
-     <h2>Parawisata Kabupaten Pekalongan</h2>
-     <p>Website parawisata Kabupaten Pekalongan</p>
-     <img src='./public/images/heros/hero-image_3' alt="Hero Image">
-   </div>
+  return `
+    <div class="tagline_hero">
+      <h2>Parawisata Kabupaten Pekalongan</h2>
+      <p>Website parawisata Kabupaten Pekalongan</p>
+      <img src="./images/heros/hero.jpeg" alt="Hero Image">
+    </div>
    `;
-}
-
-export { createHeaderHero, createDetailTemplate , createTemplateItems, createRecomendationsItemsTemplate, createServiceItemsTemplate }
+};
+const createLikeButtonTemplate = () => `
+    <button aria-label="like this tour" id="likeButton" class="like">
+        <i class="fa-regular fa-heart" aria-hidden="true"></i>
+    </button>
+    `;
+const createLikedButtonTemplate = () => `
+    <button aria-label="unlike this tour" id="likeButton" class="like">
+        <i class="fa fa-heart" aria-hidden="true"></i>
+    </button>
+    `;
+export {
+  createLikeButtonTemplate,
+  createLikedButtonTemplate,
+  createHeaderHero,
+  createDetailTemplate,
+  createTemplateItems,
+  createRecomendationsItemsTemplate,
+  createCaterogyItemsTemplate,
+};

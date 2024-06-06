@@ -4,6 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 
+
 module.exports = {
   entry: {
     app: path.resolve(__dirname, 'src/scripts/index.js'),
@@ -43,31 +44,9 @@ module.exports = {
         },
       ],
     }),
-    new WorkboxWebpackPlugin.GenerateSW({
-      swDest: './sw.bundle.js',
-      runtimeCaching: [
-        {
-          urlPattern: ({ url }) => url.href.startsWith('https://capstone-project-c624-ps070.firebaseio.com/'),
-          handler: 'StaleWhileRevalidate',
-          options: {
-            cacheName: 'firebase-realtime-db',
-          },
-        },
-        {
-          urlPattern: ({ url }) => url.href.startsWith('https://firestore.googleapis.com/v1/projects/capstone-project-c624-ps070/databases/(default)/documents/'),
-          handler: 'StaleWhileRevalidate',
-          options: {
-            cacheName: 'firebase-firestore',
-          },
-        },
-        {
-          urlPattern: ({ url }) => url.href.startsWith('https://firebasestorage.googleapis.com/v0/b/capstone-project-c624-ps070.appspot.com/o/'),
-          handler: 'StaleWhileRevalidate',
-          options: {
-            cacheName: 'firebase-storage',
-          },
-        },
-      ],
+    new WorkboxWebpackPlugin.InjectManifest({
+      swSrc: path.resolve(__dirname, 'src/scripts/service-worker.js'),
+      swDest: 'service-worker.js',
     }),
   ],
 };

@@ -19,6 +19,7 @@ async function addPenginapan(name, detail, location, fasilitas, price, mapLocati
       price,          
       mapLocation,    
       imageUrl,
+      favourite: 0, // Initialize favourite count to 0
     });
 
     return id;
@@ -63,7 +64,6 @@ async function updatePenginapan(id, updates, newImage) {
     throw new Error('Failed to update Penginapan');
   }
 }
-
 
 async function deletePenginapan(id) {
   const docRef = doc(db, 'penginapan', id);

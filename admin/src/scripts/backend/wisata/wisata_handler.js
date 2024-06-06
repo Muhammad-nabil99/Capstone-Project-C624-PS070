@@ -19,6 +19,7 @@ async function addWisata(name, location, openTime, price, detail, mapLocation, i
       detail,
       mapLocation,
       imageUrl,
+      favourite: 0, // Initialize favourite count to 0
     });
 
     return id;
