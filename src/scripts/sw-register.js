@@ -1,5 +1,6 @@
 import { Workbox } from 'workbox-window';
- 
+const { db, storage } = require('./backend/firebase');
+
 const swRegister = async () => {
   if (!('serviceWorker' in navigator)) {
     console.log('Service Worker not supported in the browser');

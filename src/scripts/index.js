@@ -1,6 +1,7 @@
   import 'regenerator-runtime';
   import '../styles/main.css';
   import App from './views/app'
+  import swRegister from './sw-register';
 
   const app = new App({
     button: document.querySelector('.menu-toggle'),
@@ -13,4 +14,5 @@
 
   window.addEventListener('load', () => {
     app.renderPage()
+    swRegister()
   })

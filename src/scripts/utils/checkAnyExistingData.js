@@ -1,4 +1,4 @@
-const chechAnyExistingData = {
+const checkAnyExistingData = {
     initialize(data){
        return !this._checkData(data)
     },
@@ -7,4 +7,4 @@ const chechAnyExistingData = {
     }
 }
 
-module.exports = chechAnyExistingData;
+module.exports = checkAnyExistingData;
