@@ -1,12 +1,11 @@
-/* Add this CSS to your existing stylesheet or in a separate stylesheet */
 .button-wrapper {
     margin-top: 10px;
 }
 
 .button-wrapper button {
     padding: 10px 20px;
-    background-color: #007bff; /* Button background color */
-    color: #fff; /* Button text color */
+    background-color: #007bff;
+    color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -50,14 +49,14 @@ tr:nth-child(even) {
 }
 
 td img {
-    max-width: 100px; /* Adjust the max width of the image */
+    max-width: 100px;
     height: auto;
 }
 
 td button {
     padding: 5px 10px;
-    background-color: #28a745; /* Button background color */
-    color: #fff; /* Button text color */
+    background-color: #28a745; 
+    color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;

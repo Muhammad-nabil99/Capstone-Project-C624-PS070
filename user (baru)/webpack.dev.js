@@ -6,10 +6,12 @@ module.exports = merge(common, {
   mode: 'development',
   devtool: 'inline-source-map',
   devServer: {
-    static: path.resolve(__dirname, 'dist'),
+    static: {
+      directory: path.resolve(__dirname, 'dist'),
+    },
     open: true,
     compress: true,
-    port : 8000,
+    port: 8000,
     client: {
       overlay: {
         errors: true,
