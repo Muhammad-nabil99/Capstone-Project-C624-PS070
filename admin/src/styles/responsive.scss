@@ -6,6 +6,14 @@
   main {
     margin-left: 25%;
   }
+
+  .button-wrapper {
+    text-align: center;
+  }
+
+  .search-bar {
+    justify-content: center;
+  }
 }
 
 @media (max-width: 768px) {
@@ -15,6 +23,34 @@
 
   main {
     margin-left: 30%;
+  }
+
+  .button-wrapper {
+    text-align: center;
+  }
+
+  .button-wrapper button {
+    width: 100%;
+    max-width: 200px;
+  }
+
+  .search-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-bar span {
+    margin-bottom: 10px;
+  }
+
+  .search-bar input[type="text"] {
+    width: 100%;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
   }
 }
 
@@ -50,6 +86,38 @@
     position: relative;
     bottom: auto;
   }
+
+  .button-wrapper {
+    text-align: center;
+  }
+
+  .button-wrapper button {
+    width: 100%;
+    max-width: 200px;
+  }
+
+  .search-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-bar span {
+    margin-bottom: 10px;
+  }
+
+  .search-bar input[type="text"] {
+    width: 100%;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  th, td {
+    padding: 10px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -64,5 +132,33 @@
 
   .sidebar ul li a {
     font-size: 0.9em;
+  }
+
+  .button-wrapper button {
+    width: 100%;
+    max-width: 200px;
+  }
+
+  .search-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-bar span {
+    margin-bottom: 10px;
+  }
+
+  .search-bar input[type="text"] {
+    width: 100%;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  th, td {
+    padding: 10px;
   }
 }

@@ -1,6 +1,6 @@
 import { addWisata } from '../../../backend/wisata/wisata_handler.js';
 import mapSetup from '../../../utils/maps.js';
-import { showNotification } from '../../../utils/form_notification.js'; // Import notification handler
+import { showNotification } from '../../../utils/form_notification.js';
 
 const { initializeMap, addMarkerToMap } = mapSetup;
 
@@ -90,6 +90,7 @@ const Wisata_form = {
       }
     });
 
+    // Handle the image input change
     imageInput.addEventListener('change', (e) => {
       const file = e.target.files[0];
       if (file && file.type.startsWith('image/')) {
@@ -104,6 +105,7 @@ const Wisata_form = {
       }
     });
 
+    // Handle the switch image button click
     switchImageButton.addEventListener('click', () => {
       imagePreview.src = '';
       imagePreview.style.display = 'none';
@@ -136,7 +138,7 @@ const Wisata_form = {
         imagePreview.style.display = 'none';
         switchImageButton.style.display = 'none';
         imageInput.style.display = 'block';
-        marker.remove();  // Remove marker after submission
+        marker.remove();
       } catch (error) {
         console.error('Error adding Wisata:', error);
         showNotification('Failed to add Wisata. Please try again.', true);

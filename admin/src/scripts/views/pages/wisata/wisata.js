@@ -11,7 +11,7 @@ const Wisata = {
                 <button id="goToAnotherPage">Isi Data</button>
             </div>
             <div class="search-bar">
-                <span>Show:</span>
+                <span>Search:</span>
                 <input type="text" id="searchInput" placeholder="Search...">
             </div>
             <table>

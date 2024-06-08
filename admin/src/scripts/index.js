@@ -1,5 +1,5 @@
 import '../styles/main.scss';
-import '../styles/wisata.scss';
+import '../styles/table.scss';
 import '../styles/responsive.scss';
 import '../styles/form.scss';
 import App from './views/app';
