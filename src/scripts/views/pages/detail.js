@@ -2,13 +2,21 @@ const { createLikeButtonTemplate, createDetailTemplate } = require('../templates
 const { db } = require('../../backend/firebase');
 const { doc, getDoc } = require('firebase/firestore');
 const UrlParser = require('../../routes/url-parse');
+<<<<<<< HEAD
 const likeButtonInitiator = require('../../utils/likeButtonInitiator');
+=======
+const likeButtonInitiator = require('../../utils/likeButtonInitiator')
+>>>>>>> 64c6a8baa2eb41130a033cbb1ebee2edf1ea0735
 
 const Detail = {
   async render() {
     return `
       <div class="detailContainer"></div>
       <div class="likeContainer"></div>
+<<<<<<< HEAD
+=======
+      
+>>>>>>> 64c6a8baa2eb41130a033cbb1ebee2edf1ea0735
     `;
   },
 
@@ -18,6 +26,11 @@ const Detail = {
     
     const url = UrlParser.parseActiveUrlWithoutCombiner();
     const { type, id } = url;
+<<<<<<< HEAD
+=======
+    // console.log("Parsed URL Data:", url);
+    // console.log("Type:", type, "ID:", id);
+>>>>>>> 64c6a8baa2eb41130a033cbb1ebee2edf1ea0735
 
     if (!type || !id) {
       container.innerHTML = '<p>Error: Invalid URL parameters.</p>';
@@ -34,11 +47,18 @@ const Detail = {
         container.innerHTML = createDetailTemplate(item, type);
         likeButton.innerHTML = createLikeButtonTemplate();
         likeButtonInitiator.init({
+<<<<<<< HEAD
           button: document.querySelector('#likeButton'),
           item,
           type,
         });
 
+=======
+          button : document.querySelector('.likeContainer'),
+          item, 
+          type,
+        });
+>>>>>>> 64c6a8baa2eb41130a033cbb1ebee2edf1ea0735
         const mapButton = document.querySelector('.maps-detail');
         mapButton.addEventListener('click', () => {
           window.location.hash = `#/map/${type}/${id}`;

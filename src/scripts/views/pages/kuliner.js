@@ -12,10 +12,18 @@ const Kuliner = {
     const container = document.querySelector('.kulinerContainer');
 
     try {
+<<<<<<< HEAD
+=======
+      // Fetch data from Firestore
+>>>>>>> 64c6a8baa2eb41130a033cbb1ebee2edf1ea0735
       const kulinerCollection = collection(db, 'kuliner');
       const kulinerSnapshot = await getDocs(kulinerCollection);
       const kulinerList = kulinerSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
+<<<<<<< HEAD
+=======
+      // Render data
+>>>>>>> 64c6a8baa2eb41130a033cbb1ebee2edf1ea0735
       kulinerList.forEach(item => {
         container.innerHTML += createTemplateItems(item, 'kuliner');
       });
