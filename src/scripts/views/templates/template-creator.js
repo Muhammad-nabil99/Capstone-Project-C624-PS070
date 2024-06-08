@@ -2,7 +2,7 @@ const createCaterogyItemsTemplate = () => {
   return `
     <div class="container-option-items">
       <div class="item_option">
-        <button tabindex="0" arial-label="penghinapan">
+        <button tabindex="0" arial-label="wisata's button">
           <a href="#/wisata">
             <img src="./images/wisata.jpeg" alt="wisata">
           </a>
@@ -10,7 +10,7 @@ const createCaterogyItemsTemplate = () => {
         <span>wisata</span>
       </div>
       <div class="item_option">
-        <button tabindex="0" arial-label="kuliner">
+        <button tabindex="0" arial-label="kuliner's button">
           <a href="#/kuliner">
             <img src="./images/kuliner.jpeg" alt="kuliner">
           </a>
@@ -18,7 +18,7 @@ const createCaterogyItemsTemplate = () => {
         <span>kuliner</span>
       </div>
       <div class="item_option">
-        <button tabindex="0" arial-label="penghinapan">
+        <button tabindex="0" arial-label="penghinapan's button">
           <a href="#/penginapan">
             <img src="./images/penghinapan.jpeg" alt="penghinapan">
           </a>
@@ -30,8 +30,8 @@ const createCaterogyItemsTemplate = () => {
 };
 
 const createRecomendationsItemsTemplate = (item) => {
-  return `
-    <div class="item_recomendation">
+  return `    
+    <div class="item_recomendation" aria-label="recomendation">
       <picture>
         <source>
           <img src="${item.imageUrl}" alt="${item.name}">
@@ -50,16 +50,16 @@ const createTemplateItems = (item, type) => `
   <div class="detail-Container">
     <div class="image-item">
       <picture>
-        <source>
-        <img src="${item.imageUrl}" alt="${item.name}">
+          <source>
+          <img src="${item.imageUrl}" alt="${item.name} image">
       </picture>
     </div>
     <div class="description-item">
       <div class="title-item">
-        <a href="#/detail/${type}/${item.id}">${item.name}</a>
+        <p tabindex="0" aria-label="${item.name}">${item.name}</p>
       </div>
       <div class="description-item">
-        <p>${item.detail}</p>
+        <p>${item.detail}</p><a href="#/detail/${type}/${item.id}" aria-label="Show More ${item.name} item">Show More</a>
       </div>
     </div>
   </div>
@@ -68,32 +68,35 @@ const createTemplateItems = (item, type) => `
 const createDetailTemplate = (item, type) => {
   let extraDetail = "";
   if (type === "wisata") {
-    extraDetail = `<p class="ticket-price">Harga Tiket: ${item.price}</p>`;
+    extraDetail = `<p class="ticket-price" aria-label="ticket's price" tabindex="0">Harga Tiket: ${item.price}</p>`;
   } else if (type === "kuliner") {
-    extraDetail = `<p class="openAt">Buka: ${item.openTime}</p>`;
+    extraDetail = `<p aria-label="Open at" tabindex="0">Buka: ${item.openTime}</p>`;
   } else if (type === "penginapan") {
-    extraDetail = `<p class="openAt">Fasilitas: ${item.fasilitas}</p>`;
+    extraDetail = `<p tabindex="0" aria-label="facility">Fasilitas: ${item.fasilitas}</p>`;
   }
 
   return `
     <div class="detail-container">
+      <a href="#/${type}" class="arrow-left" aria-label="back to the previous page">
+        <i class="fa fa-arrow-left"></i> Back
+      </a>
       <div class="image-detail">
         <picture>
           <source>
           <img src="${item.imageUrl}" alt="${item.name}">
         </picture>
-        <h2>${item.name}</h2>
-      </div>
-      <div class="description-detail">
-        <p>${item.detail}</p>
+        <h2 tabindex="0" aria-label="${item.name}'s detail">${item.name}</h2>
       </div>
       <div class="more-detail">
         <div class="location-detail">
           <h4>Lokasi: </h4>
-          <p class="locatedOn">${item.location}</p>
+          <p class="locatedOn" tabindex="0" aria-label="located on">${item.location}</p>
           ${extraDetail}
         </div> 
-        <button class="maps-detail">Maps</button>
+        <button class="maps-detail" aria-label="see maps" tabindex="0">Maps</button>
+      </div>
+      <div class="description-detail">
+        <p tabindex="0" aria-label="description text">${item.detail}</p>
       </div>
     </div>
   `;
@@ -110,13 +113,13 @@ const createHeaderHero = () => {
 };
 
 const createLikeButtonTemplate = () => `
-  <button aria-label="like this tour" id="likeButton" class="like">
+  <button aria-label="like this tour" id="likeButton" class="like" tabindex="0">
     <i class="fa-regular fa-heart" aria-hidden="true"></i>
   </button>
 `;
 
 const createLikedButtonTemplate = () => `
-  <button aria-label="unlike this tour" id="likeButton" class="like">
+  <button aria-label="unlike this tour" id="likeButton" class="like" tabindex="1">
     <i class="fa fa-heart" aria-hidden="true"></i>
   </button>
 `;

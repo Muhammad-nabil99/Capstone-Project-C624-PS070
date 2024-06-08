@@ -5,7 +5,7 @@ const { collection, getDocs } = require('firebase/firestore');
 const Penghinapan = {
   async render() {
     return `
-      <div class="penghinapanContainer Container"></div>
+      <div class="penghinapanContainer Container" aria-label="halaman penghinapan"></div>
     `;
   },
   async afterRender() {

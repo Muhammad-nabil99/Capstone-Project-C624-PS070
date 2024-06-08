@@ -1,17 +1,23 @@
+import DrawerButtonInitiator from '../utils/drawerButtonInitiator';
 import UrlParser from '../routes/url-parse';
 import routes from '../routes/route';
+import { doc } from 'firebase/firestore';
 
 class App {
-  constructor({ button, drawer, content }) {
-    this._button = button;
+  constructor({ nav, drawer, content }) {
+    this._nav = nav;
     this._drawer = drawer;
     this._content = content;
-
+    
     this._initialAppShell();
   }
-
+  
   _initialAppShell() {
-    // Initialize the app shell if needed
+    DrawerButtonInitiator.init({
+      nav : this._nav, 
+      drawer : this._drawer,
+      content : this._content
+    })
   }
 
   async renderPage() {
@@ -37,6 +43,8 @@ class App {
     } else {
       this._content.innerHTML = '<p>Page not found!</p>';
     }
+   
+   
   }
 }
 

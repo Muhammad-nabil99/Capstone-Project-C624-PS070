@@ -7,7 +7,7 @@ const likeButtonInitiator = require('../../utils/likeButtonInitiator');
 const Detail = {
   async render() {
     return `
-      <div class="detailContainer"></div>
+      <div class="detailContainer "></div>
       <div class="likeContainer"></div>
     `;
   },
@@ -17,8 +17,7 @@ const Detail = {
     const likeButton = document.querySelector('.likeContainer');
     
     const url = UrlParser.parseActiveUrlWithoutCombiner();
-    const { type, id } = url;
-
+    const { type, id , newFeature} = url;
     if (!type || !id) {
       container.innerHTML = '<p>Error: Invalid URL parameters.</p>';
       return;
@@ -37,6 +36,7 @@ const Detail = {
           button: document.querySelector('#likeButton'),
           item,
           type,
+          newFeature
         });
 
         const mapButton = document.querySelector('.maps-detail');

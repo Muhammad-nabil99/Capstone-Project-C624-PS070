@@ -5,7 +5,7 @@ const { collection, getDocs } = require('firebase/firestore');
 const Kuliner = {
   async render() {
     return `
-      <div class="kulinerContainer Container"></div>
+      <div class="kulinerContainer Container" aria-label="halaman kuliner"></div>
     `;
   },
   async afterRender() {

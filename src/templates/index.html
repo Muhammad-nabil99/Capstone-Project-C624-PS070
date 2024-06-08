@@ -13,25 +13,28 @@
     <script src="https://use.fontawesome.com/b070c8f1df.js"></script>
     <title>Wisata Pekalongan</title>
   <body>
+    <a href="#maincontent" class="skip-link" aria-label="skip to the main content">Skip Content</a>
     <header>
       <div class="sidebar">
         <div class="logo">
            <img src="./images/logo.png" alt="logo" aria-label="logo">
         </div>
+        <button class="humberger hidden" aria-label="open navbar">
+          <i id="humberger-icon" class="fa-solid fa-bars"></i>
+        </button>
         <nav class="drawer">
           <ul class="nav_lists"> 
-            <li class="nav_item"><a href="#/Beranda" tabindex="0" aria-label="Beranda">Beranda</a></li>
-            <li class="nav_item"><a href="#/penghinapan" tabindex="0" aria-label="Penghinapan">Penghinapan</a></li>
-            <li class="nav_item"><a href="#/wisata" tabindex="0" aria-label="Wisata">wisata</a></li>
-            <li class="nav_item"><a href="#/kuliner" tabindex="0" aria-label="Kuliner">kuliner</a></li>
-            <li class="nav_item"><a href="#/favorite" tabindex="0" aria-label="favorite">favorite</a></li>
+            <li aria-label="Link to Beranda's page" class="nav_item"><a href="#/Beranda" tabindex="0" aria-label="Beranda">Beranda</a></li>
+            <li aria-label="Link to Penghinapan's page" class="nav_item"><a href="#/penginapan" tabindex="0" aria-label="Penghinapan">Penghinapan</a></li>
+            <li aria-label="Link to wisata's page" class="nav_item"><a href="#/wisata" tabindex="0" aria-label="Wisata">wisata</a></li>
+            <li aria-label="Link to kuliner's page" class="nav_item"><a href="#/kuliner" tabindex="0" aria-label="Kuliner">kuliner</a></li>
+            <li aria-label="Link to favorite's page" class="nav_item"><a href="#/favorite" tabindex="0" aria-label="favorite">favorite</a></li>
           </ul>
         </nav>
-        <form action="">
-          <input type="text" tabindex="0" aria-label="search" placeholder="Search">
+        <form action="" aria-label="Search">
+          <input  type="text" tabindex="0" aria-label="search" placeholder="Search">
         </form>
       </div>
-      
     </header>
     <main id="maincontent" tabindex="0"></main>
     <footer>

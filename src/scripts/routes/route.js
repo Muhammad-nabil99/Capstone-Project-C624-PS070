@@ -9,7 +9,7 @@ import Favorite from "../views/pages/favorite";
 const routes = {
   '/': Beranda,
   '/beranda': Beranda,
-  '/penghinapan': Penghinapan,
+  '/penginapan': Penghinapan,
   '/wisata': Wisata,
   '/kuliner': Kuliner,
   '/favorite' : Favorite,

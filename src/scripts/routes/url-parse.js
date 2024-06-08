@@ -15,7 +15,7 @@ const UrlParser = {
     return {
       resource: urlsSplits[1] || null,
       type: urlsSplits[2] || null,
-      id: urlsSplits[3] || null
+      id: urlsSplits[3] || null,
     };
   },
 

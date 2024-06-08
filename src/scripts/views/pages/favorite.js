@@ -4,7 +4,7 @@ const checkAnyExistingData = require('../../utils/checkAnyExistingData')
 const Favorite = {
   async render() {
     return `
-            <div class="favoriteContainer Container"></div>
+            <div class="favoriteContainer Container" aria-label="halaman favorite"></div>
         `;
   },
   async afterRender() {

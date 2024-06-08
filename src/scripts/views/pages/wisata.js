@@ -5,7 +5,7 @@ const { collection, getDocs } = require('firebase/firestore');
 const Wisata = {
   async render() {
     return `
-      <div class="wisataContainer Container"></div>
+      <div class="wisataContainer Container" aria-label="halaman wisata"></div>
     `;
   },
   async afterRender() {
