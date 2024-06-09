@@ -1,6 +1,5 @@
 const createCaterogyItemsTemplate = () => {
   return `
-<<<<<<< HEAD
     <div class="container-option-items">
       <div class="item_option">
         <button tabindex="0" arial-label="wisata's button">
@@ -28,35 +27,6 @@ const createCaterogyItemsTemplate = () => {
       </div>
     </div>
   `;
-=======
-  <div class="container-option-items">
-    <div class="item_option">
-        <button tabindex="0" arial-label="penghinapan">
-            <a href="#/wisata">
-                <img src="./images/wisata.jpeg" alt="wisata">
-            </a>
-        </button>
-        <span>wisata</span>
-    </div>
-    <div class="item_option">
-        <button tabindex="0" arial-label="kuliner">
-        <a href="#/kuliner">
-            <img src="./images/kuliner.jpeg" alt="wisata">
-        </a>
-        </button>
-        <span>kuliner</span>
-    </div>
-    <div class="item_option">
-        <button tabindex="0" arial-label="penghinapan">
-        <a href="#/penghinapan">
-            <img src="./images/penghinapan.jpeg" alt="wisata">
-        </a>
-        </button>
-        <span>penghinapan</span>
-    </div>
-  </div>
-    `;
->>>>>>> 64c6a8baa2eb41130a033cbb1ebee2edf1ea0735
 };
 
 const createRecomendationsItemsTemplate = (item) => {
