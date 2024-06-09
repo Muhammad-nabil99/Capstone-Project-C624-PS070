@@ -5,11 +5,8 @@
 }
 body {
   background-color: #e0e0e0;
-<<<<<<< HEAD
   min-height: 100vh;
   position: relative;
-=======
->>>>>>> 71668447e4aeb4c791a670b136de97493ab2cccc
 }
 a.skip-link:focus {
   top: 40px;
