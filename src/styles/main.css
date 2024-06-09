@@ -218,10 +218,7 @@ h1 {
   justify-content: space-evenly;
   gap: 3rem .1rem;
   padding-block: 4rem;
-<<<<<<< HEAD
   margin-block-end: 5rem;
-=======
->>>>>>> 71668447e4aeb4c791a670b136de97493ab2cccc
 }
 .Container .detail-Container {
   display: flex;
@@ -386,13 +383,10 @@ footer {
   background-color: #0f1010;
   display: flex;
   padding: 2rem;
-<<<<<<< HEAD
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-=======
->>>>>>> 71668447e4aeb4c791a670b136de97493ab2cccc
 }
 footer .footer-content {
   margin: auto;
@@ -402,7 +396,4 @@ footer .footer-content {
   color: white;
 }
 /* utils */
-<<<<<<< HEAD
 
-=======
->>>>>>> 71668447e4aeb4c791a670b136de97493ab2cccc
