@@ -73,8 +73,6 @@ const createRecomendationsItemsTemplate = (item) => {
     </div>
    `;
 };
->>>>>>> 64c6a8baa2eb41130a033cbb1ebee2edf1ea0735
->>>>>>> c07a30783e3efb36339c9df8f2e78168ac17179d
 const createTemplateItems = (item, type) => `
   <div class="detail-Container">
     <div class="image-item">
