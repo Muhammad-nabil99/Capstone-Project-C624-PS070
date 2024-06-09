@@ -1,0 +1,134 @@
+/* beranda's page */
+@media screen and (max-width: 869px) {
+  header div.sidebar {
+    padding: 1rem;
+    justify-content: space-between;
+  }
+  header div.sidebar .logo img {
+    display: none;
+  }
+  nav ul.nav_lists {
+    display: flex;
+    justify-content: space-around;
+  }
+  .humberger {
+    border: 0;
+    background-color: transparent;
+    margin: 0.2px 2rem;
+    display: none;
+  }
+  .Container .detail-Container {
+    width: 300px;
+  }
+  
+}
+@media screen and (max-width: 734px) {
+  nav.drawer, div.logo {
+    display: none;
+  }
+
+  .humberger {
+    display: block;
+    font-size: 2rem;
+  }
+  .hero .tagline_hero {
+    font-size: 1.6rem;
+  }
+  .Container .detail-Container .image-item picture {
+    width: 200px;
+    height: 200px;
+  }
+  div.sidebar nav ul.nav_lists{
+    padding: 1rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background: #e0e0e0;
+    box-shadow:  -2px 0px 10px #a3a3a3,
+             2px 0px 10px #cccccc;
+
+  }
+  div.sidebar nav ul.nav_lists li a{
+    color: rgb(27, 27, 27);
+}
+header div.sidebar{
+  position: relative;
+  justify-content: space-between;
+}
+  div.sidebar nav.show {
+    position: absolute;
+    top: 69px;
+    bottom: 0;
+    left: 0;
+    width: 55%;
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+    animation: .3s fadeRight;
+    
+  }
+}
+/* medium screen */
+@media screen and (max-width: 791px) {
+    div.recomendations .container-recomendation-items .item_recomendation{
+        width: 100%;
+        text-align: center;
+    }
+    .Container .detail-Container {
+      width: 300px;
+    }
+    
+    
+}
+/* small screen */
+@media screen and (max-width: 589px) {
+    main#maincontent .category .container-option-items span {
+      font-size: .7rem;
+    }
+    .Container .detail-Container .image-item picture {
+      width: 150px;
+      height: 150px;
+    }
+    .hero .tagline_hero {
+        font-size: 1rem;
+      }
+    main#maincontent .category .container-option-items {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+      }
+    main#maincontent .category .container-option-items .item_option {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    main#maincontent .category .container-option-items button {
+        width: 44px;
+        height:44px;
+        font-size: 1rem;
+      }
+    /* div.sidebar{
+      position: relative;
+    } */
+    
+    
+    
+}
+@media screen and (max-width: 665px){
+  .Container .detail-Container {
+    width: 700px;
+  }
+}
+@media screen and (max-width: 370px){
+    #maincontent .hero .tagline_hero > *{
+      font-size: 1rem;
+      text-align: center;
+    }
+    main#maincontent .category .container-option-items{
+      flex-direction: column;
+    }
+    
+}

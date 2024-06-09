@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="find your own place to visit">
+    <meta name="color" theme="#61a3ba">
+    <link rel="apple-touch-icon" href="./icons/wisata-192x192.png">
+    <link rel="icon" type="image/x-icon" href="./images/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="manifest" href="./app.webmanifest" crossorigin="anonymous">
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.css' rel='stylesheet' />
+    <script src="https://use.fontawesome.com/b070c8f1df.js"></script>
+    <title>Wisata Pekalongan</title>
+  <body>
+    <a href="#maincontent" class="skip-link" aria-label="skip to the main content">Skip Content</a>
+    <header>
+      <div class="sidebar">
+        <div class="logo">
+           <img src="./images/logo.png" alt="logo" aria-label="logo">
+        </div>
+        <button class="humberger hidden" aria-label="open navbar">
+          <i id="humberger-icon" class="fa-solid fa-bars"></i>
+        </button>
+        <nav class="drawer">
+          <ul class="nav_lists"> 
+            <li aria-label="Link to Beranda's page" class="nav_item"><a href="#/Beranda" tabindex="0" aria-label="Beranda">Beranda</a></li>
+            <li aria-label="Link to Penghinapan's page" class="nav_item"><a href="#/penginapan" tabindex="0" aria-label="Penghinapan">Penghinapan</a></li>
+            <li aria-label="Link to wisata's page" class="nav_item"><a href="#/wisata" tabindex="0" aria-label="Wisata">wisata</a></li>
+            <li aria-label="Link to kuliner's page" class="nav_item"><a href="#/kuliner" tabindex="0" aria-label="Kuliner">kuliner</a></li>
+            <li aria-label="Link to favorite's page" class="nav_item"><a href="#/favorite" tabindex="0" aria-label="favorite">favorite</a></li>
+          </ul>
+        </nav>
+        <form action="" aria-label="Search">
+          <div class="search">
+            <input type="text" class="search__input" placeholder="Search">
+            <button class="search__button">
+                <svg class="search__icon" aria-hidden="true" viewBox="0 0 24 24">
+                    <g>
+                        <path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path>
+                    </g>
+                </svg>
+            </button>
+        </div>
+        </form>
+      </div>
+    </header>
+    <main id="maincontent" tabindex="0"></main>
+    <footer>
+      <div class="footer-content">
+        <p>TITLE</p>
+        <p>Copyright &copy; 2024</p>
+      </div>
+    </footer>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.js'></script>
+  </body>
+</html>
