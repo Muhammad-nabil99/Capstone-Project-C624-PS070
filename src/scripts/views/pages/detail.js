@@ -2,13 +2,28 @@ const { createLikeButtonTemplate, createDetailTemplate } = require('../templates
 const { db } = require('../../backend/firebase');
 const { doc, getDoc } = require('firebase/firestore');
 const UrlParser = require('../../routes/url-parse');
+<<<<<<< HEAD
 const likeButtonInitiator = require('../../utils/likeButtonInitiator');
+=======
+<<<<<<< HEAD
+const likeButtonInitiator = require('../../utils/likeButtonInitiator');
+=======
+const likeButtonInitiator = require('../../utils/likeButtonInitiator')
+>>>>>>> 64c6a8baa2eb41130a033cbb1ebee2edf1ea0735
+>>>>>>> c07a30783e3efb36339c9df8f2e78168ac17179d
 
 const Detail = {
   async render() {
     return `
       <div class="detailContainer "></div>
       <div class="likeContainer"></div>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+      
+>>>>>>> 64c6a8baa2eb41130a033cbb1ebee2edf1ea0735
+>>>>>>> c07a30783e3efb36339c9df8f2e78168ac17179d
     `;
   },
 
@@ -17,7 +32,21 @@ const Detail = {
     const likeButton = document.querySelector('.likeContainer');
     
     const url = UrlParser.parseActiveUrlWithoutCombiner();
+<<<<<<< HEAD
     const { type, id , newFeature} = url;
+=======
+<<<<<<< HEAD
+    const { type, id , newFeature} = url;
+=======
+    const { type, id } = url;
+<<<<<<< HEAD
+=======
+    // console.log("Parsed URL Data:", url);
+    // console.log("Type:", type, "ID:", id);
+>>>>>>> 64c6a8baa2eb41130a033cbb1ebee2edf1ea0735
+
+>>>>>>> c94bcc7c924ad1ff3702658624d3457c4c01c32a
+>>>>>>> c07a30783e3efb36339c9df8f2e78168ac17179d
     if (!type || !id) {
       container.innerHTML = '<p>Error: Invalid URL parameters.</p>';
       return;
@@ -33,12 +62,25 @@ const Detail = {
         container.innerHTML = createDetailTemplate(item, type);
         likeButton.innerHTML = createLikeButtonTemplate();
         likeButtonInitiator.init({
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> c07a30783e3efb36339c9df8f2e78168ac17179d
           button: document.querySelector('#likeButton'),
           item,
           type,
           newFeature
         });
 
+<<<<<<< HEAD
+=======
+=======
+          button : document.querySelector('.likeContainer'),
+          item, 
+          type,
+        });
+>>>>>>> 64c6a8baa2eb41130a033cbb1ebee2edf1ea0735
+>>>>>>> c07a30783e3efb36339c9df8f2e78168ac17179d
         const mapButton = document.querySelector('.maps-detail');
         mapButton.addEventListener('click', () => {
           window.location.hash = `#/map/${type}/${id}`;

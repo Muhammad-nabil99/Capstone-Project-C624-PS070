@@ -5,8 +5,11 @@
 }
 body {
   background-color: #e0e0e0;
+<<<<<<< HEAD
   min-height: 100vh;
   position: relative;
+=======
+>>>>>>> c07a30783e3efb36339c9df8f2e78168ac17179d
 }
 a.skip-link:focus {
   top: 40px;
@@ -216,10 +219,15 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+<<<<<<< HEAD
   gap: 3rem 0.1rem;
   padding-block: 4rem;
   margin-block-end: 6rem;
 
+=======
+  gap: 3rem .1rem;
+  padding-block: 4rem;
+>>>>>>> c07a30783e3efb36339c9df8f2e78168ac17179d
 }
 .Container .detail-Container {
   display: flex;
@@ -384,6 +392,7 @@ footer {
   background-color: #0f1010;
   display: flex;
   padding: 2rem;
+<<<<<<< HEAD
   position: absolute;
   bottom: 0;
   left: 0;
@@ -391,6 +400,9 @@ footer {
   z-index: 0;
   
   }
+=======
+}
+>>>>>>> c07a30783e3efb36339c9df8f2e78168ac17179d
 footer .footer-content {
   margin: auto;
   text-align: center;
@@ -399,3 +411,7 @@ footer .footer-content {
   color: white;
 }
 /* utils */
+<<<<<<< HEAD
+=======
+
+>>>>>>> c07a30783e3efb36339c9df8f2e78168ac17179d

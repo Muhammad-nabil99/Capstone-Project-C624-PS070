@@ -10,11 +10,20 @@ const MapPage = {
           <div class="spinner"></div>
         </div>
       </div>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> c07a30783e3efb36339c9df8f2e78168ac17179d
       <div id="transportationModes">
         <button data-mode="driving">Driving</button>
         <button data-mode="walking">Walking</button>
         <button data-mode="cycling">Cycling</button>
       </div>
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 64c6a8baa2eb41130a033cbb1ebee2edf1ea0735
+>>>>>>> c07a30783e3efb36339c9df8f2e78168ac17179d
       <button id="backButton">Back</button>
       <p id="errorMessage" style="color: red;"></p>
     `;
@@ -31,6 +40,10 @@ const MapPage = {
         const [lat, lng] = mapLocation.split(',').map(Number);
         this._initializeMap(lat, lng);
         this._getUserLocation(lat, lng);
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> c07a30783e3efb36339c9df8f2e78168ac17179d
 
         document.querySelectorAll('#transportationModes button').forEach(button => {
           button.addEventListener('click', () => {
@@ -38,6 +51,11 @@ const MapPage = {
             this._getUserLocation(lat, lng, mode);
           });
         });
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 64c6a8baa2eb41130a033cbb1ebee2edf1ea0735
+>>>>>>> c07a30783e3efb36339c9df8f2e78168ac17179d
       }
     } catch (error) {
       console.error('Error:', error);
@@ -77,12 +95,24 @@ const MapPage = {
     document.getElementById('loadingSpinner').style.display = 'none';
   },
 
+<<<<<<< HEAD
   _getUserLocation(destinationLat, destinationLng, mode = 'driving') {
+=======
+<<<<<<< HEAD
+  _getUserLocation(destinationLat, destinationLng, mode = 'driving') {
+=======
+  _getUserLocation(destinationLat, destinationLng) {
+>>>>>>> 64c6a8baa2eb41130a033cbb1ebee2edf1ea0735
+>>>>>>> c07a30783e3efb36339c9df8f2e78168ac17179d
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const userLat = position.coords.latitude;
           const userLng = position.coords.longitude;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> c07a30783e3efb36339c9df8f2e78168ac17179d
           this._fetchRoute(userLat, userLng, destinationLat, destinationLng, mode);
         },
         (error) => {
@@ -95,6 +125,17 @@ const MapPage = {
           }
         },
         { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+<<<<<<< HEAD
+=======
+=======
+          this._fetchRoute(userLat, userLng, destinationLat, destinationLng);
+        },
+        (error) => {
+          console.error('Error getting user location:', error);
+          this._displayError('Geolocation access denied. Unable to show route.');
+        }
+>>>>>>> 64c6a8baa2eb41130a033cbb1ebee2edf1ea0735
+>>>>>>> c07a30783e3efb36339c9df8f2e78168ac17179d
       );
     } else {
       console.error('Geolocation is not supported by this browser.');
@@ -102,6 +143,10 @@ const MapPage = {
     }
   },
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> c07a30783e3efb36339c9df8f2e78168ac17179d
   _retryUserLocation(destinationLat, destinationLng, mode) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -133,6 +178,17 @@ const MapPage = {
       } else {
         this._displayError('No route found. Please try a different mode of transportation.');
       }
+<<<<<<< HEAD
+=======
+=======
+  async _fetchRoute(userLat, userLng, destinationLat, destinationLng) {
+    try {
+      const response = await fetch(`https://api.mapbox.com/directions/v5/mapbox/driving/${userLng},${userLat};${destinationLng},${destinationLat}?geometries=geojson&access_token=${mapboxgl.accessToken}`);
+      const data = await response.json();
+      const route = data.routes[0].geometry.coordinates;
+      this._drawRoute(route);
+>>>>>>> 64c6a8baa2eb41130a033cbb1ebee2edf1ea0735
+>>>>>>> c07a30783e3efb36339c9df8f2e78168ac17179d
     } catch (error) {
       console.error('Error fetching route:', error);
       this._displayError('Error fetching route. Please try again.');
