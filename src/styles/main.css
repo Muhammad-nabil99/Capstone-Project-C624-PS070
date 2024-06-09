@@ -34,6 +34,7 @@ header {
   width: 100%;
   box-shadow: 1px 1px 4px #747474;
 }
+<<<<<<< HEAD
 /* search bar start*/
 .search {
   display: flex;
@@ -90,6 +91,8 @@ header {
   fill: #b4b4b4;
 }
 /* search bar end */
+=======
+>>>>>>> 0b01e66fa1597369cb142e8d2c9c6979f8fc3b61
 a {
   text-decoration: none;
 }
@@ -272,10 +275,16 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+<<<<<<< HEAD
   gap: 3rem 0.1rem;
   padding-block: 4rem;
   margin-block-end: 6rem;
 
+=======
+  gap: 3rem .1rem;
+  padding-block: 4rem;
+  margin-block-end: 5rem;
+>>>>>>> 0b01e66fa1597369cb142e8d2c9c6979f8fc3b61
 }
 .Container .detail-Container {
   display: flex;
@@ -444,9 +453,13 @@ footer {
   bottom: 0;
   left: 0;
   right: 0;
+<<<<<<< HEAD
   z-index: 0;
   
   }
+=======
+}
+>>>>>>> 0b01e66fa1597369cb142e8d2c9c6979f8fc3b61
 footer .footer-content {
   margin: auto;
   text-align: center;
@@ -454,6 +467,7 @@ footer .footer-content {
   font-weight: bold;
   color: white;
 }
+<<<<<<< HEAD
 /* animation */
 @keyframes fadeRight {
   0%{
@@ -463,3 +477,7 @@ footer .footer-content {
     left: 0;
   }
 }
+=======
+/* utils */
+
+>>>>>>> 0b01e66fa1597369cb142e8d2c9c6979f8fc3b61

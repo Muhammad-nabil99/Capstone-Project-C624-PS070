@@ -23,10 +23,17 @@
   
 }
 @media screen and (max-width: 734px) {
+<<<<<<< HEAD
   nav.drawer, div.logo {
     display: none;
   }
 
+=======
+  nav.drawer,
+  form {
+    display: none;
+  }
+>>>>>>> 0b01e66fa1597369cb142e8d2c9c6979f8fc3b61
   .humberger {
     display: block;
     font-size: 2rem;
@@ -39,11 +46,16 @@
     height: 200px;
   }
   div.sidebar nav ul.nav_lists{
+<<<<<<< HEAD
     padding: 1rem;
+=======
+    padding-block-start: 1rem;
+>>>>>>> 0b01e66fa1597369cb142e8d2c9c6979f8fc3b61
     width: 100%;
     display: flex;
     align-items: center;
     flex-direction: column;
+<<<<<<< HEAD
     background: #e0e0e0;
     box-shadow:  -2px 0px 10px #a3a3a3,
              2px 0px 10px #cccccc;
@@ -56,11 +68,16 @@ header div.sidebar{
   position: relative;
   justify-content: space-between;
 }
+=======
+    background-color: rgb(255, 255, 255);
+  }
+>>>>>>> 0b01e66fa1597369cb142e8d2c9c6979f8fc3b61
   div.sidebar nav.show {
     position: absolute;
     top: 69px;
     bottom: 0;
     left: 0;
+<<<<<<< HEAD
     width: 55%;
     z-index: 99;
     display: flex;
@@ -68,6 +85,14 @@ header div.sidebar{
     animation: .3s fadeRight;
     
   }
+=======
+    width: 60%;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+  }
+  
+>>>>>>> 0b01e66fa1597369cb142e8d2c9c6979f8fc3b61
 }
 /* medium screen */
 @media screen and (max-width: 791px) {
@@ -79,6 +104,7 @@ header div.sidebar{
       width: 300px;
     }
     
+<<<<<<< HEAD
     
 }
 /* small screen */
@@ -90,6 +116,18 @@ header div.sidebar{
       width: 150px;
       height: 150px;
     }
+=======
+}
+/* small screen */
+@media screen and (max-width: 589px) {
+  main#maincontent .category .container-option-items span {
+    font-size: .7rem;
+  }
+  .Container .detail-Container .image-item picture {
+    width: 150px;
+    height: 150px;
+  }
+>>>>>>> 0b01e66fa1597369cb142e8d2c9c6979f8fc3b61
     .hero .tagline_hero {
         font-size: 1rem;
       }
@@ -110,10 +148,19 @@ header div.sidebar{
         height:44px;
         font-size: 1rem;
       }
+<<<<<<< HEAD
     /* div.sidebar{
       position: relative;
     } */
     
+=======
+    div.sidebar{
+      position: relative;
+    }
+    div.sidebar nav ul.nav_lists li a{
+        color: rgb(119, 119, 119);
+    }
+>>>>>>> 0b01e66fa1597369cb142e8d2c9c6979f8fc3b61
     
     
 }
@@ -121,6 +168,10 @@ header div.sidebar{
   .Container .detail-Container {
     width: 700px;
   }
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 0b01e66fa1597369cb142e8d2c9c6979f8fc3b61
 }
 @media screen and (max-width: 370px){
     #maincontent .hero .tagline_hero > *{

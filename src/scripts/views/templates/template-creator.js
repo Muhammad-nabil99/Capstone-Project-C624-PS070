@@ -30,8 +30,29 @@ const createCaterogyItemsTemplate = () => {
 };
 
 const createRecomendationsItemsTemplate = (item) => {
+<<<<<<< HEAD
   return `    
     <div class="item_recomendation" aria-label="recomendation">
+=======
+<<<<<<< HEAD
+  return `    
+    <div class="item_recomendation" aria-label="recomendation">
+=======
+<<<<<<< HEAD
+  return `    
+    <div class="item_recomendation" aria-label="recomendation">
+=======
+<<<<<<< HEAD
+  return `    
+    <div class="item_recomendation" aria-label="recomendation">
+=======
+  return `
+<<<<<<< HEAD
+    <div class="item_recomendation">
+>>>>>>> c94bcc7c924ad1ff3702658624d3457c4c01c32a
+>>>>>>> c07a30783e3efb36339c9df8f2e78168ac17179d
+>>>>>>> 71668447e4aeb4c791a670b136de97493ab2cccc
+>>>>>>> 0b01e66fa1597369cb142e8d2c9c6979f8fc3b61
       <picture>
         <source>
           <img src="${item.imageUrl}" alt="${item.name}">
@@ -46,6 +67,28 @@ const createRecomendationsItemsTemplate = (item) => {
   `;
 };
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+      <div class="item_recomendation">
+      <picture>
+          <source>
+              <img src="./images/recomendasi/${item}.jpeg" alt="title">         
+      </picture>
+      <h2 class="title"><a href="#/detail/:id">Title</a></h2>
+      <div class="location">
+          <i class="fa fa-location-dot" style="color: #00000;"></i>
+          <p>Jl. A. Yani No.44, Bener Dua, Bener, Kec. Wiradesa, Kabupaten Pekalongan, Jawa Tengah 51152</p>
+      </div>
+    </div>
+   `;
+};
+>>>>>>> 71668447e4aeb4c791a670b136de97493ab2cccc
+>>>>>>> 0b01e66fa1597369cb142e8d2c9c6979f8fc3b61
 const createTemplateItems = (item, type) => `
   <div class="detail-Container">
     <div class="image-item">
@@ -109,6 +152,16 @@ const createHeaderHero = () => {
       <p>Website parawisata Kabupaten Pekalongan</p>
       <img src="./images/heros/hero.jpeg" alt="Hero Image">
     </div>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> c07a30783e3efb36339c9df8f2e78168ac17179d
+>>>>>>> 71668447e4aeb4c791a670b136de97493ab2cccc
+>>>>>>> 0b01e66fa1597369cb142e8d2c9c6979f8fc3b61
   `;
 };
 
@@ -125,6 +178,30 @@ const createLikedButtonTemplate = () => `
 `;
 
 module.exports = {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+   `;
+};
+const createLikeButtonTemplate = () => `
+    <button aria-label="like this tour" id="likeButton" class="like">
+        <i class="fa-regular fa-heart" aria-hidden="true"></i>
+    </button>
+    `;
+const createLikedButtonTemplate = () => `
+    <button aria-label="unlike this tour" id="likeButton" class="like">
+        <i class="fa fa-heart" aria-hidden="true"></i>
+    </button>
+    `;
+export {
+>>>>>>> 64c6a8baa2eb41130a033cbb1ebee2edf1ea0735
+>>>>>>> c07a30783e3efb36339c9df8f2e78168ac17179d
+>>>>>>> 71668447e4aeb4c791a670b136de97493ab2cccc
+>>>>>>> 0b01e66fa1597369cb142e8d2c9c6979f8fc3b61
   createLikeButtonTemplate,
   createLikedButtonTemplate,
   createHeaderHero,
