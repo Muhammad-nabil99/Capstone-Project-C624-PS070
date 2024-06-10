@@ -63,7 +63,6 @@ const Wisata_form_edit = {
     const mapLocationInput = document.getElementById('mapLocation');
     const wisataForm = document.getElementById('wisataForm');
     const imagePreview = document.getElementById('imagePreview');
-    const imageInput = document.getElementById('image');
 
     const defaultCoordinates = [106.8456, -6.2088];
     map = initializeMap(mapboxgl, mapContainer, defaultCoordinates);

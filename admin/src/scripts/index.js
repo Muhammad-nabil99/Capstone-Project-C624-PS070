@@ -1,7 +1,7 @@
 import '../styles/main.scss';
 import '../styles/table.scss';
-import '../styles/responsive.scss';
 import '../styles/form.scss';
+import '../styles/responsive.scss';
 import App from './views/app';
 
 const app = new App({

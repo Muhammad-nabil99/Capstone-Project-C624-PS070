@@ -1,6 +1,5 @@
 import { getPenginapanById, updatePenginapan } from '../../../backend/penginapan/penginapan_handler.js';
 import mapSetup from '../../../utils/maps.js';
-import { showNotification } from '../../../utils/form_notification.js';
 
 const { initializeMap, addMarkerToMap } = mapSetup;
 
@@ -122,7 +121,6 @@ const Penginapan_form_edit = {
       console.error('Error fetching Penginapan data:', error);
     }
 
-    // Update image preview when a new image is selected
     imageInput.addEventListener('change', (e) => {
       const file = e.target.files[0];
       if (file) {
