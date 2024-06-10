@@ -141,7 +141,6 @@
   }
 
   footer {
-    position: relative;
     bottom: 0;
   }
   
@@ -173,7 +172,7 @@
     display: block;
     overflow-x: auto;
     white-space: nowrap;
-    margin-bottom: 0;
+    margin-bottom: 100px;
   }
 
   th, td {
