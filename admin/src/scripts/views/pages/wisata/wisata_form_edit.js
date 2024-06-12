@@ -34,9 +34,14 @@ const Wisata_form_edit = {
           <input type="text" id="detail" name="detail" required>
         </div>
         <div class="form-group">
-          <label for="image">Image:</label>
-          <input type="file" id="image" name="image" accept="image/png, image/jpeg, image/jpg">
-          <img id="imagePreview" style="display: none;" />
+          <label>Image:</label>
+          <div style="width:max-content">
+            <label for="image" id="imageLabel" class="button-like">Choose file</label>
+            <input type="file" id="image" name="image" accept="image/*" required style="display: none;">
+          </div>
+          <div id="imagePreviewContainer">
+            <img id="imagePreview" src="" alt="Image Preview" style="display: none;">
+          </div>
         </div>
         <div class="form-group">
           <label for="placeName">Place Name:</label>
@@ -62,7 +67,9 @@ const Wisata_form_edit = {
     const mapContainer = document.getElementById('map');
     const mapLocationInput = document.getElementById('mapLocation');
     const wisataForm = document.getElementById('wisataForm');
+    const imageInput = document.getElementById('image');
     const imagePreview = document.getElementById('imagePreview');
+    const imageLabel = document.getElementById('imageLabel');
 
     const defaultCoordinates = [106.8456, -6.2088];
     map = initializeMap(mapboxgl, mapContainer, defaultCoordinates);
@@ -115,6 +122,29 @@ const Wisata_form_edit = {
     } catch (error) {
       console.error('Error fetching Wisata data:', error);
     }
+
+    imageInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          imagePreview.src = event.target.result;
+          imagePreview.style.display = 'block';
+          imageLabel.textContent = 'Switch image';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    imageLabel.addEventListener('click', (e) => {
+      e.preventDefault();
+      imageInput.click();
+    });
+
+    imageInput.addEventListener('click', () => {
+      // To ensure the change event is fired even if the same file is selected again
+      imageInput.value = '';
+    });
 
     wisataForm.addEventListener('submit', async (e) => {
       e.preventDefault();

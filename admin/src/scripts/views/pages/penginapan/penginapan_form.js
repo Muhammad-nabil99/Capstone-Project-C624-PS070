@@ -35,11 +35,13 @@ const Penginapan_form = {
           <input type="text" id="price" name="price" required>
         </div>
         <div class="form-group">
-          <label for="image">Gambar:</label>
-          <input type="file" id="image" name="image" accept="image/*" required>
+          <label>Image:</label>
+          <div style="width:max-content">
+            <label for="image" id="imageLabel" class="button-like">Choose file</label>
+            <input type="file" id="image" name="image" accept="image/*" required style="display: none;">
+          </div>
           <div id="imagePreviewContainer">
             <img id="imagePreview" src="" alt="Image Preview" style="display: none;">
-            <button id="switchImageButton" type="button" style="display: none;">Ganti Gambar</button>
           </div>
         </div>
         <div class="form-group">
@@ -63,7 +65,7 @@ const Penginapan_form = {
     const penginapanForm = document.getElementById('penginapanForm');
     const imageInput = document.getElementById('image');
     const imagePreview = document.getElementById('imagePreview');
-    const switchImageButton = document.getElementById('switchImageButton');
+    const imageLabel = document.getElementById('imageLabel');
     
     const defaultCoordinates = [106.8456, -6.2088];
     map = initializeMap(mapboxgl, mapContainer, defaultCoordinates);
@@ -97,18 +99,18 @@ const Penginapan_form = {
         reader.onload = (event) => {
           imagePreview.src = event.target.result;
           imagePreview.style.display = 'block';
-          switchImageButton.style.display = 'block';
-          imageInput.style.display = 'none';
+          imageLabel.textContent = 'Ganti gambar';
         };
         reader.readAsDataURL(file);
       }
     });
 
-    switchImageButton.addEventListener('click', () => {
-      imagePreview.src = '';
-      imagePreview.style.display = 'none';
-      switchImageButton.style.display = 'none';
-      imageInput.style.display = 'block';
+    imageLabel.addEventListener('click', (e) => {
+      e.preventDefault();
+      imageInput.click();
+    });
+
+    imageInput.addEventListener('click', () => {
       imageInput.value = '';
     });
 
@@ -134,7 +136,7 @@ const Penginapan_form = {
         penginapanForm.reset();
         imagePreview.src = '';
         imagePreview.style.display = 'none';
-        imageInput.style.display = 'block';
+        imageLabel.textContent = 'Pilih file';
         marker.remove();
       } catch (error) {
         console.error('Error adding Penginapan:', error);

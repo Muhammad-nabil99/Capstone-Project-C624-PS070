@@ -30,8 +30,11 @@ const Kuliner_form_edit = {
           <textarea id="detail" name="detail" rows="3" required></textarea>
         </div>
         <div class="form-group">
-          <label for="image">Image:</label>
-          <input type="file" id="image" name="image" accept="image/*">
+          <label>Image:</label>
+          <div style="width:max-content">
+            <label for="image" id="imageLabel" class="button-like">Choose file</label>
+            <input type="file" id="image" name="image" accept="image/*" required style="display: none;">
+          </div>
           <div id="imagePreviewContainer">
             <img id="imagePreview" src="" alt="Image Preview" style="display: none;">
           </div>
@@ -63,6 +66,7 @@ const Kuliner_form_edit = {
     const kulinerForm = document.getElementById('kulinerForm');
     const imagePreview = document.getElementById('imagePreview');
     const imageInput = document.getElementById('image');
+    const imageLabel = document.getElementById('imageLabel');
 
     const defaultCoordinates = [106.8456, -6.2088];
     map = initializeMap(mapboxgl, mapContainer, defaultCoordinates);
@@ -102,6 +106,7 @@ const Kuliner_form_edit = {
       if (kuliner.imageUrl) {
         imagePreview.src = kuliner.imageUrl;
         imagePreview.style.display = 'block';
+        imageLabel.textContent = 'Switch image';
       }
 
       const existingCoordinates = kuliner.mapLocation.split(',').map(Number).reverse();
@@ -114,16 +119,27 @@ const Kuliner_form_edit = {
     } catch (error) {
       console.error('Error fetching Kuliner data:', error);
     }
+
     imageInput.addEventListener('change', (e) => {
       const file = e.target.files[0];
-      if (file) {
+      if (file && file.type.startsWith('image/')) {
         const reader = new FileReader();
-        reader.onload = function (e) {
-          imagePreview.src = e.target.result;
+        reader.onload = (event) => {
+          imagePreview.src = event.target.result;
           imagePreview.style.display = 'block';
+          imageLabel.textContent = 'Switch image';
         };
         reader.readAsDataURL(file);
       }
+    });
+
+    imageLabel.addEventListener('click', (e) => {
+      e.preventDefault();
+      imageInput.click();
+    });
+
+    imageInput.addEventListener('click', () => {
+      imageInput.value = '';
     });
 
     kulinerForm.addEventListener('submit', async (e) => {

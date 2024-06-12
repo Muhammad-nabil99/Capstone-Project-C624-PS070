@@ -34,12 +34,24 @@
 }
 
 .form-group input[type="file"] {
-  width: auto; 
-  display: inline-block; 
   margin-top: 5px; 
   background-color: #E6E6E6; 
 }
-
+.button-like {
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 16px;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+}
+.button-like:hover {
+  background-color: #0056b3;
+}
 #imagePreviewContainer {
   margin-top: 10px;
   display: flex;
@@ -50,19 +62,6 @@
   max-width: 100px;
   max-height: 100px;
   margin-right: 10px;
-}
-
-#switchImageButton {
-  padding: 5px 10px;
-  background-color: #007BFF;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-#switchImageButton:hover {
-  background-color: #0056b3;
 }
 
 .map-container {

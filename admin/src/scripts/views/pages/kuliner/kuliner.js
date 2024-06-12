@@ -3,7 +3,8 @@ const { db } = require('../../../backend/firebase.js');
 const { deleteKuliner } = require('../../../backend/kuliner/kuliner_handler.js');
 const searchBox = require('../../../utils/search_box/search_kuliner.js');
 const { applyTextShortener } = require('../../../utils/text-shortener.js');
-
+import 'lazysizes'
+import 'lazysizes/plugins/parent-fit/ls.parent-fit'
 const Kuliner = {
     async render() {
         return `
@@ -58,7 +59,7 @@ const Kuliner = {
                             <td class="shorten-text">${item.detail}</td>
                             <td>${item.location}</td>
                             <td>${item.openTime}</td>
-                            <td><img src="${item.imageUrl}" alt="${item.name}" width="100"></td>
+                            <td><img data-src="${item.imageUrl}" alt="${item.name}" width="100" class="lazyload"></td>
                             <td>
                                 <button class="edit-button" data-id="${item.id}">Edit</button>
                                 <button class="delete-button" data-id="${item.id}">Delete</button>
@@ -105,4 +106,4 @@ const Kuliner = {
     }
 };
 
-module.exports = Kuliner;
+export default Kuliner;

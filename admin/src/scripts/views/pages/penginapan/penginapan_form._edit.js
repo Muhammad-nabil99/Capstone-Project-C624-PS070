@@ -34,11 +34,13 @@ const Penginapan_form_edit = {
           <input type="text" id="price" name="price" required>
         </div>
         <div class="form-group">
-          <label for="image">Gambar:</label>
-          <input type="file" id="image" name="image" accept="image/*">
+          <label>Image:</label>
+          <div style="width:max-content">
+            <label for="image" id="imageLabel" class="button-like">Choose file</label>
+            <input type="file" id="image" name="image" accept="image/*" required style="display: none;">
+          </div>
           <div id="imagePreviewContainer">
             <img id="imagePreview" src="" alt="Image Preview" style="display: none;">
-            <button id="switchImageButton" type="button" style="display: none;">Ganti Gambar</button>
           </div>
         </div>
         <div class="form-group">
@@ -68,6 +70,7 @@ const Penginapan_form_edit = {
     const penginapanForm = document.getElementById('penginapanForm');
     const imagePreview = document.getElementById('imagePreview');
     const imageInput = document.getElementById('image');
+    const imageLabel = document.getElementById('imageLabel');
 
     const defaultCoordinates = [106.8456, -6.2088];
     map = initializeMap(mapboxgl, mapContainer, defaultCoordinates);
@@ -108,6 +111,7 @@ const Penginapan_form_edit = {
       if (penginapan.imageUrl) {
         imagePreview.src = penginapan.imageUrl;
         imagePreview.style.display = 'block';
+        imageLabel.textContent = 'Ganti gambar';
       }
 
       const existingCoordinates = penginapan.mapLocation.split(',').map(Number).reverse();
@@ -123,14 +127,23 @@ const Penginapan_form_edit = {
 
     imageInput.addEventListener('change', (e) => {
       const file = e.target.files[0];
-      if (file) {
+      if (file && file.type.startsWith('image/')) {
         const reader = new FileReader();
-        reader.onload = function (e) {
-          imagePreview.src = e.target.result;
+        reader.onload = (event) => {
+          imagePreview.src = event.target.result;
           imagePreview.style.display = 'block';
         };
         reader.readAsDataURL(file);
       }
+    });
+
+    imageLabel.addEventListener('click', (e) => {
+      e.preventDefault();
+      imageInput.click();
+    });
+
+    imageInput.addEventListener('click', () => {
+      imageInput.value = '';
     });
 
     penginapanForm.addEventListener('submit', async (e) => {
@@ -150,7 +163,6 @@ const Penginapan_form_edit = {
       if (price !== initialData.price) updates.price = price;
       if (detail !== initialData.detail) updates.detail = detail;
       if (mapLocation !== initialData.mapLocation) updates.mapLocation = mapLocation;
-
 
       if (image && !['image/png', 'image/jpeg', 'image/jpg'].includes(image.type)) {
         alert('Only PNG, JPEG, and JPG images are allowed');

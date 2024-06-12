@@ -3,7 +3,8 @@ const { db } = require('../../../backend/firebase.js');
 const searchBox = require('../../../utils/search_box/search_penginapan.js');
 const { deletePenginapan } = require('../../../backend/penginapan/penginapan_handler.js');
 const { applyTextShortener } = require('../../../utils/text-shortener.js');
-
+import 'lazysizes'
+import 'lazysizes/plugins/parent-fit/ls.parent-fit'
 const Penginapan = {
     async render() {
         return `
@@ -58,7 +59,7 @@ const Penginapan = {
                             <td class="shorten-text">${item.detail}</td>
                             <td>${item.location}</td>
                             <td>${item.price}</td>
-                            <td><img src="${item.imageUrl}" alt="${item.name}" width="100"></td>
+                            <td><img data-src="${item.imageUrl}" alt="${item.name}" width="100" class="lazyload"></td>
                             <td>
                                 <button class="edit-button" data-id="${item.id}">Edit</button>
                                 <button class="delete-button" data-id="${item.id}">Delete</button>
@@ -106,4 +107,4 @@ const Penginapan = {
     }
 };
 
-module.exports = Penginapan;
+export default Penginapan;
