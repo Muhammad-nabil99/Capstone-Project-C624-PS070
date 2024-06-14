@@ -13,13 +13,13 @@ async function addPenginapan(name, detail, location, fasilitas, price, mapLocati
     await setDoc(doc(db, 'penginapan', id), {
       id,
       name,
-      detail,         
-      location,      
-      fasilitas,     
-      price,          
-      mapLocation,    
+      detail,
+      location,
+      fasilitas,
+      price,
+      mapLocation,
       imageUrl,
-      favourite: 0, // Initialize favourite count to 0
+      favourite: 0,
     });
 
     return id;
@@ -49,15 +49,35 @@ async function updatePenginapan(id, updates, newImage) {
   const docRef = doc(db, 'penginapan', id);
 
   try {
-    if (newImage) {
-      const storageRef = ref(storage, `penginapan/${id}`);
-      await uploadBytes(storageRef, newImage);
-      const newImageUrl = await getDownloadURL(storageRef);
-      updates.imageUrl = newImageUrl;
+    const penginapanData = await getDoc(docRef);
+
+    if (!penginapanData.exists()) {
+      throw new Error('No such document!');
     }
 
-    if (Object.keys(updates).length > 0) {
-      await updateDoc(docRef, updates);
+    const existingImageUrl = penginapanData.data().imageUrl;
+
+    if (newImage && newImage.size > 0) {
+      const reader = new FileReader();
+      reader.onload = async (event) => {
+        const newImageUrl = event.target.result;
+
+        if (newImageUrl !== existingImageUrl) {
+          const storageRef = ref(storage, `penginapan/${id}`);
+          await uploadBytes(storageRef, newImage);
+          const updatedImageUrl = await getDownloadURL(storageRef);
+          updates.imageUrl = updatedImageUrl;
+        }
+
+        if (Object.keys(updates).length > 0) {
+          await updateDoc(docRef, updates);
+        }
+      };
+      reader.readAsDataURL(newImage);
+    } else {
+      if (Object.keys(updates).length > 0) {
+        await updateDoc(docRef, updates);
+      }
     }
   } catch (error) {
     console.error('Error:', error);

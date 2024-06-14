@@ -1,10 +1,11 @@
-const { getDocs, collection} = require('firebase/firestore');
+const { getDocs, collection } = require('firebase/firestore');
 const { db } = require('../../../backend/firebase.js');
 const search_box = require('../../../utils/search_box/search_wisata.js');
 const { deleteWisata } = require('../../../backend/wisata/wisata_handler.js');
 const { applyTextShortener } = require('../../../utils/text-shortener.js');
 import 'lazysizes';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
+
 const Wisata = {
     async render() {
         return `
@@ -80,13 +81,16 @@ const Wisata = {
                 document.querySelectorAll('.delete-button').forEach(button => {
                     button.addEventListener('click', async (event) => {
                         const wisataId = event.target.getAttribute('data-id');
-                        try {
-                            await deleteWisata(wisataId);
-                            alert('Wisata deleted successfully');
-                            window.location.reload();
-                        } catch (error) {
-                            console.error('Error deleting Wisata:', error);
-                            alert('Failed to delete Wisata. Please try again.');
+                        const confirmDelete = confirm('Are you sure you want to delete this data?');
+                        if (confirmDelete) {
+                            try {
+                                await deleteWisata(wisataId);
+                                alert('Wisata deleted successfully');
+                                window.location.reload();
+                            } catch (error) {
+                                console.error('Error deleting Wisata:', error);
+                                alert('Failed to delete Wisata. Please try again.');
+                            }
                         }
                     });
                 });

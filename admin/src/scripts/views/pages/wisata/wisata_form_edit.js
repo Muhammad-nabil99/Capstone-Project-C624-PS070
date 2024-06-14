@@ -1,7 +1,7 @@
 import { getWisataById, updateWisata } from '../../../backend/wisata/wisata_handler.js';
-import mapSetup from '../../../utils/maps.js';
-
-const { initializeMap, addMarkerToMap } = mapSetup;
+import { setupMap } from '../../../utils/maps/map_initialization.js';
+import wisata_validator from '../../../utils/form_handling/wisata_validator.js';
+import { showNotification } from '../../../utils/form_handling/form_notification.js';
 
 const mapboxglAccessToken = 'pk.eyJ1IjoiZjE3MjZ5YjE0MCIsImEiOiJjbHdhMXYyOGcwYW40Mmlxazg2aTBqYWl6In0.7vkdPDBmhzZq38n2jFNEjA';
 mapboxgl.accessToken = mapboxglAccessToken;
@@ -12,36 +12,43 @@ let marker;
 const Wisata_form_edit = {
   async render() {
     return `
+      <div id="notification" class="notification"></div>
       <form id="wisataForm" class="wisata-form">
         <div class="form-group">
           <label for="name">Nama Tempat Wisata:</label>
-          <input type="text" id="name" name="name" required>
+          <input type="text" id="name" name="name" >
+          <div class="validation-message" id="nameValidation"></div>
         </div>
         <div class="form-group">
           <label for="location">Lokasi:</label>
-          <input type="text" id="location" name="location" required>
+          <input type="text" id="location" name="location" >
+          <div class="validation-message" id="locationValidation"></div>
         </div>
         <div class="form-group">
           <label for="openTime">Open Time:</label>
-          <input type="text" id="openTime" name="openTime" required>
+          <input type="text" id="openTime" name="openTime" >
+          <div class="validation-message" id="openTimeValidation"></div>
         </div>
         <div class="form-group">
           <label for="price">Price:</label>
-          <input type="text" id="price" name="price" required>
+          <input type="text" id="price" name="price" >
+          <div class="validation-message" id="priceValidation"></div>
         </div>
         <div class="form-group">
           <label for="detail">Detail:</label>
-          <input type="text" id="detail" name="detail" required>
+          <input type="text" id="detail" name="detail" >
+          <div class="validation-message" id="detailValidation"></div>
         </div>
         <div class="form-group">
           <label>Image:</label>
           <div style="width:max-content">
             <label for="image" id="imageLabel" class="button-like">Choose file</label>
-            <input type="file" id="image" name="image" accept="image/*" required style="display: none;">
+            <input type="file" id="image" name="image" accept="image/*" style="display: none;">
           </div>
           <div id="imagePreviewContainer">
             <img id="imagePreview" src="" alt="Image Preview" style="display: none;">
           </div>
+          <div class="validation-message" id="imageValidation"></div>
         </div>
         <div class="form-group">
           <label for="placeName">Place Name:</label>
@@ -64,37 +71,14 @@ const Wisata_form_edit = {
       return;
     }
 
-    const mapContainer = document.getElementById('map');
-    const mapLocationInput = document.getElementById('mapLocation');
     const wisataForm = document.getElementById('wisataForm');
     const imageInput = document.getElementById('image');
     const imagePreview = document.getElementById('imagePreview');
     const imageLabel = document.getElementById('imageLabel');
+    const mapLocationInput = document.getElementById('mapLocation');
 
     const defaultCoordinates = [106.8456, -6.2088];
-    map = initializeMap(mapboxgl, mapContainer, defaultCoordinates);
-    marker = addMarkerToMap(map, defaultCoordinates, mapLocationInput, marker);
-
-    const geocoder = new MapboxGeocoder({
-      accessToken: mapboxgl.accessToken,
-      mapboxgl: mapboxgl,
-      placeholder: 'Enter place name or address',
-      bbox: [95.316, -11.008, 141.056, 6.214],
-    });
-
-    document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
-    document.getElementById('geocoder').classList.add('custom-geocoder');
-
-    geocoder.on('result', (e) => {
-      const coordinates = e.result.geometry.coordinates;
-      mapLocationInput.value = `${coordinates[1]},${coordinates[0]}`;
-      map.flyTo({ center: coordinates, zoom: 15 });
-      if (marker) {
-        marker.setLngLat(coordinates);
-      } else {
-        marker = addMarkerToMap(map, coordinates, mapLocationInput, marker);
-      }
-    });
+    ({ map, marker } = setupMap(defaultCoordinates));
 
     let initialData;
     try {
@@ -123,38 +107,23 @@ const Wisata_form_edit = {
       console.error('Error fetching Wisata data:', error);
     }
 
-    imageInput.addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      if (file && file.type.startsWith('image/')) {
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          imagePreview.src = event.target.result;
-          imagePreview.style.display = 'block';
-          imageLabel.textContent = 'Switch image';
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-
-    imageLabel.addEventListener('click', (e) => {
-      e.preventDefault();
-      imageInput.click();
-    });
-
-    imageInput.addEventListener('click', () => {
-      // To ensure the change event is fired even if the same file is selected again
-      imageInput.value = '';
-    });
+    wisata_validator.setupImageInput(imageInput, imagePreview, imageLabel);
 
     wisataForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const name = document.getElementById('name').value;
-      const location = document.getElementById('location').value;
-      const openTime = document.getElementById('openTime').value;
-      const price = document.getElementById('price').value;
-      const detail = document.getElementById('detail').value;
-      const mapLocation = document.getElementById('mapLocation').value;
-      const image = document.getElementById('image').files[0];
+
+      const formData = new FormData(wisataForm);
+      if (!wisata_validator.validateForm(formData)) {
+        return;
+      }
+
+      const name = formData.get('name').trim();
+      const location = formData.get('location').trim();
+      const openTime = formData.get('openTime').trim();
+      const price = formData.get('price').trim();
+      const detail = formData.get('detail').trim();
+      const mapLocation = formData.get('mapLocation').trim();
+      const image = formData.get('image');
 
       const updates = {};
       if (name !== initialData.name) updates.name = name;
@@ -164,19 +133,15 @@ const Wisata_form_edit = {
       if (detail !== initialData.detail) updates.detail = detail;
       if (mapLocation !== initialData.mapLocation) updates.mapLocation = mapLocation;
 
-      if (image && !['image/png', 'image/jpeg', 'image/jpg'].includes(image.type)) {
-        alert('Only PNG, JPEG, and JPG images are allowed');
-        return;
-      }
-
       try {
         await updateWisata(wisataId, updates, image);
-        console.log('Wisata updated with ID:', wisataId);
-        alert('Wisata updated successfully');
-        window.location.href = '/#/wisata';
+        showNotification('Wisata updated successfully');
+        setTimeout(() => {
+          window.location.href = '/#/wisata';
+        }, 1500);
       } catch (error) {
         console.error('Error updating Wisata:', error);
-        alert('Failed to update Wisata. Please try again.');
+        showNotification('Failed to update Wisata. Please try again.', true);
       }
     });
   }

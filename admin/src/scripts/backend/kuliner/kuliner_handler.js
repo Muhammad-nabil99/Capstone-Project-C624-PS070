@@ -48,15 +48,35 @@ async function updateKuliner(id, updates, newImage) {
   const docRef = doc(db, 'kuliner', id);
 
   try {
-    if (newImage) {
-      const storageRef = ref(storage, `kuliner/${id}`);
-      await uploadBytes(storageRef, newImage);
-      const newImageUrl = await getDownloadURL(storageRef);
-      updates.imageUrl = newImageUrl;
+    const kulinerData = await getDoc(docRef);
+
+    if (!kulinerData.exists()) {
+      throw new Error('No such document!');
     }
 
-    if (Object.keys(updates).length > 0) {
-      await updateDoc(docRef, updates);
+    const existingImageUrl = kulinerData.data().imageUrl;
+
+    if (newImage && newImage.size > 0) {
+      const reader = new FileReader();
+      reader.onload = async (event) => {
+        const newImageUrl = event.target.result;
+
+        if (newImageUrl !== existingImageUrl) {
+          const storageRef = ref(storage, `kuliner/${id}`);
+          await uploadBytes(storageRef, newImage);
+          const updatedImageUrl = await getDownloadURL(storageRef);
+          updates.imageUrl = updatedImageUrl;
+        }
+
+        if (Object.keys(updates).length > 0) {
+          await updateDoc(docRef, updates);
+        }
+      };
+      reader.readAsDataURL(newImage);
+    } else {
+      if (Object.keys(updates).length > 0) {
+        await updateDoc(docRef, updates);
+      }
     }
   } catch (error) {
     console.error('Error:', error);

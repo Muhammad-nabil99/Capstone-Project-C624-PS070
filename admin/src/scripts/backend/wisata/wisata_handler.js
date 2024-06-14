@@ -19,7 +19,7 @@ async function addWisata(name, location, openTime, price, detail, mapLocation, i
       detail,
       mapLocation,
       imageUrl,
-      favourite: 0, // Initialize favourite count to 0
+      favourite: 0,
     });
 
     return id;
@@ -49,15 +49,35 @@ async function updateWisata(id, updates, newImage) {
   const docRef = doc(db, 'wisata', id);
 
   try {
-    if (newImage) {
-      const storageRef = ref(storage, `wisata/${id}`);
-      await uploadBytes(storageRef, newImage);
-      const newImageUrl = await getDownloadURL(storageRef);
-      updates.imageUrl = newImageUrl;
+    const wisataData = await getDoc(docRef);
+
+    if (!wisataData.exists()) {
+      throw new Error('No such document!');
     }
 
-    if (Object.keys(updates).length > 0) {
-      await updateDoc(docRef, updates);
+    const existingImageUrl = wisataData.data().imageUrl;
+
+    if (newImage && newImage.size > 0) {
+      const reader = new FileReader();
+      reader.onload = async (event) => {
+        const newImageUrl = event.target.result;
+
+        if (newImageUrl !== existingImageUrl) {
+          const storageRef = ref(storage, `wisata/${id}`);
+          await uploadBytes(storageRef, newImage);
+          const updatedImageUrl = await getDownloadURL(storageRef);
+          updates.imageUrl = updatedImageUrl;
+        }
+
+        if (Object.keys(updates).length > 0) {
+          await updateDoc(docRef, updates);
+        }
+      };
+      reader.readAsDataURL(newImage);
+    } else {
+      if (Object.keys(updates).length > 0) {
+        await updateDoc(docRef, updates);
+      }
     }
   } catch (error) {
     console.error('Error:', error);
