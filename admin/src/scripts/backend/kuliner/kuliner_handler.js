@@ -18,13 +18,13 @@ async function addKuliner(name, location, openTime, detail, mapLocation, image) 
       detail,
       mapLocation,
       imageUrl,
-      favourite: 0, // Initialize favourite count to 0
+      favourite: 0,
     });
 
     return id;
   } catch (error) {
     console.error('Error:', error);
-    throw new Error('Failed to add Kuliner');
+    throw new Error('Gagal menambah data Kuliner');
   }
 }
 
@@ -36,11 +36,11 @@ async function getKulinerById(id) {
     if (docSnap.exists()) {
       return docSnap.data();
     } else {
-      throw new Error('No such document!');
+      throw new Error('Dokumen tidak ditemukan!');
     }
   } catch (error) {
     console.error('Error:', error);
-    throw new Error('Failed to fetch Kuliner');
+    throw new Error('Gagal mengambil data Kuliner');
   }
 }
 
@@ -51,7 +51,7 @@ async function updateKuliner(id, updates, newImage) {
     const kulinerData = await getDoc(docRef);
 
     if (!kulinerData.exists()) {
-      throw new Error('No such document!');
+      throw new Error('Dokumen tidak ditemukan!');
     }
 
     const existingImageUrl = kulinerData.data().imageUrl;
@@ -80,7 +80,7 @@ async function updateKuliner(id, updates, newImage) {
     }
   } catch (error) {
     console.error('Error:', error);
-    throw new Error('Failed to update Kuliner');
+    throw new Error('Gagal memperbarui data Kuliner');
   }
 }
 
@@ -92,8 +92,8 @@ async function deleteKuliner(id) {
     await deleteDoc(docRef);
     await deleteObject(storageRef);
   } catch (error) {
-    console.error('Error deleting Kuliner:', error);
-    throw new Error('Failed to delete Kuliner');
+    console.error('Error menghapus data Kuliner:', error);
+    throw new Error('Gagal menghapus data Kuliner');
   }
 }
 

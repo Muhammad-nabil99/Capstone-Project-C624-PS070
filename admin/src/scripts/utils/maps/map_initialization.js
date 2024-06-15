@@ -11,7 +11,7 @@ export function setupMap(defaultCoordinates) {
   const geocoder = new MapboxGeocoder({
     accessToken: mapboxgl.accessToken,
     mapboxgl: mapboxgl,
-    placeholder: 'Enter place name or address',
+    placeholder: 'Masukkan nama tempat atau alamat',
     bbox: [95.316, -11.008, 141.056, 6.214],
   });
 

@@ -31,46 +31,46 @@ const penginapan_validator = {
     switch (input.id) {
       case 'name':
         if (!value) {
-          errorMessage = 'Nama Penginapan is required.';
+          errorMessage = 'Nama Penginapan wajib diisi.';
           isValid = false;
         }
         break;
       case 'detail':
         if (!value) {
-          errorMessage = 'Detail is required.';
+          errorMessage = 'Detail wajib diisi.';
           isValid = false;
         }
         break;
       case 'location':
         if (!value) {
-          errorMessage = 'Lokasi is required.';
+          errorMessage = 'Lokasi wajib diisi.';
           isValid = false;
         }
         break;
       case 'fasilitas':
         if (!value) {
-          errorMessage = 'Fasilitas is required.';
+          errorMessage = 'Fasilitas wajib diisi.';
           isValid = false;
         }
         break;
       case 'price':
         if (!value) {
-          errorMessage = 'Harga is required.';
+          errorMessage = 'Harga wajib diisi.';
           isValid = false;
         }
         break;
       case 'mapLocation':
         if (!value || value === '0,0') {
-          errorMessage = 'Please input place name.';
+          errorMessage = 'Silakan masukkan nama tempat.';
           isValid = false;
         }
         break;
       case 'image':
-        const imageElement= document.getElementById('imagePreview')
-        const imgSrc = imageElement.getAttribute('src')
+        const imageElement = document.getElementById('imagePreview');
+        const imgSrc = imageElement.getAttribute('src');
         if (!imgSrc || imgSrc === '') {
-            errorMessage = 'An image is required.';
-            isValid = false;
+          errorMessage = 'Gambar wajib diisi.';
+          isValid = false;
         }
         break;
     }

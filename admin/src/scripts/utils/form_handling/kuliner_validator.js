@@ -31,31 +31,31 @@ const kuliner_validator = {
       switch (input.id) {
         case 'name':
           if (!value) {
-            errorMessage = 'Nama Tempat Kuliner is required.';
+            errorMessage = 'Nama Tempat Kuliner wajib diisi.';
             isValid = false;
           }
           break;
         case 'location':
           if (!value) {
-            errorMessage = 'Lokasi is required.';
+            errorMessage = 'Lokasi wajib diisi.';
             isValid = false;
           }
           break;
         case 'openTime':
           if (!value) {
-            errorMessage = 'Jam Buka is required.';
+            errorMessage = 'Jam Buka wajib diisi.';
             isValid = false;
           }
           break;
         case 'detail':
           if (!value) {
-            errorMessage = 'Informasi Detail is required.';
+            errorMessage = 'Informasi Detail wajib diisi.';
             isValid = false;
           }
           break;
         case 'mapLocation':
           if (!value || value === '0,0') {
-            errorMessage = 'Please input place name.';
+            errorMessage = 'Silakan masukkan nama tempat.';
             isValid = false;
           }
           break;
@@ -63,7 +63,7 @@ const kuliner_validator = {
           const imageElement = document.getElementById('imagePreview');
           const imgSrc = imageElement.getAttribute('src');
           if (!imgSrc || imgSrc === '') {
-            errorMessage = 'An image is required.';
+            errorMessage = 'Gambar wajib diisi.';
             isValid = false;
           }
           break;

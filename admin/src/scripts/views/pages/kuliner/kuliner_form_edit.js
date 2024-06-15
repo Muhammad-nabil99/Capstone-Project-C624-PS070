@@ -62,7 +62,7 @@ const Kuliner_form_edit = {
   async afterRender() {
     const kulinerId = window.location.hash.split('/')[2];
     if (!kulinerId) {
-      console.error('No Kuliner ID found in URL');
+      console.error('Tidak ada ID Kuliner yang ditemukan di URL');
       return;
     }
 
@@ -98,7 +98,7 @@ const Kuliner_form_edit = {
         marker = addMarkerToMap(map, existingCoordinates, mapLocationInput, marker);
       }
     } catch (error) {
-      console.error('Error fetching Kuliner data:', error);
+      console.error('Error mengambil data Kuliner:', error);
     }
 
     kuliner_validator.setupImageInput(imageInput, imagePreview, imageLabel);
@@ -132,8 +132,8 @@ const Kuliner_form_edit = {
           window.location.href = '/#/kuliner';
         }, 1500);
       } catch (error) {
-        console.error('Error updating Kuliner:', error);
-        showNotification('Failed to update Kuliner. Please try again.', true);
+        console.error('Error memperbarui data Kuliner:', error);
+        showNotification('Gagal memperbarui data Kuliner. Coba kembali.', true);
       }
     });
   }

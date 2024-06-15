@@ -28,7 +28,7 @@ const Dashboard = {
       document.getElementById('kulinerCount').textContent = `${counts.kuliner} Kuliner`;
       document.getElementById('penginapanCount').textContent = `${counts.penginapan} Penginapan`;
     } catch (error) {
-      console.error('Error fetching counts:', error);
+      console.error('Error mengambil data', error);
     }
   }
 };

@@ -23,11 +23,11 @@ const geocodeHelper = {
           marker = mapSetup.addMarkerToMap(map, coordinates, mapLocationInput, marker);
         }
       } else {
-        alert('Location not found.');
+        alert('Lokasi tidak ditemukan.');
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('An error occurred while fetching the location.');
+      alert('Terjadi error saat mengambil lokasi.');
     }
   }
 };

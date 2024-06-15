@@ -122,18 +122,18 @@ const Penginapan_form = {
           formData.get('image')
         );
 
-        console.log('Penginapan added with ID:', id);
-        showNotification('Penginapan added successfully!');
+        console.log('Data Penginapan ditambahkan dengan ID:', id);
+        showNotification('Data Penginapan berhasil ditambahkan');
         penginapanForm.reset();
         imagePreview.src = '';
         imagePreview.style.display = 'none';
-        imageLabel.textContent = 'Choose file';
+        imageLabel.textContent = 'Pilih file';
         if (marker) {
           marker.remove();
         }
       } catch (error) {
-        console.error('Error adding Penginapan:', error);
-        showNotification('Failed to add Penginapan. Please try again.', true);
+        console.error('Error menambah data Penginapan:', error);
+        showNotification('Gagal menambah data Penginapan. Coba kembali.', true);
       } finally {
         loadingSpinner.style.display = 'none';
         submitButton.disabled = false;

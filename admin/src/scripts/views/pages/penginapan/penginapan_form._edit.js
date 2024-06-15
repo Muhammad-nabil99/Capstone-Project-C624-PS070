@@ -69,7 +69,7 @@ const Penginapan_form_edit = {
   async afterRender() {
     const penginapanId = window.location.hash.split('/')[2];
     if (!penginapanId) {
-      console.error('No Penginapan ID found in URL');
+      console.error('Tidak ada ID Penginapan yang ditemukan di URL');
       return;
     }
 
@@ -109,7 +109,7 @@ const Penginapan_form_edit = {
         marker = addMarkerToMap(map, existingCoordinates, mapLocationInput, marker);
       }
     } catch (error) {
-      console.error('Error fetching Penginapan data:', error);
+      console.error('Error mengambil data Penginapan:', error);
     }
 
     penginapan_validator.setupImageInput(imageInput, imagePreview, imageLabel);
@@ -163,14 +163,14 @@ const Penginapan_form_edit = {
 
         await updatePenginapan(penginapanId, updates, image);
 
-        console.log('Penginapan updated with ID:', penginapanId);
-        showNotification('Penginapan updated successfully!');
+        console.log('Data Penginapan diperbarui dengan ID:', penginapanId);
+        showNotification('Data Penginapan berhasil diperbarui!');
         setTimeout(() => {
           window.location.href = '/#/penginapan';
         }, 1500);
       } catch (error) {
         console.error('Error updating Penginapan:', error);
-        showNotification('Failed to update Penginapan. Please try again.', true);
+        showNotification('Gagal memperbarui data Penginapan. Coba Kembali.', true);
       } finally {
         loadingSpinner.style.display = 'none';
         submitButton.disabled = false;

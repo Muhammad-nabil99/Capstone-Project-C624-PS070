@@ -116,18 +116,17 @@ const Wisata_form = {
           formData.get('image')
         );
 
-        console.log('Wisata added with ID:', id);
-        showNotification('Wisata added successfully!');
+        console.log('Data Wisata ditambah dengan ID:', id);
+        showNotification('Data Wisata berhasil ditambahkan!');
         wisataForm.reset();
         imagePreview.src = '';
         imagePreview.style.display = 'none';
-        imageLabel.textContent = 'Choose file';
+        imageLabel.textContent = 'Pilih file';
         if (marker) {
           marker.remove();
         }
       } catch (error) {
-        console.error('Error adding Wisata:', error);
-        showNotification('Failed to add Wisata. Please try again.', true);
+        showNotification('Terjadi Error menghapus data Wisata. Coba Kembali.', true);
       } finally {
         loadingSpinner.style.display = 'none';
         submitButton.disabled = false;

@@ -25,7 +25,7 @@ async function addWisata(name, location, openTime, price, detail, mapLocation, i
     return id;
   } catch (error) {
     console.error('Error:', error);
-    throw new Error('Failed to add Wisata');
+    throw new Error('Gagal menambah data Wisata');
   }
 }
 
@@ -37,11 +37,11 @@ async function getWisataById(id) {
     if (docSnap.exists()) {
       return docSnap.data();
     } else {
-      throw new Error('No such document!');
+      throw new Error('Dokumen tidak ditemukan!');
     }
   } catch (error) {
     console.error('Error:', error);
-    throw new Error('Failed to fetch Wisata');
+    throw new Error('Gagal mengambil data Wisata');
   }
 }
 
@@ -52,7 +52,7 @@ async function updateWisata(id, updates, newImage) {
     const wisataData = await getDoc(docRef);
 
     if (!wisataData.exists()) {
-      throw new Error('No such document!');
+      throw new Error('Dokumen tidak ditemukan!');
     }
 
     const existingImageUrl = wisataData.data().imageUrl;
@@ -81,7 +81,7 @@ async function updateWisata(id, updates, newImage) {
     }
   } catch (error) {
     console.error('Error:', error);
-    throw new Error('Failed to update Wisata');
+    throw new Error('Gagal memperbarui data Wisata');
   }
 }
 
@@ -93,8 +93,8 @@ async function deleteWisata(id) {
     await deleteDoc(docRef);
     await deleteObject(storageRef);
   } catch (error) {
-    console.error('Error deleting Wisata:', error);
-    throw new Error('Failed to delete Wisata');
+    console.error('Error menghapus data Wisata:', error);
+    throw new Error('Gagal menghapus data Wisata');
   }
 }
 

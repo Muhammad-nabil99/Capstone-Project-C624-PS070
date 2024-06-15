@@ -81,11 +81,11 @@ const Kuliner = {
                         const kulinerId = event.target.getAttribute('data-id');
                         try {
                             await deleteKuliner(kulinerId);
-                            alert('Kuliner deleted successfully');
+                            alert('Data Kuliner berhasil dihapus!');
                             window.location.reload();
                         } catch (error) {
-                            console.error('Error deleting Kuliner:', error);
-                            alert('Failed to delete Kuliner. Please try again.');
+                            console.error('Error menghapus data Kuliner:', error);
+                            alert('Gagal menghapus data Kuliner. Coba kembali.');
                         }
                     });
                 });
@@ -101,7 +101,7 @@ const Kuliner = {
             });
 
         } catch (error) {
-            console.error('Error fetching kuliner data:', error);
+            console.error('Gagal mengambil data Kuliner:', error);
         }
     }
 };

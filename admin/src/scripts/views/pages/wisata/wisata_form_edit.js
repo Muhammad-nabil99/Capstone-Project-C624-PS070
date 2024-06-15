@@ -67,7 +67,7 @@ const Wisata_form_edit = {
   async afterRender() {
     const wisataId = window.location.hash.split('/')[2];
     if (!wisataId) {
-      console.error('No Wisata ID found in URL');
+      console.error('Tidak ada ID Wisata yang ditemukan di URL');
       return;
     }
 
@@ -104,7 +104,7 @@ const Wisata_form_edit = {
         marker = addMarkerToMap(map, existingCoordinates, mapLocationInput, marker);
       }
     } catch (error) {
-      console.error('Error fetching Wisata data:', error);
+      console.error('Terjadi Error mengambil data wisata:', error);
     }
 
     wisata_validator.setupImageInput(imageInput, imagePreview, imageLabel);
@@ -135,13 +135,12 @@ const Wisata_form_edit = {
 
       try {
         await updateWisata(wisataId, updates, image);
-        showNotification('Wisata updated successfully');
+        showNotification('Data Wisata berhasil diperbarui!');
         setTimeout(() => {
           window.location.href = '/#/wisata';
         }, 1500);
       } catch (error) {
-        console.error('Error updating Wisata:', error);
-        showNotification('Failed to update Wisata. Please try again.', true);
+        showNotification('Terjadi Error menghapus data Wisata. Coba Kembali.', true);
       }
     });
   }

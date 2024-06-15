@@ -111,18 +111,18 @@ const Kuliner_form = {
           formData.get('image')
         );
 
-        console.log('Kuliner added with ID:', id);
-        showNotification('Kuliner added successfully!');
+        console.log('Data Kuliner ditambah dengan ID:', id);
+        showNotification('Data Kuliner berhasil ditambah!');
         kulinerForm.reset();
         imagePreview.src = '';
         imagePreview.style.display = 'none';
-        imageLabel.textContent = 'Choose file';
+        imageLabel.textContent = 'Pilih file';
         if (marker) {
           marker.remove();
         }
       } catch (error) {
-        console.error('Error adding Kuliner:', error);
-        showNotification('Failed to add Kuliner. Please try again.', true);
+        console.error('Error menambah data Kuliner:', error);
+        showNotification('Gagal menambah data Kuliner. Coba kembali.', true);
       } finally {
         loadingSpinner.style.display = 'none';
         submitButton.disabled = false;

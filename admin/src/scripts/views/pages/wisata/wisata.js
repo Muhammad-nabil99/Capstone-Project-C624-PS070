@@ -81,15 +81,14 @@ const Wisata = {
                 document.querySelectorAll('.delete-button').forEach(button => {
                     button.addEventListener('click', async (event) => {
                         const wisataId = event.target.getAttribute('data-id');
-                        const confirmDelete = confirm('Are you sure you want to delete this data?');
+                        const confirmDelete = confirm('Apakah Anda yakin ingin menghapus data ini?');
                         if (confirmDelete) {
                             try {
                                 await deleteWisata(wisataId);
-                                alert('Wisata deleted successfully');
+                                alert('Data Wisata berhasil dihapus');
                                 window.location.reload();
                             } catch (error) {
-                                console.error('Error deleting Wisata:', error);
-                                alert('Failed to delete Wisata. Please try again.');
+                                alert('Terjadi Error menghapus data Wisata. Coba Kembali.');
                             }
                         }
                     });
@@ -107,7 +106,7 @@ const Wisata = {
             });
 
         } catch (error) {
-            console.error('Error fetching wisata data:', error);
+            console.error('Terjadi Error mengambil data wisata:', error);
         }
     }
 };

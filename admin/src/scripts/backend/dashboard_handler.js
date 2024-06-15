@@ -15,8 +15,8 @@ async function getCountOfDocs() {
 
     return counts;
   } catch (error) {
-    console.error('Error fetching document counts:', error);
-    throw new Error('Failed to fetch document counts');
+    console.error('Error saat mengambil jumlah dokumen:', error);
+    throw new Error('Gagal mengambil jumlah dokumen:');
   }
 }
 

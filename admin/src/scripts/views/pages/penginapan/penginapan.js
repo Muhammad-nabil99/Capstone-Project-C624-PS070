@@ -85,7 +85,7 @@ const Penginapan = {
                             window.location.reload();
                         } catch (error) {
                             console.error('Error deleting Penginapan:', error);
-                            alert('Failed to delete Penginapan. Please try again.');
+                            alert('Gagal menghapus data Penginapan. Coba kembali.');
                         }
                     });
                 });
@@ -102,7 +102,7 @@ const Penginapan = {
             });
 
         } catch (error) {
-            console.error('Error fetching penginapan data:', error);
+            console.error('Error mengambil data penginapan:', error);
         }
     }
 };

@@ -25,7 +25,7 @@ async function addPenginapan(name, detail, location, fasilitas, price, mapLocati
     return id;
   } catch (error) {
     console.error('Error:', error);
-    throw new Error('Failed to add Penginapan');
+    throw new Error('Gagal menambah data Penginapan');
   }
 }
 
@@ -37,11 +37,11 @@ async function getPenginapanById(id) {
     if (docSnap.exists()) {
       return docSnap.data();
     } else {
-      throw new Error('No such document!');
+      throw new Error('Dokumen tidak ditemukan!');
     }
   } catch (error) {
     console.error('Error:', error);
-    throw new Error('Failed to fetch Penginapan');
+    throw new Error('Gagal mengambil data Penginapan');
   }
 }
 
@@ -52,7 +52,7 @@ async function updatePenginapan(id, updates, newImage) {
     const penginapanData = await getDoc(docRef);
 
     if (!penginapanData.exists()) {
-      throw new Error('No such document!');
+      throw new Error('Dokumen tidak ditemukan!');
     }
 
     const existingImageUrl = penginapanData.data().imageUrl;
@@ -81,7 +81,7 @@ async function updatePenginapan(id, updates, newImage) {
     }
   } catch (error) {
     console.error('Error:', error);
-    throw new Error('Failed to update Penginapan');
+    throw new Error('Gagal memperbarui data Penginapan');
   }
 }
 
@@ -93,8 +93,8 @@ async function deletePenginapan(id) {
     await deleteDoc(docRef);
     await deleteObject(storageRef);
   } catch (error) {
-    console.error('Error deleting Penginapan:', error);
-    throw new Error('Failed to delete Penginapan');
+    console.error('Error menghapus data Penginapan:', error);
+    throw new Error('Gagal menghapus data Penginapan');
   }
 }
 
