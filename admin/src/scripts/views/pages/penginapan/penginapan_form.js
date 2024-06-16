@@ -98,13 +98,8 @@ const Penginapan_form = {
         message.textContent = '';
       });
 
-      const { isValid, firstInvalidField } = penginapan_validator.validateForm(formData);
-
+      const isValid = penginapan_validator.validateForm(formData);
       if (!isValid) {
-        if (firstInvalidField) {
-          firstInvalidField.scrollIntoView({ behavior: 'smooth' });
-          firstInvalidField.focus();
-        }
         return;
       }
 

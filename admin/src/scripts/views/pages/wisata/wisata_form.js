@@ -97,7 +97,7 @@ const Wisata_form = {
         message.textContent = '';
       });
 
-      const isValid = kuliner_validator.validateForm(formData);
+      const isValid = wisata_validator.validateForm(formData);
 
       if (!isValid) {
         return;

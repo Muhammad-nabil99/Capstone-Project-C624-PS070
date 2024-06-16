@@ -5,15 +5,15 @@ const Dashboard = {
     return `
       <div class="cards">
         <div class="card">
-          <img src="../../images/wisata.jpeg" alt="Mountain Icon">
+          <img src="../../images/wisata.png" alt="Mountain Icon">
           <span id="wisataCount">x Wisata</span>
         </div>
         <div class="card">
-          <img src="../../images/kuliner.jpeg" alt="Food Icon">
+          <img src="../../images/kuliner.png" alt="Food Icon">
           <span id="kulinerCount">x Kuliner</span>
         </div>
         <div class="card">
-          <img src="../../images/penginapan.jpeg" alt="Hotel Icon">
+          <img src="../../images/penginapan.png" alt="Hotel Icon">
           <span id="penginapanCount">x Penginapan</span>
         </div>
       </div>

@@ -27,9 +27,6 @@
     width: 100%;
     height: auto;
   }
-  button[type="submit"] {
-    margin-bottom: 150px;  
-  }
   main {
     height: 100%;
     margin-left: 0;
@@ -64,7 +61,6 @@
     display: block;
     overflow-x: auto;
     white-space: nowrap;
-    margin-bottom: 100px;
   }
 
   th, td {
@@ -73,9 +69,6 @@
 }
 
 @media (max-width: 768px) {
-  button[type="submit"] {
-    margin-bottom: 100px;
-  }
   .button-wrapper {
     text-align: center;
   }
@@ -172,7 +165,6 @@
     display: block;
     overflow-x: auto;
     white-space: nowrap;
-    margin-bottom: 100px;
   }
 
   th, td {
@@ -182,9 +174,6 @@
 }
 
 @media (max-width: 480px) {
-  button[type="submit"] {
-    margin-bottom: 100px;
-  }
   .user-info img {
     width: 20px;
     height: 20px;
