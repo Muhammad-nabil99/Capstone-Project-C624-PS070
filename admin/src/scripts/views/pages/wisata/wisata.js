@@ -87,6 +87,7 @@ const Wisata = {
                                 await deleteWisata(wisataId);
                                 alert('Data Wisata berhasil dihapus');
                                 window.location.reload();
+                            // eslint-disable-next-line no-unused-vars
                             } catch (error) {
                                 alert('Terjadi Error menghapus data Wisata. Coba Kembali.');
                             }

@@ -60,13 +60,13 @@ const kuliner_validator = {
           }
           break;
         case 'image':
-          const imageElement = document.getElementById('imagePreview');
+          { const imageElement = document.getElementById('imagePreview');
           const imgSrc = imageElement.getAttribute('src');
           if (!imgSrc || imgSrc === '') {
             errorMessage = 'Gambar wajib diisi.';
             isValid = false;
           }
-          break;
+          break; }
       }
   
       this.showValidationNotification(errorMessage, !isValid, `${input.id}Validation`);
@@ -77,7 +77,7 @@ const kuliner_validator = {
       let isValid = true;
       let firstInvalidField = null;
   
-      for (const [key, value] of formData.entries()) {
+      for (const [key] of formData.entries()) {
         const input = document.getElementById(key);
         if (input && !this.validateSingleField(input)) {
           isValid = false;

@@ -32,7 +32,7 @@ const Penginapan_form = {
         </div>
         <div class="form-group">
           <label for="price">Harga:</label>
-          <input type="text" id="price" name="price">
+          <input type="text" id="price" name="price" placeholder="Rp.">
           <div id="priceValidation" class="validation-message"></div>
         </div>
         <div class="form-group">
@@ -56,7 +56,7 @@ const Penginapan_form = {
           <div id="mapLocationValidation" class="validation-message"></div>
           <div id="map" class="map-container"></div>
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" class="submit-button">Submit</button>
         <div id="loadingSpinner" class="loading-spinner" style="display: none;">Loading...</div>
         <div id="notification" class="notification"></div>
       </form>
@@ -72,7 +72,7 @@ const Penginapan_form = {
     const submitButton = penginapanForm.querySelector('button[type="submit"]');
 
     const defaultCoordinates = [0, 0];
-    const { map, marker } = setupMap(defaultCoordinates);
+    const { marker } = setupMap(defaultCoordinates);
 
 
     penginapan_validator.setupImageInput(imageInput, imagePreview, imageLabel);

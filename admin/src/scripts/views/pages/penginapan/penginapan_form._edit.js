@@ -36,7 +36,7 @@ const Penginapan_form_edit = {
         </div>
         <div class="form-group">
           <label for="price">Harga:</label>
-          <input type="text" id="price" name="price">
+          <input type="text" id="price" name="price" placeholder="Rp.">
           <div id="priceValidation" class="validation-message"></div>
         </div>
         <div class="form-group">
@@ -60,7 +60,7 @@ const Penginapan_form_edit = {
           <div id="mapLocationValidation" class="validation-message"></div>
           <div id="map" class="map-container"></div>
         </div>
-        <button type="submit">Update</button>
+        <button type="submit" class="submit-button">Update</button>
         <div id="loadingSpinner" class="loading-spinner" style="display: none;">Loading...</div>
       </form>
     `;
@@ -106,6 +106,7 @@ const Penginapan_form_edit = {
       if (marker) {
         marker.setLngLat(existingCoordinates);
       } else {
+        // eslint-disable-next-line no-undef
         marker = addMarkerToMap(map, existingCoordinates, mapLocationInput, marker);
       }
     } catch (error) {

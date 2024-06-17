@@ -56,7 +56,7 @@ const Wisata_form = {
           <div id="mapLocationValidation" class="validation-message"></div>
           <div id="map" class="map-container"></div>
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" class="submit-button">Submit</button>
         <div id="loadingSpinner" class="loading-spinner" style="display: none;">Loading...</div>
         <div id="notification" class="notification"></div>
       </form>
@@ -72,7 +72,7 @@ const Wisata_form = {
     const submitButton = wisataForm.querySelector('button[type="submit"]');
 
     const defaultCoordinates = [0, 0];
-    const { map, marker } = setupMap(defaultCoordinates);
+    const { marker } = setupMap(defaultCoordinates);
 
     wisata_validator.setupImageInput(imageInput, imagePreview, imageLabel);
 
@@ -125,6 +125,7 @@ const Wisata_form = {
         if (marker) {
           marker.remove();
         }
+      // eslint-disable-next-line no-unused-vars
       } catch (error) {
         showNotification('Terjadi Error menghapus data Wisata. Coba Kembali.', true);
       } finally {

@@ -54,7 +54,7 @@ const Kuliner_form_edit = {
           <input type="text" id="mapLocation" name="mapLocation" readonly>
           <div id="map" class="map-container"></div>
         </div>
-        <button type="submit">Update</button>
+        <button type="submit" class="submit-button">Update</button>
       </form>
     `;
   },
@@ -95,6 +95,7 @@ const Kuliner_form_edit = {
       if (marker) {
         marker.setLngLat(existingCoordinates);
       } else {
+        // eslint-disable-next-line no-undef
         marker = addMarkerToMap(map, existingCoordinates, mapLocationInput, marker);
       }
     } catch (error) {

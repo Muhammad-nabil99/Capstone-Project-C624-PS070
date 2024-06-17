@@ -25,18 +25,18 @@ const Wisata_form_edit = {
           <div class="validation-message" id="locationValidation"></div>
         </div>
         <div class="form-group">
-          <label for="openTime">Open Time:</label>
+          <label for="openTime">Jam Buka:</label>
           <input type="text" id="openTime" name="openTime" >
           <div class="validation-message" id="openTimeValidation"></div>
         </div>
         <div class="form-group">
-          <label for="price">Price:</label>
+          <label for="price">Harga:</label>
           <input type="text" id="price" name="price" >
           <div class="validation-message" id="priceValidation"></div>
         </div>
         <div class="form-group">
-          <label for="detail">Detail:</label>
-          <input type="text" id="detail" name="detail" >
+          <label for="detail">Informasi Detail:</label>
+          <textarea id="detail" name="detail" rows="3" ></textarea>
           <div class="validation-message" id="detailValidation"></div>
         </div>
         <div class="form-group">
@@ -59,7 +59,7 @@ const Wisata_form_edit = {
           <input type="text" id="mapLocation" name="mapLocation" readonly>
           <div id="map" class="map-container"></div>
         </div>
-        <button type="submit">Update</button>
+        <button type="submit" class="submit-button">Update</button>
       </form>
     `;
   },
@@ -101,6 +101,7 @@ const Wisata_form_edit = {
       if (marker) {
         marker.setLngLat(existingCoordinates);
       } else {
+        // eslint-disable-next-line no-undef
         marker = addMarkerToMap(map, existingCoordinates, mapLocationInput, marker);
       }
     } catch (error) {
@@ -139,6 +140,7 @@ const Wisata_form_edit = {
         setTimeout(() => {
           window.location.href = '/#/wisata';
         }, 1500);
+      // eslint-disable-next-line no-unused-vars
       } catch (error) {
         showNotification('Terjadi Error menghapus data Wisata. Coba Kembali.', true);
       }

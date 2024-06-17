@@ -51,7 +51,7 @@ const Kuliner_form = {
           <div id="mapLocationValidation" class="validation-message"></div>
           <div id="map" class="map-container"></div>
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" class="submit-button">Submit</button>
         <div id="loadingSpinner" class="loading-spinner" style="display: none;">Loading...</div>
         <div id="notification" class="notification"></div>
       </form>
@@ -67,7 +67,7 @@ const Kuliner_form = {
     const submitButton = kulinerForm.querySelector('button[type="submit"]');
 
     const defaultCoordinates = [0, 0];
-    const { map, marker } = setupMap(defaultCoordinates);
+    const { marker } = setupMap(defaultCoordinates);
 
     kuliner_validator.setupImageInput(imageInput, imagePreview, imageLabel);
 
