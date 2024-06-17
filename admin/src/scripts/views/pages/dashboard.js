@@ -3,20 +3,20 @@ import { getCountOfDocs } from '../../backend/dashboard_handler.js';
 const Dashboard = {
   async render() {
     return `
-      <div class="cards">
-        <div class="card">
+      <section class="cards">
+        <article class="card">
           <img src="../../images/wisata.png" alt="Mountain Icon">
           <span id="wisataCount">x Wisata</span>
-        </div>
-        <div class="card">
+        </article>
+        <article class="card">
           <img src="../../images/kuliner.png" alt="Food Icon">
           <span id="kulinerCount">x Kuliner</span>
-        </div>
-        <div class="card">
+        </article>
+        <article class="card">
           <img src="../../images/penginapan.png" alt="Hotel Icon">
           <span id="penginapanCount">x Penginapan</span>
-        </div>
-      </div>
+        </article>
+      </section>
     `;
   },
   
