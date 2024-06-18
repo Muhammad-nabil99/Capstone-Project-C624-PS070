@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "capstone-project-c624-ps070",
+    "site": "trakel-c624-ps070",
     "public": "dist",
     "ignore": [
       "firebase.json",

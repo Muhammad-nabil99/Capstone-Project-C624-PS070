@@ -1,26 +1,29 @@
 const { doc, getDoc } = require('firebase/firestore');
 const { db } = require('../../backend/firebase');
 const UrlParser = require('../../routes/url-parse');
+const { createFooterTemplate} = require('../templates/template-creator');
 
 const MapPage = {
   async render() {
     return `
-      <div id="mapContainer" style="width: 100%; height: 400px; position: relative;">
-        <div id="loadingSpinner" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+      <div id="mapContainer">
+        <div id="loadingSpinner">
           <div class="spinner"></div>
         </div>
       </div>
-      <div id="transportationModes">
-        <button data-mode="driving">Driving</button>
-        <button data-mode="walking">Walking</button>
-        <button data-mode="cycling">Cycling</button>
+      <div class="buttonMap">
+        <div id="transportationModes">
+        <button data-mode="driving" class="button active">Driving</button>
+        </div>
+        <button id="backButton" class="button">Back</button>
       </div>
-      <button id="backButton">Back</button>
       <p id="errorMessage" style="color: red;"></p>
     `;
   },
 
   async afterRender() {
+    const footerContainer = document.querySelector('footer');
+          footerContainer.innerHTML = createFooterTemplate();
     const url = UrlParser.parseActiveUrlWithoutCombiner();
     const { type, id } = url;
     console.log("Type:", type, "ID:", id);
@@ -65,14 +68,14 @@ const MapPage = {
 
   _initializeMap(lat, lng) {
     mapboxgl.accessToken = 'pk.eyJ1IjoiZjE3MjZ5YjE0MCIsImEiOiJjbHdhMXYyOGcwYW40Mmlxazg2aTBqYWl6In0.7vkdPDBmhzZq38n2jFNEjA';
-    this.map = new mapboxgl.Map({
+    const map = new mapboxgl.Map({
       container: 'mapContainer',
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [lng, lat],
       zoom: 14,
     });
 
-    new mapboxgl.Marker().setLngLat([lng, lat]).addTo(this.map);
+    new mapboxgl.Marker().setLngLat([lng, lat]).addTo(map);
 
     document.getElementById('loadingSpinner').style.display = 'none';
   },
@@ -83,19 +86,38 @@ const MapPage = {
         (position) => {
           const userLat = position.coords.latitude;
           const userLng = position.coords.longitude;
-          console.log(`User Location: ${userLat}, ${userLng}`);
           this._fetchRoute(userLat, userLng, destinationLat, destinationLng, mode);
         },
         (error) => {
           console.error('Error getting user location:', error);
-          this._displayError('Geolocation access denied. Unable to show route.');
+          if (error.code === error.TIMEOUT) {
+            console.warn('Location request timed out. Retrying with increased timeout.');
+            this._retryUserLocation(destinationLat, destinationLng, mode);
+          } else {
+            this._displayError('Geolocation access denied or location unavailable. Unable to show route.');
+          }
         },
-        { enableHighAccuracy: true }
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
       );
     } else {
       console.error('Geolocation is not supported by this browser.');
       this._displayError('Geolocation is not supported by this browser.');
     }
+  },
+
+  _retryUserLocation(destinationLat, destinationLng, mode) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const userLat = position.coords.latitude;
+        const userLng = position.coords.longitude;
+        this._fetchRoute(userLat, userLng, destinationLat, destinationLng, mode);
+      },
+      (error) => {
+        console.error('Error getting user location on retry:', error);
+        this._displayError('Geolocation access denied or location unavailable. Unable to show route.');
+      },
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 0 }
+    );
   },
 
   async _fetchRoute(userLat, userLng, destinationLat, destinationLng, mode) {
@@ -110,7 +132,6 @@ const MapPage = {
 
       if (data.routes && data.routes.length > 0) {
         const route = data.routes[0].geometry.coordinates;
-        console.log(`Route: ${JSON.stringify(route)}`);
         this._drawRoute(route);
       } else {
         this._displayError('No route found. Please try a different mode of transportation.');
@@ -122,17 +143,15 @@ const MapPage = {
   },
 
   _drawRoute(route) {
-    if (this.map.getSource('route')) {
-      this.map.getSource('route').setData({
-        type: 'Feature',
-        properties: {},
-        geometry: {
-          type: 'LineString',
-          coordinates: route,
-        },
-      });
-    } else {
-      this.map.addLayer({
+    const map = new mapboxgl.Map({
+      container: 'mapContainer',
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: route[0],
+      zoom: 14,
+    });
+
+    map.on('load', () => {
+      map.addLayer({
         id: 'route',
         type: 'line',
         source: {
@@ -155,13 +174,13 @@ const MapPage = {
           'line-width': 6,
         },
       });
-    }
 
-    const bounds = route.reduce((bounds, coord) => {
-      return bounds.extend(coord);
-    }, new mapboxgl.LngLatBounds(route[0], route[0]));
+      const bounds = route.reduce((bounds, coord) => {
+        return bounds.extend(coord);
+      }, new mapboxgl.LngLatBounds(route[0], route[0]));
 
-    this.map.fitBounds(bounds, { padding: 50 });
+      map.fitBounds(bounds, { padding: 50 });
+    });
   },
 
   _displayError(message) {

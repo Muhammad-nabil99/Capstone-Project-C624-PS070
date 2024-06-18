@@ -3,6 +3,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
+const ImageminWebpackPlugin = require('imagemin-webpack-plugin').default;
+const ImageminMozjpeg = require('imagemin-mozjpeg');
+const ImageminWebpWebpackPlugin = require('imagemin-webp-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   entry: {
@@ -28,9 +32,33 @@ module.exports = {
       }
     ]
   },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      minSize: 20000,
+      maxSize: 70000,
+      minChunks: 1,
+      maxAsyncRequests: 30,
+      maxInitialRequests: 30,
+      automaticNameDelimiter: '~',
+      enforceSizeThreshold: 50000,
+      cacheGroups: {
+        defaultVendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true,
+        },
+      },
+    },
+  },
   plugins: [
+    
     new CleanWebpackPlugin(),
-
+    new BundleAnalyzerPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: path.resolve(__dirname, 'src/templates/index.html'),
@@ -43,31 +71,29 @@ module.exports = {
         },
       ],
     }),
-    new WorkboxWebpackPlugin.GenerateSW({
-      swDest: './sw.bundle.js',
-      runtimeCaching: [
+    new WorkboxWebpackPlugin.InjectManifest({
+      swSrc: path.resolve(__dirname, 'src/scripts/service-worker.js'),
+      swDest: 'service-worker.js',
+    }),
+    new ImageminWebpackPlugin({
+      plugins: [
+        ImageminMozjpeg({
+          quality: 50,
+          progressive: true,
+        }),
+      ],
+    }),
+    new ImageminWebpWebpackPlugin({
+      config: [
         {
-          urlPattern: ({ url }) => url.href.startsWith('https://capstone-project-c624-ps070.firebaseio.com/'),
-          handler: 'StaleWhileRevalidate',
+          test: /\.(jpe?g|png)/,
           options: {
-            cacheName: 'firebase-realtime-db',
-          },
-        },
-        {
-          urlPattern: ({ url }) => url.href.startsWith('https://firestore.googleapis.com/v1/projects/capstone-project-c624-ps070/databases/(default)/documents/'),
-          handler: 'StaleWhileRevalidate',
-          options: {
-            cacheName: 'firebase-firestore',
-          },
-        },
-        {
-          urlPattern: ({ url }) => url.href.startsWith('https://firebasestorage.googleapis.com/v0/b/capstone-project-c624-ps070.appspot.com/o/'),
-          handler: 'StaleWhileRevalidate',
-          options: {
-            cacheName: 'firebase-storage',
+            quality: 50,
           },
         },
       ],
+      overrideExtension: true,
     }),
+    
   ],
 };

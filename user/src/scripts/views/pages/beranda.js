@@ -1,28 +1,64 @@
-import {createHeaderHero, createRecomendationsItemsTemplate, createCaterogyItemsTemplate} from '../templates/template-creator';
-
+import {
+  createHeaderHero,
+  createTemplateItems,
+  createOurFeatureTemplate,
+  createWhatWeOfferTemplate,
+  createFooterTemplate
+} from "../templates/template-creator";
+import { getTopFavourite } from "../../utils/recommendation";
+const utils = require("../../utils/utils");
+import Data from "../../../public/data/dataAdditionAtBeranda";
+import numberIncreament from "../../utils/numberIncreamentOnScroll";
+const getCountOfDoc = require('../../backend/getCountOfDocs');
 const Beranda = {
   async render() {
     return `
-            <div class="hero"></div>
-            <div class="category"></div>
-            <div class="recomendations">
-            <h1 tabindex="0" arial-label="rekomendasi">Rekomendasi</h1>
-            <div class="container-recomendation-items"></>
-            </div>
-        `;
+      <div class="hero"></div>
+      <div class="whatWeOfferContainer"></div>
+      <h1 class="ourFeature-label section-title" aria-label="our feature" tabindex="0">Our Features</h1>
+      <div class="ourFeatureContainer " tabindex="0" aria-label="our feature"></div>
+      <div class="recomendations ">
+        <h1 tabindex="0" arial-label="rekomendasi" class="section-title">Recomendation</h1>
+        <div class="container-recomendation-items"></div>
+      </div>
+    `;
   },
   async afterRender() {
-    const category = document.querySelector('.category');
-    const hero = document.querySelector('.hero');
-    const recomendations = document.querySelector('.container-recomendation-items');
+    const footerContainer = document.querySelector('footer');
+     
+    const hero = document.querySelector(".hero");
+    const header = document.querySelector("header");
+    const ourFeature = document.querySelector(".ourFeatureContainer");
+    const {wisata,kuliner,penginapan} = await getCountOfDoc();
+    numberIncreament(
+      [{ id: "1", value: wisata },
+      { id: "2", value: kuliner },
+      { id: "3", value: penginapan }]
+    );
+    const recommendationsContainer = document.querySelector(
+      ".container-recomendation-items"
+    );
     hero.innerHTML = createHeaderHero();
-    category.innerHTML = createCaterogyItemsTemplate();
-    const temporaryImage = ['7e4e6b34da38e5d72cd0be82ae280504', '6301bbcba802bf6536ac8ec6558b3621', '94773ff0b79bc30ddbfa13396d7be8d9', 'c84313d02549e1a6df789d4846105e70'];
-
-    temporaryImage.forEach((item) => {
-      console.log(item);
-      recomendations.innerHTML += createRecomendationsItemsTemplate(item);
+    // sticky navbar
+    utils._stickyNavbar({ header, hero });
+    // what we offer
+    const whatWeOffer = document.querySelector(".whatWeOfferContainer");
+    whatWeOffer.innerHTML = createWhatWeOfferTemplate();
+    footerContainer.innerHTML = createFooterTemplate();
+    // our Feature section
+    Data.forEach((data) => {
+      ourFeature.innerHTML += createOurFeatureTemplate(data);
     });
+    // recomendation section
+    const topFavourites = await getTopFavourite();
+    if (topFavourites.length === 0) {
+      recommendationsContainer.innerHTML =
+        "<p>No recommendations available at the moment.</p>";
+    } else {
+      topFavourites.forEach((item) => {
+        recommendationsContainer.innerHTML += createTemplateItems(item);
+      });
+    }
   },
 };
 

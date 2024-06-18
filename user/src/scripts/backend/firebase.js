@@ -4,7 +4,7 @@ const { getStorage } = require('firebase/storage');
 
 const firebaseConfig = {
   apiKey: "AIzaSyD1LxRgRqwbq9Ia82eTtb0156lpuk06mRw",
-  authDomain: "capstone-project-c624-ps070.firebaseapp.com",
+  authDomain: "capstone-project-c624-ps070.appspot.com",
   projectId: "capstone-project-c624-ps070",
   storageBucket: "capstone-project-c624-ps070.appspot.com",
   messagingSenderId: "640500722269",

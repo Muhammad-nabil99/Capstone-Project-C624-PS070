@@ -1,0 +1,405 @@
+/* beranda's page */
+@media screen and (max-width: 1075px) {
+  #maincontent .hero img {
+    width: 300px;
+    height: 300px;
+  }
+  #maincontent .hero .tagline_hero > p {
+    font-size: 0.9rem;
+  }
+  #maincontent .hero .tagline_hero > h1 {
+    font-size: 1.5rem;
+  }
+}
+@media screen and (max-width: 869px) {
+  #maincontent .hero .tagline_hero {
+    padding-inline-start: 2rem;
+  }
+  header div.sidebar {
+    padding: 1rem;
+    justify-content: space-between;
+  }
+  header div.sidebar .logo img {
+    display: none;
+  }
+
+  nav ul.nav_lists {
+    display: flex;
+    justify-content: space-around;
+  }
+  .humberger {
+    border: 0;
+    background-color: transparent;
+    margin: 0.2px 2rem;
+    display: none;
+  }
+  .Container .detail-Container {
+    width: 300px;
+  }
+  /* hero destinations */
+  .DestinationsHero .DestinationsHero-image img {
+    width: 150px;
+    height: 150px;
+  }
+  .DestinationsHero .DestinationsHero-image .tagline h1 {
+    font-size: 1.5rem;
+  }
+  /* .search__input {
+    max-width: 20rem;
+  } */
+}
+@media screen and (max-width: 734px) {
+  #maincontent .hero img {
+    width: 250px;
+    height: 250px;
+  }
+  #maincontent .hero {
+    display: flex;
+    align-items: center;
+    flex-direction: column-reverse;
+  }
+  #maincontent .hero img {
+    margin: auto;
+  }
+  nav.drawer,
+  div.logo {
+    display: none;
+  }
+  .humberger {
+    display: block;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+  .hero .tagline_hero {
+    font-size: 1.6rem;
+  }
+  .Container .detail-Container .image-item picture {
+    width: 200px;
+    height: 200px;
+  }
+  div.sidebar nav ul.nav_lists {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background: #e0e0e0;
+    box-shadow: -2px 0px 10px #a3a3a3, 2px 0px 10px #cccccc;
+  }
+  div.sidebar nav ul.nav_lists li {
+    width: 100%;
+    text-align: center;
+  }
+  div.sidebar nav ul.nav_lists li a {
+    color: rgb(27, 27, 27);
+  }
+  div.sidebar nav ul.nav_lists li:hover {
+    background-color: #f8f8f8;
+  }
+  header div.sidebar {
+    position: relative;
+    justify-content: space-between;
+  }
+  div.sidebar nav.show {
+    position: absolute;
+    top: 69px;
+    bottom: 0;
+    left: 0;
+    width: 55%;
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+    animation: 0.3s fadeRight;
+  }
+  /* our feature */
+  #maincontent .ourFeatureItem {
+    width: 200px;
+  }
+  #maincontent .ourFeatureItem h2 {
+    font-size: 1.2rem;
+  }
+  #maincontent .ourFeatureItem p {
+    font-size: 1rem;
+  }
+  #maincontent .ourFeatureItem i {
+    font-size: 1.2rem;
+  }
+
+  /* what we offer */
+  div.whatWeOfferContainer .image-whatWeOffer img {
+    width: 400px;
+    height: 380px;
+  }
+  div.whatWeOfferContainer
+    .whatWeOffer
+    .howMuchTheDestionationsAre
+    .itemDestination {
+    width: 100px;
+    height: 70px;
+  }
+  div.whatWeOfferContainer
+    .whatWeOffer
+    .howMuchTheDestionationsAre
+    .itemDestination
+    h2 {
+    font-size: 1.2rem;
+  }
+  #maincontent .ourFeatureContainer {
+    gap: 1rem;
+  }
+}
+/* medium screen */
+@media screen and (max-width: 791px) {
+  div.recomendations .container-recomendation-items .item_recomendation {
+    width: 100%;
+    text-align: center;
+  }
+  .Container .detail-Container {
+    width: 300px;
+  }
+
+  /* penghinapan */
+  .DestinationsHero .search-item {
+    max-width: 600px;
+  }
+  .DestinationsHero .search-item .search__input {
+    width: 20rem;
+  }
+  /* drop down */
+  .dropDownBox select {
+    padding: 1rem 4px;
+  }
+}
+/* small screen */
+@media screen and (max-width: 589px) {
+  #maincontent .hero img {
+    width: 170px;
+    height: 170px;
+  }
+  #maincontent h1.section-title {
+    font-size: 1.6rem;
+  }
+  /* penghinapan */
+  /* .DestinationsHero .Search-container form {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  } */
+  .DestinationsHero .search-item {
+    max-width: 600px;
+    gap: 1rem;
+    margin: 0rem 1rem;
+  }
+  .DestinationsHero .search-item .search__input {
+    width: 15rem;
+  }
+  .DestinationsHero .search-item .button_input {
+    gap: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  /* drop down */
+  .DestinationsHero .search-item button.submit-search {
+    width: 50%;
+  }
+  .dropbtn {
+    width: 100px;
+    font-size: 0.9rem;
+  }
+
+  /* what we offer */
+  div.whatWeOfferContainer .image-whatWeOffer img {
+    width: 300px;
+    height: 280px;
+  }
+  div.whatWeOfferContainer
+    .whatWeOffer
+    .howMuchTheDestionationsAre
+    .itemDestination {
+    width: 90px;
+    height: 60px;
+  }
+  div.whatWeOfferContainer
+    .whatWeOffer
+    .howMuchTheDestionationsAre
+    .itemDestination
+    h2 {
+    font-size: 1rem;
+  }
+  main#maincontent .category .container-option-items span {
+    font-size: 0.7rem;
+  }
+  .Container .detail-Container .image-item picture {
+    width: 150px;
+    height: 150px;
+  }
+  .hero .tagline_hero {
+    font-size: 1rem;
+  }
+  main#maincontent .category .container-option-items {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  main#maincontent .category .container-option-items .item_option {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  main#maincontent .category .container-option-items button {
+    width: 44px;
+    height: 44px;
+    font-size: 1rem;
+  }
+  main#maincontent .category .container-option-items button a picture img {
+    width: 44px;
+    height: 44px;
+    font-size: 1rem;
+  }
+  #maincontent .ourFeatureContainer {
+    flex-direction: column;
+    padding-block-end: 5rem;
+  }
+  #maincontent .ourFeatureContainer .ourFeatureItem {
+    padding: 0;
+  }
+  /* about us */
+  .taglineAboutUs {
+    text-align: center;
+    padding: 10px;
+  }
+  .taglineAboutUs h2 {
+    font-size: 1.5rem;
+  }
+  .taglineAboutUs p {
+    font-size: 1rem;
+  }
+  .title_page {
+    font-size: 1.5rem;
+  }
+  .cards {
+    width: 200px;
+  }
+  .image-person {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+  }
+  .image-person img {
+    width: 100px;
+    height: 100px;
+  }
+  .cards .social-media i {
+    padding: 0.3rem;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+}
+/* item destinations */
+@media screen and (max-width: 430px) {
+  .DestinationsHero .search-item .search__input {
+    width: 10rem;
+  }
+  .taglineAboutUs img {
+    width: 200px;
+    height: 200px;
+    transform: rotate(30deg);
+  }
+}
+@media screen and (max-width: 410px) {
+  .item-Container {
+    margin: 0.5rem;
+  }
+}
+@media screen and (max-width: 683px) {
+  .Container .detail-Container {
+    width: 700px;
+  }
+  /* input destinations */
+  /* image hero destinations */
+  .DestinationsHero .DestinationsHero-image img {
+    width: 140px;
+    height: 140px;
+  }
+  .DestinationsHero .DestinationsHero-image .tagline p {
+    padding: 8px;
+  }
+  /* penghinapan */
+  .DestinationsHero .search-item {
+    max-width: 600px;
+  }
+  /* drop down */
+  .dropDownBox select {
+    padding: 1rem 0rem;
+  }
+  /* footer */
+  footer .teams-icon i,
+  footer .nav-icons i {
+    font-size: 1rem;
+  }
+  footer h2 {
+    padding-block-end: 0.3rem;
+  }
+  footer a {
+    font-size: 0.8rem;
+  }
+  footer .desriptions-footer {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    /* grid-template-rows: 1fr 1fr 1fr; */
+  }
+  footer .desriptions-footer .help-footer {
+    align-items: start;
+  }
+}
+@media screen and (max-width: 400px) {
+  .DestinationsHero .search-item .search__input {
+    width: 10rem;
+  }
+}
+@media screen and (max-width: 375px) {
+  #maincontent .hero .tagline_hero > p {
+    font-size: 0.9rem;
+  }
+  div.whatWeOfferContainer .image-whatWeOffer img {
+    display: none;
+  }
+  div.whatWeOfferContainer .whatWeOffer .howMuchTheDestionationsAre {
+    position: static;
+  }
+  div.whatWeOfferContainer
+    .whatWeOffer
+    .howMuchTheDestionationsAre
+    .itemDestination {
+    box-shadow: 1px 1px 2px #00000056, -1px -1px 2px #00000062;
+    padding: 0;
+    font-size: 0.8rem;
+    width: 90px;
+    height: 90px;
+    gap: 1.2rem;
+  }
+}
+@media screen and (max-width: 370px) {
+  #maincontent .hero .tagline_hero > * {
+    font-size: 1rem;
+    text-align: center;
+  }
+  #maincontent h1.section-title {
+    font-size: 1.3rem;
+  }
+  main#maincontent .category .container-option-items {
+    flex-direction: column;
+  }
+}
+@media screen and (max-width: 330px) {
+  .DestinationsHero .search-item{
+    display: grid;
+    justify-content: center;
+    align-content: center;
+  }
+  .dropbtn {
+    width: 10rem;
+    font-size: 0.9rem;
+  }
+}
