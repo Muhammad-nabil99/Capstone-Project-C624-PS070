@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="dicoding:email" content="f6936yb075@dicoding.org">
+    <meta name="description" content="find your own place to visit">
+    <meta name="color" theme="#61a3ba">
+    <link rel="apple-touch-icon" href="./icons/wisata-192x192.png">
+    <link rel="icon" type="image/x-icon" href="./images/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="manifest" href="./app.webmanifest" crossorigin="anonymous">
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.css' rel='stylesheet' />
+    <script src="https://use.fontawesome.com/b070c8f1df.js"></script>
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <!-- animations scroll -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <title>Trakel</title>
+  <body>
+    <header>
+      <div class="sidebar">
+        <div class="logo">
+            <img class="lazyload" data-src="./images/logo.png" alt="logo" aria-label="logo">
+            <h2>Trakel</h2>
+        </div>
+        <button class="humberger hidden" aria-label="open navbar">
+          <i id="humberger-icon" class="fa-solid fa-bars"></i>
+        </button>
+        <nav class="drawer">
+          <ul class="nav_lists"> 
+            <li aria-label="Link to Beranda's page" class="nav_item"><a href="#/beranda" class="nav_link" name="beranda" tabindex="0" aria-label="Beranda">Beranda</a></li>
+            <li aria-label="Link to destinations's page" class="nav_item"><a href="#/penginapan" class="nav_link" name="destinations" tabindex="0" aria-label="destinations">Destinations</a></li>
+            <li aria-label="Link to favorite's page" class="nav_item"><a href="#/favorite" class="nav_link" name="favorite" tabindex="0" aria-label="favorite">Favorite</a></li>
+            <li aria-label="Link to about's page" class="nav_item"><a href="#/about" class="nav_link" name="about" tabindex="0" aria-label="favorite">About</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main id="maincontent" tabindex="0"></main>
+    <footer></footer>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.js'></script>
+  </body>
+</html>
