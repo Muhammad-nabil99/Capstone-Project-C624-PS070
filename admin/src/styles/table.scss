@@ -33,6 +33,9 @@ table {
     height: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    overflow-x: auto;
+    display: block;
+    overflow-x: auto;
 }
 
 th, td {

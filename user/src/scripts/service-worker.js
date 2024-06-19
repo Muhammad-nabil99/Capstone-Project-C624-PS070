@@ -6,7 +6,6 @@ import { ExpirationPlugin } from 'workbox-expiration';
 
 precacheAndRoute(self.__WB_MANIFEST);
 
-// Cache API responses from Firestore
 registerRoute(
   ({ url }) => url.origin === 'https://firestore.googleapis.com',
   new StaleWhileRevalidate({
@@ -16,14 +15,13 @@ registerRoute(
         statuses: [0, 200],
       }),
       new ExpirationPlugin({
-        maxEntries: 50, // Customize the max entries or duration as needed
-        maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
+        maxEntries: 50,
+        maxAgeSeconds: 30 * 24 * 60 * 60,
       }),
     ],
   })
 );
 
-// Cache API responses from Firebase Storage
 registerRoute(
   ({ url }) => url.origin === 'https://firebasestorage.googleapis.com',
   new StaleWhileRevalidate({
@@ -33,14 +31,13 @@ registerRoute(
         statuses: [0, 200],
       }),
       new ExpirationPlugin({
-        maxEntries: 50, // Customize the max entries or duration as needed
-        maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
+        maxEntries: 50,
+        maxAgeSeconds: 30 * 24 * 60 * 60,
       }),
     ],
   })
 );
 
-// Cache images
 registerRoute(
   ({ request }) => request.destination === 'image',
   new StaleWhileRevalidate({
@@ -51,7 +48,7 @@ registerRoute(
       }),
       new ExpirationPlugin({
         maxEntries: 60,
-        maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
+        maxAgeSeconds: 30 * 24 * 60 * 60,
       }),
     ],
   })

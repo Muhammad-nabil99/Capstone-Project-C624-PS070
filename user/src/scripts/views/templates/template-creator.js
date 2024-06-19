@@ -68,9 +68,9 @@ createDestinationsHeroTemplate = () =>{
                   <div class="dropdown">
                       <button class="dropbtn">Destinations</button>
                       <div id="myDropdown" class="dropdown-content">
-                          <a href="#/penginapan">Penghinapan</a>
-                          <a href="#/kuliner">Kuliner</a>
-                          <a href="#/wisata">Wisata</a>
+                          <a href="#/penginapan" class="nav_link">Penghinapan</a>
+                          <a href="#/kuliner" class="nav_link">Kuliner</a>
+                          <a href="#/wisata" class="nav_link">Wisata</a>
                       </div>
                   </div>
             </div>
@@ -105,7 +105,7 @@ const createWhatWeOfferTemplate = () =>{
 const createTemplateItems = (item, type) => {
   let price;
     if(type === 'penginapan'){
-      price = '<a href="${item.price}" target="_blank" class="price" aria-label="price">Price by Traveloka</a>'
+      price = `<a href="${item.price}" target="_blank" class="price" aria-label="price">Price by Traveloka</a>`
   }
   
   return `
@@ -174,7 +174,9 @@ const createHeaderHero = () => {
     <div class="tagline_hero" data-aos="fade-left">
       <h1 tabindex="0" aria-label="Tagline">Discover Your Own <span class="Spesific-style">Destinations</span></h1>
       <h4>Website parawisata Kabupaten Pekalongan</h4>
-      <p tabindex="0" aria-label="deskripsi">Kota Pekalongan adalah salah satu kota di provinsi Jawa Tengah, Indonesia. Kota ini merupakan pelabuhan terpenting di Jawa Tengah dan terkenal dengan batiknya. Pekalongan merupakan kota pertama di Indonesia dan kota Asia Tenggara pertama yang menjadi bagian dari Jaringan Kota Kreatif UNESCO</p>
+      <p tabindex="0" aria-label="deskripsi">
+      Kabupaten Pekalongan di Jawa Tengah, yang berbatasan dengan Laut Jawa, menawarkan pesona wisata unik. Terkenal dengan batik dan tradisi budayanya, daerah ini memiliki 43 kecamatan dengan kuliner khas seperti Nasi Megono dan Tauto. Wisata alamnya mencakup Curug Bajing dan Blackcanyon. Pekalongan adalah perpaduan budaya, kuliner, dan alam yang menarik untuk dijelajahi.</p>
+      <a class="explore-btn" href="#/penginapan" aria-label="go to destinations page">Explore</a>
     </div>
     <img src="./images/heros/destinations.png" alt="hero image" data-aos="fade-right">
   `;
@@ -191,9 +193,7 @@ const createLikedButtonTemplate = () => `
     <i class="fa fa-heart" aria-hidden="true"></i>
   </button>
 `;
-const createSpinnerLoading =  () => `
-  <div class="lds-default spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-`;
+
 const createFooterTemplate = () =>{
   return `
           <div class="desriptions-footer">
@@ -204,10 +204,10 @@ const createFooterTemplate = () =>{
           </div>
           <nav class="list-nav-item">
                 <a href="#/beranda" class="nav_link" name="beranda" tabindex="0" aria-label="Beranda">Beranda</a>
-                          <a href="#/penginapan" class="nav_link" name="destinations" tabindex="0" aria-label="destinations">Destinations</a>
-                          <a href="#/favorite" class="nav_link" name="favorite" tabindex="0" aria-label="favorite">Favorite</a>
-                          <a href="#/about" class="nav_link" name="about" tabindex="0" aria-label="favorite">About</a>
-              </ul>
+                <a href="#/penginapan" class="nav_link" name="destinations" tabindex="0" aria-label="destinations">Destinations</a>
+                <a href="#/favorite" class="nav_link" name="favorite" tabindex="0" aria-label="favorite">Favorite</a>
+                <a href="#/about" class="nav_link" name="about" tabindex="0" aria-label="favorite">About</a>
+            
           </nav>
         </div>
           <div class="our-teams-footer">
@@ -245,7 +245,6 @@ createTaglineAboutUs,
   createDestinationsHeroTemplate,
   createOurFeatureTemplate,
   createWhatWeOfferTemplate,
-  createSpinnerLoading,
   createLikeButtonTemplate,
   createLikedButtonTemplate,
   createHeaderHero,

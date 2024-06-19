@@ -47,11 +47,11 @@ const Wisata_form = {
           </div>
         </div>
         <div class="form-group">
-          <label for="placeName">Place Name:</label>
+          <label for="placeName">Nama Tempat:</label>
           <div id="geocoder" class="custom-geocoder"></div>
         </div>
         <div class="form-group">
-          <label for="mapLocation">Map Location:</label>
+          <label for="mapLocation">Koordinat Lokasi:</label>
           <input type="text" id="mapLocation" name="mapLocation" readonly>
           <div id="mapLocationValidation" class="validation-message"></div>
           <div id="map" class="map-container"></div>

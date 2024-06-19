@@ -23,13 +23,11 @@ class App {
   }
 
   async renderPage() {
-    const spinner = document.querySelector('#maincontent');
-    utils._showElement(spinner)
+    
     const url = UrlParser.parseActiveUrlWithCombiner();
     let page = routes[url];
     
     if (!page) {
-      // Handle dynamic routes
       const parsedUrl = UrlParser.parseActiveUrlWithoutCombiner();
       if (parsedUrl.resource && parsedUrl.type && parsedUrl.id) {
         const dynamicUrl = `/${parsedUrl.resource}/:type/:id`;
@@ -41,6 +39,7 @@ class App {
     if (page) {
       this._content.innerHTML = await page.render();
       await page.afterRender();
+      utils._scrollToTop()
       document.addEventListener('click', utils._activeNavbar)
     } else {
       this._content.innerHTML = '<p>Page not found!</p>';

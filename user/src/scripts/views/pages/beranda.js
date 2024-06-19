@@ -25,10 +25,10 @@ const Beranda = {
   },
   async afterRender() {
     const footerContainer = document.querySelector('footer');
-     
     const hero = document.querySelector(".hero");
     const header = document.querySelector("header");
     const ourFeature = document.querySelector(".ourFeatureContainer");
+    const whatWeOffer = document.querySelector(".whatWeOfferContainer");
     const {wisata,kuliner,penginapan} = await getCountOfDoc();
     numberIncreament(
       [{ id: "1", value: wisata },
@@ -39,17 +39,15 @@ const Beranda = {
       ".container-recomendation-items"
     );
     hero.innerHTML = createHeaderHero();
-    // sticky navbar
+    const btnExplore = document.querySelector('.explore-btn')
+    utils._btnExploreToDestinations(btnExplore)
     utils._stickyNavbar({ header, hero });
-    // what we offer
-    const whatWeOffer = document.querySelector(".whatWeOfferContainer");
+    
     whatWeOffer.innerHTML = createWhatWeOfferTemplate();
     footerContainer.innerHTML = createFooterTemplate();
-    // our Feature section
     Data.forEach((data) => {
       ourFeature.innerHTML += createOurFeatureTemplate(data);
     });
-    // recomendation section
     const topFavourites = await getTopFavourite();
     if (topFavourites.length === 0) {
       recommendationsContainer.innerHTML =

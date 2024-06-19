@@ -1,6 +1,5 @@
 const {
   createTemplateItems,
-  createSpinnerLoading,
 } = require("../views/templates/template-creator");
 
 const utils = {
@@ -10,16 +9,16 @@ const utils = {
   async _checkData(data) {
     return data.length === 0 || data.length === -1;
   },
-  async formInput({ container, form, input, collectionData }) {
+  async formInput({ container, form, input, collectionData,typeData }) {
     form.addEventListener("input", async (e) => {
       e.preventDefault();
-
       const items = await utils.searchBar({ input, collectionData });
       if (items.length === 0)
         return (container.innerHTML = "<h2>Sorry! Items Not Found</h2>");
       container.innerHTML = "";
+      
       items.forEach((item) => {
-        container.innerHTML += createTemplateItems(item, "penginapan");
+        container.innerHTML += createTemplateItems(item, typeData);
       });
     });
   },
@@ -34,14 +33,6 @@ const utils = {
     return collectionData.filter((item) => {
       return item.name.toLowerCase().includes(query.toLowerCase());
     });
-  },
-  async _showElement(element) {
-    element.style.display = "block";
-    element.innerHTML = createSpinnerLoading();
-  },
-  async _hideElement(element) {
-    element.style.display = "none";
-    element.innerHTML = "";
   },
   _removeTextField({removeFieldButton,input,collectionData,container,typeData}){
     removeFieldButton.addEventListener('click', (e) =>{
@@ -59,15 +50,16 @@ const utils = {
           const [entry] = entries;
           if(!entry.isIntersecting) {
             header.classList.add('sticky')
+            header.classList.add('animation')
           }else{
             header.classList.remove('sticky')
+            header.classList.remove('animation')
           }
-          // observer.unobserve(entry.target)
       }
       const headerObserver = new IntersectionObserver(stickyNav,{
           root : null,
-          threshold : 0.15,
-          rootMargin : `-${navHeight}px`
+          threshold : 0.25,
+          rootMargin : `${navHeight}px`
       })
       headerObserver.observe(hero)
   },
@@ -99,10 +91,33 @@ const utils = {
     if(target){
       const attributeTarget = e.target.getAttribute('name');
       const navbarTarget = document.querySelector(`a[name="${attributeTarget}"]`).closest('.nav_item').children[0];
-      console.log(navbarTarget);
       navbarTarget.classList.add('active')
     }
-  }
+  },
+  _btnExploreToDestinations(buttonExplore){
+    if(!buttonExplore) return;
+    buttonExplore.addEventListener('click', () =>{
+      const destinations = document.querySelector(`a[name="destinations"]`).closest('.nav_item').children[0];
+      document.querySelector(`a[href="${window.location.hash}"]`).classList.remove('active')
+      destinations.classList.add('active')
+    })
+
+  },
+  _scrollToTop(){
+    const allLink = document.querySelectorAll('.nav_link');
+    [...allLink].forEach(link =>{
+      link.addEventListener('click', () =>{
+        this._removeActiveClass(allLink);
+        link.classList.add('active');
+        window.scrollTo(0,0);
+      })
+    })
+  },
+  _removeActiveClass(items) {
+    [...items].forEach((item) => {
+      item.classList.remove("active");
+    });
+  },
 };
 
 module.exports = utils;
