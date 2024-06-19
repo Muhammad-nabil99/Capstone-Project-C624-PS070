@@ -6,7 +6,7 @@ import "../styles/main.css";
 import "../styles/responsive.css";
 import App from "./views/app";
 import swRegister from "./sw-register";
-const utils = require("../scripts/utils/utils");
+import { doc } from "firebase/firestore";
 
 
 const app = new App({
@@ -18,7 +18,6 @@ const app = new App({
 window.addEventListener("hashchange", () => {
   app.renderPage();
 });
-
 window.addEventListener("load", async () => {
   app.renderPage();
   Aos.init();

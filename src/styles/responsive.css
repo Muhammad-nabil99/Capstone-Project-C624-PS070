@@ -82,18 +82,18 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    background: #e0e0e0;
+    background: #ffffff;
+    
     box-shadow: -2px 0px 10px #a3a3a3, 2px 0px 10px #cccccc;
   }
-  div.sidebar nav ul.nav_lists li {
+  div.sidebar nav ul.nav_lists li  {
     width: 100%;
-    text-align: center;
   }
   div.sidebar nav ul.nav_lists li a {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
     color: rgb(27, 27, 27);
-  }
-  div.sidebar nav ul.nav_lists li:hover {
-    background-color: #f8f8f8;
   }
   header div.sidebar {
     position: relative;
@@ -105,14 +105,13 @@
     bottom: 0;
     left: 0;
     width: 55%;
-    z-index: 99;
     display: flex;
     flex-direction: column;
     animation: 0.3s fadeRight;
   }
   /* our feature */
   #maincontent .ourFeatureItem {
-    width: 200px;
+    width: 200px;https://docs.google.com/forms/d/e/1FAIpQLScW4-miIShxJVFs7VUq9efMer0Q9dHDOabf6ZcXO9-TmWzUIg/formrestricted
   }
   #maincontent .ourFeatureItem h2 {
     font-size: 1.2rem;

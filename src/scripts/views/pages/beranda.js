@@ -28,6 +28,7 @@ const Beranda = {
     const hero = document.querySelector(".hero");
     const header = document.querySelector("header");
     const ourFeature = document.querySelector(".ourFeatureContainer");
+    const whatWeOffer = document.querySelector(".whatWeOfferContainer");
     const {wisata,kuliner,penginapan} = await getCountOfDoc();
     numberIncreament(
       [{ id: "1", value: wisata },
@@ -44,7 +45,7 @@ const Beranda = {
     // sticky navbar
     utils._stickyNavbar({ header, hero });
     // what we offer
-    const whatWeOffer = document.querySelector(".whatWeOfferContainer");
+    
     whatWeOffer.innerHTML = createWhatWeOfferTemplate();
     footerContainer.innerHTML = createFooterTemplate();
     // our Feature section

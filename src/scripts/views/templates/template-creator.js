@@ -105,7 +105,7 @@ const createWhatWeOfferTemplate = () =>{
 const createTemplateItems = (item, type) => {
   let price;
     if(type === 'penginapan'){
-      price = '<a href="${item.price}" target="_blank" class="price" aria-label="price">Price by Traveloka</a>'
+      price = `<a href="${item.price}" target="_blank" class="price" aria-label="price">Price by Traveloka</a>`
   }
   
   return `

@@ -31,7 +31,7 @@ const Detail = {
       // Fetch data from Firestore
       const docRef = doc(db, type, id);
       const docSnap = await getDoc(docRef);
-
+      document.querySelector('header').classList.remove('sticky')
       if (docSnap.exists()) {
         const item = docSnap.data();
         container.innerHTML = createDetailTemplate(item, type);

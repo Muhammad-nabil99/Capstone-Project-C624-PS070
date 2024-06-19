@@ -45,6 +45,7 @@ const DrawerButtonInitiator = {
     nav.classList.remove("show");
   },
   _afterClicked(navbar) {
+    console.log('after click');
     [...navbar.children[0].children].forEach((element) => {
       element.addEventListener("click", (e) => {
         if (
@@ -57,7 +58,6 @@ const DrawerButtonInitiator = {
         e.target.parentElement.parentElement.parentElement.classList.remove(
           "show"
         );
-        e.target.parentElement.classList.add("active");
       });
     });
   },

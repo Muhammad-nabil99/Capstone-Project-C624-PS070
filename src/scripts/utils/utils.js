@@ -9,16 +9,16 @@ const utils = {
   async _checkData(data) {
     return data.length === 0 || data.length === -1;
   },
-  async formInput({ container, form, input, collectionData }) {
+  async formInput({ container, form, input, collectionData,typeData }) {
     form.addEventListener("input", async (e) => {
       e.preventDefault();
-
       const items = await utils.searchBar({ input, collectionData });
       if (items.length === 0)
         return (container.innerHTML = "<h2>Sorry! Items Not Found</h2>");
       container.innerHTML = "";
+      
       items.forEach((item) => {
-        container.innerHTML += createTemplateItems(item, "penginapan");
+        container.innerHTML += createTemplateItems(item, typeData);
       });
     });
   },
@@ -50,15 +50,16 @@ const utils = {
           const [entry] = entries;
           if(!entry.isIntersecting) {
             header.classList.add('sticky')
+            header.classList.add('animation')
           }else{
             header.classList.remove('sticky')
+            header.classList.remove('animation')
           }
-          // observer.unobserve(entry.target)
       }
       const headerObserver = new IntersectionObserver(stickyNav,{
           root : null,
-          threshold : 0.15,
-          rootMargin : `-${navHeight}px`
+          threshold : 0.25,
+          rootMargin : `${navHeight}px`
       })
       headerObserver.observe(hero)
   },
@@ -94,6 +95,7 @@ const utils = {
     }
   },
   _btnExploreToDestinations(buttonExplore){
+    if(!buttonExplore) return;
     buttonExplore.addEventListener('click', () =>{
       const destinations = document.querySelector(`a[name="destinations"]`).closest('.nav_item').children[0];
       document.querySelector(`a[href="${window.location.hash}"]`).classList.remove('active')
@@ -105,11 +107,17 @@ const utils = {
     const allLink = document.querySelectorAll('.nav_link');
     [...allLink].forEach(link =>{
       link.addEventListener('click', () =>{
-        window.scrollTo(0,0)
-
+        this._removeActiveClass(allLink);
+        link.classList.add('active');
+        window.scrollTo(0,0);
       })
     })
-  }
+  },
+  _removeActiveClass(items) {
+    [...items].forEach((item) => {
+      item.classList.remove("active");
+    });
+  },
 };
 
 module.exports = utils;

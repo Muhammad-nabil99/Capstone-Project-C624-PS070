@@ -37,7 +37,7 @@ const Destinations = {
      // dropdownm end
       const removeFieldButton = document.querySelector('.remove_button');
       utils._removeTextField({removeFieldButton,input,collectionData,container,typeData})
-      utils.formInput({container,form,input,collectionData})
+      utils.formInput({container,form,input,collectionData,typeData})
       utils._showItemsDestinations({container,collectionData,typeData})
       
     } catch (error) {
